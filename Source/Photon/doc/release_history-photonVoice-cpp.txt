@@ -1,0 +1,31 @@
+* release_history-photonVoice-cpp.txt
+* Release history for the Exit Games PhotonVoice C++ Client Library
+
+Copyright (C) 2004-2022 Exit Games GmbH, http://www.photonengine.com
+
+Questions? Write to developer@photonengine.com or visit forum.photonengine.com
+
+*** version 5.0.2.3
+	Date: 01-19-2022
+	- fixed: class IAudioPusher was hiding it's inherited assignment operators
+
+
+*** version 5.0.1.0
+	Date: 10-26-2021
+	- fixed: the echo mode did not work when the sendDirect flag of class LoadBalancingTransport was set to true
+	- changed: PhotonTransportProtocol::buildVoicesInfo() now returns a Common::ValueObject<Common::Object*> instead of a Common::Object
+	- changed: PhotonTransportProtocol::buildVoiceRemoveMessage() now returns a Common::ValueObject<Common::Object*> instead of a Common::Object
+	- changed: PhotonTransportProtocol::buildFrameMessage() now returns a Common::ValueObject<Common::Object*> instead of a Common::Object
+
+
+*** version 5.0.0.3
+	Date: 09-30-2021
+	- fixed: undefined references for AudioUtil::LevelMeter<float>
+	- fixed: undefined references for AudioUtil::LevelMeter<short>
+	- fixed: undefined references for AudioUtil::VoiceDetector<float>
+	- fixed: undefined references for AudioUtil::VoiceDetector<short>
+
+
+*** version 5.0.0.0
+	Date: 08-03-2021
+	- initial version of the Photon Voice C++ Library

@@ -1,0 +1,52 @@
+Index: Enums/TypeCode.h
+===================================================================
+--- Enums/TypeCode.h	(revision 5678)
++++ Enums/TypeCode.h	(working copy)
+@@ -18,7 +18,7 @@
+ 			static const nByte SHORT              = 'k'; /**<short*/
+ 			static const nByte INTEGER            = 'i'; /**<int*/
+ 			static const nByte LONG               = 'l'; /**<int64*/
+-			static const nByte FLOAT              = 'f'; /**<float*/
++			static const nByte EG_FLOAT              = 'f'; /**<float*/
+ 			static const nByte DOUBLE             = 'd'; /**<double*/
+ 			static const nByte BOOLEAN            = 'o'; /**<bool*/
+ 			static const nByte STRING             = 's'; /**<@if CPP JString@endif @if OBJC NSString@endif*/
+Index: Helpers/ConfirmAllowed.h
+===================================================================
+--- Helpers/ConfirmAllowed.h	(revision 5678)
++++ Helpers/ConfirmAllowed.h	(working copy)
+@@ -76,7 +76,7 @@
+ 				typedef float type;
+ 				typedef float scalarType;
+ 				static const unsigned int dimensions = 0;
+-				static const nByte typeName = TypeCode::FLOAT;
++				static const nByte typeName = TypeCode::EG_FLOAT;
+ 				static const nByte customTypeName = 0;
+ 			};
+ 			template<> struct ConfirmAllowed<double>
+Index: Helpers/ConfirmAllowedKey.h
+===================================================================
+--- Helpers/ConfirmAllowedKey.h	(revision 5678)
++++ Helpers/ConfirmAllowedKey.h	(working copy)
+@@ -43,7 +43,7 @@
+ 			template<> struct ConfirmAllowedKey<float>
+ 			{
+ 				typedef float type;
+-				static const nByte typeName = TypeCode::FLOAT;
++				static const nByte typeName = TypeCode::EG_FLOAT;
+ 			};
+ 			template<> struct ConfirmAllowedKey<double>
+ 			{
+Index: Helpers/TypeName.h
+===================================================================
+--- Helpers/TypeName.h	(revision 5678)
++++ Helpers/TypeName.h	(working copy)
+@@ -14,7 +14,7 @@
+ #endif
+ 
+ // msvc rtti || gcc rtti || gcc version from a time, when it hasn't offered an rtti define ( == llvm gcc frontend for Marmalade OS X x86 builds!)
+-#if defined _CPPRTTI || defined __GXX_RTTI || (__GNUC__ < 4 || (__GNUC__ == 4 && (__GNUC_MINOR__ < 3 || (__GNUC_MINOR__ == 3 && __GNUC_PATCHLEVEL__ < 2))))
++#if defined _CPPRTTI || defined __GXX_RTTI //|| (__GNUC__ < 4 || (__GNUC__ == 4 && (__GNUC_MINOR__ < 3 || (__GNUC_MINOR__ == 3 && __GNUC_PATCHLEVEL__ < 2))))
+ #	include <typeinfo>
+ #	define TYPENAME(arg) cut((typeid(arg).name()))
+ // else assume rtti to be disabled
