@@ -3,18 +3,18 @@
 #pragma once
 
 #include "demo_particle_common/LoadBalancingListener.h"
-#include "GameFramework/Actor.h"
+#include "Components/ActorComponent.h"
 #include "PhotonLBClient.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class APhotonLBClient : public AActor, public BaseView
+class UPhotonLBClient : public UActorComponent, public BaseView
 {
 	GENERATED_UCLASS_BODY()
 	void BeginPlay();
-	void Tick(float DeltaSeconds);
+	void TickComponent(float DeltaSeconds, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
 	// Demo BaseView overrides (View implementation).
@@ -76,11 +76,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Demo")
 	FString appVersion;
 
-	// Exposing demo methods to blueprint 
-	UFUNCTION(BlueprintCallable, Category = "Demo")
-	void RandomizeColor();
-	UFUNCTION(BlueprintCallable, Category = "Demo")
-	void NextGridSize();
 	UFUNCTION(BlueprintCallable, Category = "Demo")
 	void NewGame();
 	UFUNCTION(BlueprintCallable, Category = "Demo")
@@ -91,10 +86,6 @@ public:
 	void SetLocalPlayerPos(float x, float y, float z, float rotX, float rotY, float rotZ);
 	UFUNCTION(BlueprintCallable, Category = "Demo")
 	void SetLocalPlayerRot(float x, float y, float z);
-	UFUNCTION(BlueprintCallable, Category = "Demo")
-	void SetAutomove(bool automove);
-	UFUNCTION(BlueprintCallable, Category = "Demo")
-	void SetUseGroups(bool useGroups);
 
 	// Util
 	UFUNCTION(BlueprintCallable, Category = "Demo")

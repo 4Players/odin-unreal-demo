@@ -4,7 +4,7 @@
 #include "PhotonLBClient.h"
 #include "demo_particle_common/Console.h"
 
-APhotonLBClient::APhotonLBClient(const class FObjectInitializer& PCIP)
+UPhotonLBClient::UPhotonLBClient(const class FObjectInitializer& PCIP)
 	: Super(PCIP),
 	serverAddress(TEXT("ns.exitgames.com")),
 	AppID(TEXT("<no-app-id>")),
@@ -12,10 +12,10 @@ APhotonLBClient::APhotonLBClient(const class FObjectInitializer& PCIP)
 	mpClient(NULL),
 	mpListener(NULL)
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true;
 }
 
-void APhotonLBClient::BeginPlay(void)
+void UPhotonLBClient::BeginPlay(void)
 {
 	Super::BeginPlay();
 	srand(GETTIMEMS());
@@ -32,9 +32,9 @@ void APhotonLBClient::BeginPlay(void)
 
 }
 
-void APhotonLBClient::Tick(float DeltaSeconds)
+void UPhotonLBClient::TickComponent(float DeltaSeconds, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::Tick(DeltaSeconds);
+	Super::TickComponent(DeltaSeconds, TickType, ThisTickFunction);
 	if(mpClient)
 	{
 		mpClient->service();
@@ -42,71 +42,47 @@ void APhotonLBClient::Tick(float DeltaSeconds)
 	}
 }
 
-void APhotonLBClient::RandomizeColor(void)
-{
-	mpListener->changeRandomColor();
-}
-
-void APhotonLBClient::NextGridSize(void)
-{
-	mpListener->nextGridSize();
-}
-
-void APhotonLBClient::NewGame(void)
+void UPhotonLBClient::NewGame(void)
 {
 	mpListener->createRoom();
 }
 
-void APhotonLBClient::Leave(void)
+void UPhotonLBClient::Leave(void)
 {
 	if(mpClient->getIsInGameRoom())
 		mpClient->opLeaveRoom();
 }
 
-void APhotonLBClient::JoinRoom(FString gameId)
+void UPhotonLBClient::JoinRoom(FString gameId)
 {
 	mpClient->opJoinRoom(TCHAR_TO_UTF8(*gameId));
 }
 
-void APhotonLBClient::SetLocalPlayerPos(float x, float y, float z, float rotX, float rotY, float rotZ)
+void UPhotonLBClient::SetLocalPlayerPos(float x, float y, float z, float rotX, float rotY, float rotZ)
 {
 	mpListener->setLocalPlayerPos(x, y, z, rotX, rotY, rotZ);
 }
 
-void APhotonLBClient::SetLocalPlayerRot(float x, float y, float z)
+void UPhotonLBClient::SetLocalPlayerRot(float x, float y, float z)
 {
 	mpListener->setLocalPlayerRot(x, y, z);
 }
 
-void APhotonLBClient::SetAutomove(bool am)
-{
-	mpListener->setAutomove(automove=am);
-}
-
-void APhotonLBClient::SetUseGroups(bool ug)
-{
-	mpListener->setUseGroups(useGroups=ug);
-}
-
-bool APhotonLBClient::IsInLobby(void)
+bool UPhotonLBClient::IsInLobby(void)
 {
 	return mpClient->getState() == ExitGames::LoadBalancing::PeerStates::JoinedLobby || mpClient->getState() == ExitGames::LoadBalancing::PeerStates::AuthenticatedComingFromGameserver;
 }
 
-bool APhotonLBClient::IsInRoom(void)
+bool UPhotonLBClient::IsInRoom(void)
 {
 	return mpClient->getState() == ExitGames::LoadBalancing::PeerStates::Joined;
 }
 
 #if WITH_EDITOR
-void APhotonLBClient::PostEditChangeProperty(struct FPropertyChangedEvent& e)
+void UPhotonLBClient::PostEditChangeProperty(struct FPropertyChangedEvent& e)
 {
 	Super::PostEditChangeProperty(e);
 
 	FName PropertyName = (e.Property) ? e.Property->GetFName() : NAME_None;
-	if(PropertyName == GET_MEMBER_NAME_CHECKED(APhotonLBClient, automove))
-		SetAutomove(automove);
-	else if(PropertyName == GET_MEMBER_NAME_CHECKED(APhotonLBClient, useGroups))
-		SetUseGroups(useGroups);
 }
 #endif
