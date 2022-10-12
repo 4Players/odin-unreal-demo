@@ -85,12 +85,46 @@ In the next part we will now look at what the Networking Component does exactly.
 
 The `PhotonLBClient_TD` class can be found in the `Blueprints/Networking` folder. It inherits from the `UPhotonLBClient` Actor Component from the C++ Source Code and thus already has most functionality to communicate with the Photon framework. The Component extends the class to handle our use case - yet it is still agnostic to the Odin Framework and thus implements the `Networking Component` Blueprint Interface so that other Components can communicate with the implemented networking framework without knowing which one is used exactly. You can easily extend or exchange this component for anything you would like to use in your application.
 
-Just like the Source Code, the blueprints of this class are based on the sample blueprints of the Photon sample for the Unreal Engine. It has Events that are called from the C++ parent class when a player joins the Photon room, when one player leaves it, 
-
-
 ![PhotonComponentClassSettings.png](/Documentation/img/PhotonComponentClassSettings.png)
 
-### Odin Component
+The `Networking Component` interface has 4 functions:
+
+- `Get Own Network Id`: Returns an integer representing a unique identifier for the client in the network.
+
+- `Replicate Transform`: Takes a transformation (of the local player character) and sends it over the network to all other clients.
+
+- `Leave Network Session`: Leaves the current network session and stops replication.
+
+- `Get Actors Map`: The Networking Component needs to track references to each actor owned by a client so that you can get an actor of a client by its unique identifier.
+
+Just like the Source Code of the project, the blueprints of this class are based on the sample blueprints of the Photon sample for the Unreal Engine. It has Events that are called from the C++ parent class when a player joins the Photon room, when one player leaves it and when a player changes their position.
+
+- `Add Player`: This is called whenever any client is added. With the `Local` flag we can decide what to do with the event. If it is local we just prepare our existing local player character and also start the connection to ODIN from the `OdinClientComponent`. If it is a non-local client the blueprint creates a player character for that client and assigns it the given photon id and sets it up.
+
+- `Remove Player`: This is called whenever any client leaves the session. Here we search the according player character and delete it.
+
+- `Change Player Pos`: Retrieves positional and rotational values that we apply to the correct player character.
+
+If you want to exchange the Photon Networking for e.g. the Unreal Networking System you can easily do so by implementing a component that uses corresponding RPC Calls - just have in mind that you will not use advanced systems, like the [Networked Movement in the Character Movement Component](https://docs.unrealengine.com/5.0/en-US/understanding-networked-movement-in-the-character-movement-component-for-unreal-engine/).
+
+### Odin Client Component
+
+The `Odin Client Component` is the meat and bone of this sample so we will have a detailed look at what it does.
+
+It derives directly from `Actor Component` and does not implement any interfaces. It has two sets of functions - one for each ODIN room it connects to - remember that we have a proximity chat and a radio chat so that we need to join two ODIN rooms in total. You can either connect to them in the same function and then decide how to handle the different events with the passed `Room` parameter, or do it like in this sample and break them into two parts.
+
+The `Start Connect` Custom Event is called once the local player is connected to the Photon room. It is mainly taken from the [ODIN Unreal SDK Manual](https://www.4players.io/odin/sdk/unreal/manual/). In summary, we generate a room token with our access key, a room id and a user id. Note, that the Access Key should not be known to the client normally and you should do this on a trusted Web Server instead. For the simplicity of this sample we kept the call on the client though.
+
+Then we construct a room and bind all needed events to appropriate Custom Events (we go through them in a bit). Then we create some User Data - they contain the chosen User Name from the Login Screen and the Network Id from our Photon Component. The Network Id is needed by the other clients so that they can get the correct Player Character from the Photon Component to assign it an Odin Synth Component with the correct Media Stream. Once that is done, we will call the `Join Room` function and are done with the event. We do this two times in total, once for each Odin Room.
+
+We handle the Room Events in different events:
+- `Peer Joined`: This event is called before the media of the other peer is added to the room, so we can setup the player character - we use the network id in the user data and the passed ODIN peer id to create a map on this component, so once we get the media stream with the ODIN id we can get the correct network id and thus correct actor to assign it the stream.
+
+- `Joined Room`: This event is called once we join the room ourselves. Here we can create an Audio Capture and from it an ODIN Media Stream that we add to the room afterwards via the `Add Media` node.
+
+- `Media Added`:
+
+- `Peer Left`: 
 
 ### Sample Map
 
