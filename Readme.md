@@ -24,8 +24,19 @@ To open the project in the Unreal Editor you need to install the Unreal Engine 4
 * Although it builts upon Photon's networking engine, the sample delivers all needed libraries for that
 * The sample depends on Steam Audio, which is delivered together with the Unreal Engine so you do not need to install the plugin manually, if you have installed plugins with your Unreal Engine version
 * ## Version History
+* 0.2
+  * Extended Documentation
+  * Small changes to tidy up blueprints
 * 0.1
   * Initial Release
+  
+### Sample Map
+
+Below you can see an overview of the map, its areas and what they show:
+
+![MapOverview.png](/Documentation/img/MapOverview.png)
+
+The audio sources in the level have the same attenuation settings as the voice chat and so you can use them to get an idea of what the level does without having to invite someone else to test with you. To turn an audio source on, go near it and then press space on your keyboard.
 
 ## Project Structure
 
@@ -120,12 +131,18 @@ Then we construct a room and bind all needed events to appropriate Custom Events
 We handle the Room Events in different events:
 - `Peer Joined`: This event is called before the media of the other peer is added to the room, so we can setup the player character - we use the network id in the user data and the passed ODIN peer id to create a map on this component, so once we get the media stream with the ODIN id we can get the correct network id and thus correct actor to assign it the stream.
 
-- `Joined Room`: This event is called once we join the room ourselves. Here we can create an Audio Capture and from it an ODIN Media Stream that we add to the room afterwards via the `Add Media` node.
+- `Joined Room`: This event is called once we join the room ourselves. Here we can create an Audio Capture and from it an ODIN Media Stream that we add to the room afterwards via the `Add Media` node. We also save the Audio Captures of both rooms in a variable to reference them later.
 
-- `Media Added`:
+- `Peer Left`: This is called when another peer leaves. Here we just print a message in this sample.
 
-- `Peer Left`: 
+- `Media Added`: This Event is called when the media stream of another peer is added to the room. It grabs the actors map from our Networking Component and adds an `Odin Synth Component`to it, activates it and assigns it the given media stream.
 
-### Sample Map
+Additionally we have some functionality to adjust the APM Settings of the rooms - this is done in the `SetApmSettings` event. Also we can open the APM Settings menu with the `OpenOptions` event and close them with `CloseOptions`.
+
+Lastly, in the `Tick` Event we start and stop the Capturing of the Proximity Chat and Radio Chat Audio Captures - depending on whether we press the R Key or not. The RPressed variable is set from the player controller class.
+
+![OdinClientComponentTick.png.png](/Documentation/img/OdinClientComponentTick.png.png)
 
 ## Conclusion
+
+This was a rough rundown of the demo project - to get started in your own project with ODIN you can copy and paste any portions of the project. Also have a look at the [ODIN Unreal SDK Manual](https://www.4players.io/odin/sdk/unreal/manual/). Here you have a step by step guide on how to implement the ODIN SDK in your application. On the [4Players Website](https://www.4players.io/products/voice-chat/) you get all information on how to integrate ODIN properly.
