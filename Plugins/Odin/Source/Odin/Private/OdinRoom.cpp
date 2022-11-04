@@ -23,13 +23,26 @@ UOdinRoom::UOdinRoom(const class FObjectInitializer &PCIP)
         this);
 }
 
+UOdinRoom::~UOdinRoom()
+{
+    odin_room_set_event_callback(this->room_handle_, nullptr, nullptr);
+}
+
 void UOdinRoom::BeginDestroy()
 {
     this->Destroy();
     Super::BeginDestroy();
 }
 
-UOdinRoom *UOdinRoom::ConstructRoom(UObject                *WorldContextObject,
+void UOdinRoom::FinishDestroy()
+{
+    if (this->room_handle_) {
+        odin_room_set_event_callback(room_handle_, nullptr, nullptr);
+    }
+    Super::FinishDestroy();
+}
+
+UOdinRoom *UOdinRoom::ConstructRoom(UObject *               WorldContextObject,
                                     const FOdinApmSettings &InitialAPMSettings)
 {
     auto room = NewObject<UOdinRoom>();
@@ -57,6 +70,7 @@ void UOdinRoom::UpdateAPMConfig(FOdinApmSettings apm_config)
     odin_apm_config.high_pass_filter             = apm_config.bHighPassFilter;
     odin_apm_config.pre_amplifier                = apm_config.bPreAmplifier;
     odin_apm_config.transient_suppressor         = apm_config.bTransientSuppresor;
+    odin_apm_config.gain_controller              = apm_config.bGainController;
 
     switch (apm_config.noise_suppression_level) {
         case EOdinNoiseSuppressionLevel::OdinNS_None: {
@@ -88,7 +102,6 @@ void UOdinRoom::Destroy()
         this->capture_medias_.Empty();
     }
     (new FAutoDeleteAsyncTask<DestroyRoomTask>(this->room_handle_))->StartBackgroundTask();
-    this->room_handle_ = 0;
 }
 
 void UOdinRoom::BindCaptureMedia(UOdinCaptureMedia *media)
@@ -127,9 +140,10 @@ void UOdinRoom::HandleOdinEvent(const struct OdinEvent *event)
             {
                 FString    roomId       = UTF8_TO_TCHAR(event->joined.room_id);
                 FString    roomCustomer = UTF8_TO_TCHAR(event->joined.customer);
+                FString    own_user_id  = UTF8_TO_TCHAR(event->joined.own_user_id);
                 FScopeLock lock(&joined_callbacks_cs_);
                 for (auto &callback : this->joined_callbacks_) {
-                    callback(roomId, roomCustomer, user_data, own_peer_id);
+                    callback(roomId, roomCustomer, user_data, own_peer_id, own_user_id);
                 }
                 this->joined_callbacks_.Reset();
             }
@@ -139,11 +153,12 @@ void UOdinRoom::HandleOdinEvent(const struct OdinEvent *event)
         } break;
         case OdinEventTag::OdinEvent_PeerJoined: {
             auto          peer_id = event->peer_joined.peer_id;
+            FString       user_id = UTF8_TO_TCHAR(event->peer_joined.user_id);
             TArray<uint8> user_data{event->peer_joined.peer_user_data,
                                     (int)event->peer_joined.peer_user_data_len};
             FFunctionGraphTask::CreateAndDispatchWhenReady(
-                [=]() { this->onPeerJoined.Broadcast(peer_id, user_data, this); }, TStatId(),
-                nullptr, ENamedThreads::GameThread);
+                [=]() { this->onPeerJoined.Broadcast(peer_id, user_id, user_data, this); },
+                TStatId(), nullptr, ENamedThreads::GameThread);
         } break;
         case OdinEventTag::OdinEvent_PeerLeft: {
             auto peer_id = event->peer_left.peer_id;
@@ -212,6 +227,9 @@ void UOdinRoom::HandleOdinEvent(const struct OdinEvent *event)
                 } break;
                 case OdinRoomConnectionState::OdinRoomConnectionState_Connecting: {
                     state = EOdinRoomConnectionState::Connecting;
+                } break;
+                case OdinRoomConnectionState::OdinRoomConnectionState_Disconnecting: {
+                    state = EOdinRoomConnectionState::Disconnecting;
                 } break;
                 case OdinRoomConnectionState::OdinRoomConnectionState_Disconnected: {
                     state = EOdinRoomConnectionState::Disconnected;

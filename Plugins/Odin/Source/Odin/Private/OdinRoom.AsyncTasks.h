@@ -39,13 +39,19 @@ class JoinRoomTask : public FNonAbandonableTask
 
     void DoWork()
     {
-        auto result =
-            odin_room_update_user_data(RoomHandle, OdinUserDataTarget::OdinUserDataTarget_Room,
+        auto update_user_data_result =
+            odin_room_update_user_data(RoomHandle, OdinUserDataTarget::OdinUserDataTarget_Peer,
                                        UserData.GetData(), UserData.Num());
-        if (odin_is_error(result)) {
-            OnError.ExecuteIfBound(result);
-            Response.Broadcast(false);
+        if (odin_is_error(update_user_data_result)) {
+            FFunctionGraphTask::CreateAndDispatchWhenReady(
+                [OnError = OnError, Response = Response, update_user_data_result]() {
+                    OnError.ExecuteIfBound(update_user_data_result);
+                    Response.Broadcast(false);
+                },
+                TStatId(), nullptr, ENamedThreads::GameThread);
+            return;
         }
+
         auto join_room_result =
             odin_room_join(RoomHandle, TCHAR_TO_UTF8(*Url), TCHAR_TO_UTF8(*RoomToken));
 
@@ -56,7 +62,6 @@ class JoinRoomTask : public FNonAbandonableTask
                     Response.Broadcast(false);
                 },
                 TStatId(), nullptr, ENamedThreads::GameThread);
-
         } else {
             // OnSuccess is handled in UOdinRoom::HandleEvent
             // See also, UOdinRoomJoin in OdinRoom.AsyncNodes.cpp
@@ -77,7 +82,7 @@ class AddMediaTask : public FNonAbandonableTask
     friend class FAutoDeleteAsyncTask<AddMediaTask>;
 
     UOdinCaptureMedia *Media;
-    UOdinRoom         *Room;
+    UOdinRoom *        Room;
 
     FAddMediaResponsePin     Response;
     FOdinRoomAddMediaError   OnError;
@@ -127,7 +132,7 @@ class RemoveMediaTask : public FNonAbandonableTask
     friend class FAutoDeleteAsyncTask<RemoveMediaTask>;
 
     UOdinCaptureMedia *Media;
-    UOdinRoom         *Room;
+    UOdinRoom *        Room;
 
     FRemoveMediaResponsePin     Response;
     FOdinRoomRemoveMediaError   OnError;
@@ -420,6 +425,7 @@ class DestroyRoomTask : public FNonAbandonableTask
     void DoWork()
     {
         odin_room_close(roomHandle);
+        odin_room_set_event_callback(roomHandle, nullptr, nullptr);
         odin_room_destroy(roomHandle);
         roomHandle = 0;
     }
