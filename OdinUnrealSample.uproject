@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{ECBC63B7-4C9F-EAD0-07C1-96968377D098}",
+	"EngineAssociation": "{92A3E1B7-414D-8022-9B58-27B52E1F32BB}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -11,61 +11,6 @@
 		}
 	],
 	"Plugins": [
-		{
-			"Name": "OculusVR",
-			"Enabled": false,
-			"SupportedTargetPlatforms": [
-				"Win32",
-				"Win64",
-				"Android"
-			]
-		},
-		{
-			"Name": "OpenXREyeTracker",
-			"Enabled": false,
-			"SupportedTargetPlatforms": [
-				"Win32",
-				"Win64",
-				"Linux",
-				"HoloLens",
-				"Android"
-			]
-		},
-		{
-			"Name": "OpenXRHandTracking",
-			"Enabled": false,
-			"SupportedTargetPlatforms": [
-				"Win32",
-				"Win64",
-				"Linux",
-				"HoloLens",
-				"Android"
-			]
-		},
-		{
-			"Name": "OpenXR",
-			"Enabled": false,
-			"SupportedTargetPlatforms": [
-				"Win32",
-				"Win64",
-				"Linux",
-				"Android",
-				"HoloLens"
-			]
-		},
-		{
-			"Name": "SteamVR",
-			"Enabled": false,
-			"SupportedTargetPlatforms": [
-				"Win32",
-				"Win64",
-				"Linux"
-			]
-		},
-		{
-			"Name": "SoundVisualizations",
-			"Enabled": true
-		},
 		{
 			"Name": "Spatialization",
 			"Enabled": true

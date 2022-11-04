@@ -11,7 +11,6 @@ public class OdinUnrealSample : ModuleRules
 	public OdinUnrealSample(ReadOnlyTargetRules Target) : base(Target)
 	{
 		MinFilesUsingPrecompiledHeaderOverride = 1;
-		bFasterWithoutUnity = true;
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
@@ -44,7 +43,7 @@ public class OdinUnrealSample : ModuleRules
 
 	private void AddPhotonLibPathWin(ReadOnlyTargetRules Target, string name)
 	{
-		string PlatformString = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64" : "Win32";
+		string PlatformString = "x64";
 		PublicAdditionalLibraries.Add(Path.Combine(PhotonPath, "lib", "Windows", name + "-cpp_vc14_release_windows_md_" + PlatformString + ".lib"));
 	}
 
@@ -66,30 +65,30 @@ public class OdinUnrealSample : ModuleRules
 
 	public bool LoadPhoton(ReadOnlyTargetRules Target)
 	{
-		if ((Target.Platform == UnrealTargetPlatform.Win64) || (Target.Platform == UnrealTargetPlatform.Win32))
+		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
-			Definitions.Add("_EG_WINDOWS_PLATFORM");
+			//GlobalDefinitions.Add("_EG_WINDOWS_PLATFORM");
 			AddPhotonLibPathWin(Target, "Common");
 			AddPhotonLibPathWin(Target, "Photon");
 			AddPhotonLibPathWin(Target, "LoadBalancing");
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Android)
 		{
-			Definitions.Add("_EG_ANDROID_PLATFORM");
+			//GlobalDefinitions.Add("_EG_ANDROID_PLATFORM");
 			AddPhotonLibPathAndroid(Target, "common");
 			AddPhotonLibPathAndroid(Target, "photon");
 			AddPhotonLibPathAndroid(Target, "loadbalancing");
 		}
 		else if (Target.Platform == UnrealTargetPlatform.IOS)
 		{
-			Definitions.Add("_EG_IPHONE_PLATFORM");
+			//GlobalDefinitions.Add("_EG_IPHONE_PLATFORM");
 			AddPhotonLibPathIOS(Target, "Common");
 			AddPhotonLibPathIOS(Target, "Photon");
 			AddPhotonLibPathIOS(Target, "LoadBalancing");
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Mac)
 		{
-			Definitions.Add("_EG_IMAC_PLATFORM");
+			//GlobalDefinitions.Add("_EG_IMAC_PLATFORM");
 			AddPhotonLibPathMac(Target, "Common");
 			AddPhotonLibPathMac(Target, "Photon");
 			AddPhotonLibPathMac(Target, "LoadBalancing");
