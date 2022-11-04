@@ -16,12 +16,12 @@ The Demo showcases the usage of Odin together with Unreal's Audio Engine. The ex
 
 In the releases you can find a pre-built game executable and the current project's code base.  The pre-built game can likely be executed without any installations required - if you do not have the redistributable packages of C++ installed, that Unreal needs, you can find it in the `\Engine\Extras\Redist\en-us`folder of the pre-built game.
 
-To open the project in the Unreal Editor you need to install the Unreal Engine 4.27.
+To open the project in the Unreal Editor you need to install the Unreal Engine 4.26, 4.27 or 5.0. You can open the source code with UE5.0 easily. If you need to open it with a 4.26 or 4.27 build of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
 
 ### Dependencies
 
-* The sample is built with the Unreal Engine version 4.27, you may need to adjust the project in order to make it fully functional in UE 5.0
-* Although it builts upon Photon's networking engine, the sample delivers all needed libraries for that
+* The sample is built with the Unreal Engine version 5.0. Alternatively you need UE4.26 or UE4.27.
+* Although it builts upon Photon's networking engine, you do not need to install anything, since the sample delivers all needed libraries for that
 * The sample depends on Steam Audio, which is delivered together with the Unreal Engine so you do not need to install the plugin manually, if you have installed plugins with your Unreal Engine version
 * ## Version History
 * 0.2
@@ -29,7 +29,7 @@ To open the project in the Unreal Editor you need to install the Unreal Engine 4
   * Small changes to tidy up blueprints
 * 0.1
   * Initial Release
-  
+
 ### Sample Map
 
 Below you can see an overview of the map, its areas and what they show:
@@ -129,6 +129,7 @@ The `Start Connect` Custom Event is called once the local player is connected to
 Then we construct a room and bind all needed events to appropriate Custom Events (we go through them in a bit). Then we create some User Data - they contain the chosen User Name from the Login Screen and the Network Id from our Photon Component. The Network Id is needed by the other clients so that they can get the correct Player Character from the Photon Component to assign it an Odin Synth Component with the correct Media Stream. Once that is done, we will call the `Join Room` function and are done with the event. We do this two times in total, once for each Odin Room.
 
 We handle the Room Events in different events:
+
 - `Peer Joined`: This event is called before the media of the other peer is added to the room, so we can setup the player character - we use the network id in the user data and the passed ODIN peer id to create a map on this component, so once we get the media stream with the ODIN id we can get the correct network id and thus correct actor to assign it the stream.
 
 - `Joined Room`: This event is called once we join the room ourselves. Here we can create an Audio Capture and from it an ODIN Media Stream that we add to the room afterwards via the `Add Media` node. We also save the Audio Captures of both rooms in a variable to reference them later.
