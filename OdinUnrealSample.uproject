@@ -46,6 +46,8 @@
 		"IOS",
 		"WindowsNoEditor",
 		"PS4",
-		"MacNoEditor"
+		"MacNoEditor",
+		"Linux",
+		"Windows"
 	]
 }
