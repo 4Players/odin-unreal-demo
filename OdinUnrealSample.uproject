@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.0",
+	"EngineAssociation": "{04D4A755-47E8-0248-72C4-B7A9A8B437EE}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -16,36 +16,18 @@
 			"Enabled": true
 		},
 		{
-			"Name": "MicroSoftSpatialSound",
-			"Enabled": true,
-			"SupportedTargetPlatforms": [
-				"HoloLens",
-				"Win64"
-			]
-		},
-		{
 			"Name": "SteamAudio",
 			"Enabled": true
 		},
 		{
 			"Name": "AudioModulation",
 			"Enabled": true
-		},
-		{
-			"Name": "Bridge",
-			"Enabled": true,
-			"SupportedTargetPlatforms": [
-				"Win64",
-				"Mac",
-				"Linux"
-			]
 		}
 	],
 	"TargetPlatforms": [
 		"Android",
 		"IOS",
 		"WindowsNoEditor",
-		"PS4",
 		"MacNoEditor",
 		"Linux",
 		"Windows"
