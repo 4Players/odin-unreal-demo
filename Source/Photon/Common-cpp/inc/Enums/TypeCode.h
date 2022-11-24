@@ -18,7 +18,7 @@ namespace ExitGames
 			static const nByte SHORT              = 'k'; ///<short
 			static const nByte INTEGER            = 'i'; ///<int
 			static const nByte LONG               = 'l'; ///<int64
-			static const nByte FLOAT              = 'f'; ///<float
+			static const nByte EG_FLOAT              = 'f'; ///<float
 			static const nByte DOUBLE             = 'd'; ///<double
 			static const nByte BOOLEAN            = 'o'; ///<bool
 			static const nByte STRING             = 's'; ///<@if CPP JString@endif @if OBJC NSString@endif

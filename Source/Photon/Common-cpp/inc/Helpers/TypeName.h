@@ -14,7 +14,7 @@
 #endif
 
 // msvc rtti || gcc rtti || gcc version from a time, when it hasn't offered an rtti define ( == llvm gcc frontend for Marmalade OS X x86 builds!)
-#if defined _CPPRTTI || defined __GXX_RTTI || !defined __clang__ && !defined _EG_PSVITA_OR_NEWER_PLATFORM && defined __GNUC__ && (__GNUC__ < 4 || __GNUC__ == 4 && (__GNUC_MINOR__ < 3 || __GNUC_MINOR__ == 3 && __GNUC_PATCHLEVEL__ < 2))
+#if defined _CPPRTTI || defined __GXX_RTTI 
 #	include <typeinfo>
 #	define TYPENAME(arg) cut((typeid(arg).name()))
 // else assume rtti to be disabled

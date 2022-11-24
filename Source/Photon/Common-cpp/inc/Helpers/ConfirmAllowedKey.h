@@ -43,7 +43,7 @@ namespace ExitGames
 			template<> struct ConfirmAllowedKey<float>
 			{
 				typedef float type;
-				static const nByte typeName = TypeCode::FLOAT;
+				static const nByte typeName = TypeCode::EG_FLOAT;
 			};
 			template<> struct ConfirmAllowedKey<double>
 			{

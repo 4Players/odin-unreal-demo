@@ -55,12 +55,12 @@ public class OdinUnrealSample : ModuleRules
 	private void AddPhotonLibPathIOS(ReadOnlyTargetRules Target, string name)
 	{
 		string archStr = (Target.Architecture == "-simulator") ? "iphonesimulator" : "iphoneos";
-		PublicAdditionalLibraries.Add(Path.Combine(PhotonPath, "lib", "iOS", "lib" + name + "-cpp_debug_" + archStr + ".a"));
+		PublicAdditionalLibraries.Add(Path.Combine(PhotonPath, "lib", "iOS", "lib" + name + "_debug_" + archStr + ".a"));
 	}
 
 	private void AddPhotonLibPathMac(ReadOnlyTargetRules Target, string name)
 	{
-		PublicAdditionalLibraries.Add(Path.Combine(PhotonPath, "lib", "Mac", "lib" + name + "-cpp_debug_macosx.a"));
+		PublicAdditionalLibraries.Add(Path.Combine(PhotonPath, "lib", "Mac", "lib" + name + "_debug_macosx.a"));
 	}
 
 	public bool LoadPhoton(ReadOnlyTargetRules Target)
@@ -68,6 +68,8 @@ public class OdinUnrealSample : ModuleRules
 		if (Target.Platform == UnrealTargetPlatform.Win64)
 		{
 			//GlobalDefinitions.Add("_EG_WINDOWS_PLATFORM");
+			PublicDefinitions.Add("_EG_WINDOWS_PLATFORM");
+
 			AddPhotonLibPathWin(Target, "Common");
 			AddPhotonLibPathWin(Target, "Photon");
 			AddPhotonLibPathWin(Target, "LoadBalancing");
@@ -75,23 +77,38 @@ public class OdinUnrealSample : ModuleRules
 		else if (Target.Platform == UnrealTargetPlatform.Android)
 		{
 			//GlobalDefinitions.Add("_EG_ANDROID_PLATFORM");
+
+			PublicDefinitions.Add("_EG_ANDROID_PLATFORM");
+
 			AddPhotonLibPathAndroid(Target, "common");
 			AddPhotonLibPathAndroid(Target, "photon");
 			AddPhotonLibPathAndroid(Target, "loadbalancing");
+			AddPhotonLibPathMac(Target, "crypto");
+			// TODO: Add libs for ssl and websockets to support android
+			//AddPhotonLibPathMac(Target, "ssl");
+			//ddPhotonLibPathMac(Target, "websockets");
+
 		}
 		else if (Target.Platform == UnrealTargetPlatform.IOS)
 		{
 			//GlobalDefinitions.Add("_EG_IPHONE_PLATFORM");
-			AddPhotonLibPathIOS(Target, "Common");
-			AddPhotonLibPathIOS(Target, "Photon");
-			AddPhotonLibPathIOS(Target, "LoadBalancing");
+			PublicDefinitions.Add("_EG_IPHONE_PLATFORM");
+
+
+			AddPhotonLibPathIOS(Target, "Common-cpp");
+			AddPhotonLibPathIOS(Target, "Photon-cpp");
+			AddPhotonLibPathIOS(Target, "LoadBalancing-cpp");
+			AddPhotonLibPathMac(Target, "crypto");
+
 		}
 		else if (Target.Platform == UnrealTargetPlatform.Mac)
 		{
 			//GlobalDefinitions.Add("_EG_IMAC_PLATFORM");
-			AddPhotonLibPathMac(Target, "Common");
-			AddPhotonLibPathMac(Target, "Photon");
-			AddPhotonLibPathMac(Target, "LoadBalancing");
+			PublicDefinitions.Add("_EG_IMAC_PLATFORM");
+			AddPhotonLibPathMac(Target, "Common-cpp");
+			AddPhotonLibPathMac(Target, "Photon-cpp");
+			AddPhotonLibPathMac(Target, "LoadBalancing-cpp");
+			AddPhotonLibPathMac(Target, "crypto");
 		}
 		else
 		{

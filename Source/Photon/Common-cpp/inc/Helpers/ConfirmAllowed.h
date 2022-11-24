@@ -76,7 +76,7 @@ namespace ExitGames
 				typedef float type;
 				typedef float scalarType;
 				static const unsigned int dimensions = 0;
-				static const nByte typeName = TypeCode::FLOAT;
+				static const nByte typeName = TypeCode::EG_FLOAT;
 				static const nByte customTypeName = 0;
 			};
 			template<> struct ConfirmAllowed<double>

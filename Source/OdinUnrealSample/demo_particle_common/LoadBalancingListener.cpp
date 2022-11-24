@@ -218,7 +218,7 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 				}
 				MemoryManagement::deallocateArray(data);
 			}
-			else if (obj->getType() == TypeCode::FLOAT)
+			else if (obj->getType() == TypeCode::EG_FLOAT)
 			{
 				float* data = ((ValueObject<float*>*)obj)->getDataCopy();
 				x = (float)data[0];
