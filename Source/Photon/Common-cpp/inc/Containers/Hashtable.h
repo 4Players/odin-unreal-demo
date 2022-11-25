@@ -7,8 +7,6 @@
 #pragma once
 
 #include "Common-cpp/inc/Containers/AssociativeContainerBase.h"
-#include "Common-cpp/inc/Helpers/KeyToObject.h"
-#include "Common-cpp/inc/Helpers/ValueToObject.h"
 #include "Common-cpp/inc/Object.h"
 
 namespace ExitGames
@@ -21,8 +19,8 @@ namespace ExitGames
 			virtual void put(const Hashtable& src);
 			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType& val);
 			template<typename FKeyType> void put(const FKeyType& key);
-			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, typename Common::Helpers::ArrayLengthType<FValueType>::type size);
-			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, const short* sizes);
+			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, int size);
+			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, const int* sizes);
 		private:
 			typedef AssociativeContainerBase<Hashtable, Object> super;
 
@@ -51,9 +49,9 @@ namespace ExitGames
 			putImplementation(Helpers::KeyToObject<Object>::get(key), Object());
 		}
 
-		/** @copydoc AssociativeContainerBase::put(const FKeyType&,FValueType,typename Common::Helpers::ArrayLengthType<FValueType>::type) */
+		/** @copydoc AssociativeContainerBase::put(const FKeyType&,FValueType,int) */
 		template<typename FKeyType, typename FValueType>
-		void Hashtable::put(const FKeyType& key, const FValueType pVal, typename Common::Helpers::ArrayLengthType<FValueType>::type size)
+		void Hashtable::put(const FKeyType& key, const FValueType pVal, int size)
 		{
 			typename Helpers::ConfirmAllowedKey<FKeyType>::type forceCompilationToFailForUnsupportedKeyTypes; (void)forceCompilationToFailForUnsupportedKeyTypes;
 			typename Helpers::ConfirmAllowed<FValueType>::type forceCompilationToFailForUnsupportedValueTypes; (void)forceCompilationToFailForUnsupportedValueTypes;
@@ -63,7 +61,7 @@ namespace ExitGames
 
 		/** @copydoc AssociativeContainerBase::put(const FKeyType&,FValueType,const short*) */
 		template<typename FKeyType, typename FValueType>
-		void Hashtable::put(const FKeyType& key, const FValueType pVal, const short* const sizes)
+		void Hashtable::put(const FKeyType& key, const FValueType pVal, const int* const sizes)
 		{
 			typename Helpers::ConfirmAllowedKey<FKeyType>::type forceCompilationToFailForUnsupportedKeyTypes; (void)forceCompilationToFailForUnsupportedKeyTypes;
 			typename Helpers::ConfirmAllowed<FValueType>::type forceCompilationToFailForUnsupportedValueTypes; (void)forceCompilationToFailForUnsupportedValueTypes;

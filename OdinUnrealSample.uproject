@@ -30,6 +30,7 @@
 		"WindowsNoEditor",
 		"MacNoEditor",
 		"Linux",
-		"Windows"
+		"Windows",
+		"Mac"
 	]
 }

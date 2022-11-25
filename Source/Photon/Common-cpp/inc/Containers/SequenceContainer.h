@@ -18,9 +18,11 @@ namespace ExitGames
 {
 	namespace Common
 	{
+EG_PRAGMA_VISIBILITY_PUSH_HIDDEN
 		template<template<typename> class T, typename Etype>
 		class SequenceContainer : public Base
 		{
+EG_PRAGMA_VISIBILITY_POP
 		public:
 			using ToString::toString;
 
@@ -85,7 +87,7 @@ namespace ExitGames
 		/** @file */
 
 		template<template<typename> class T, typename Etype>
-		SequenceContainer<T, Etype>::SequenceContainer(unsigned int initialCapacity, unsigned int capacityIncrement) 
+		SequenceContainer<T, Etype>::SequenceContainer(unsigned int initialCapacity, unsigned int capacityIncrement)
 		{
 			mSize = 0;
 			mCapacity = initialCapacity;
@@ -107,7 +109,7 @@ namespace ExitGames
 			for(unsigned int i=0; i<mSize; ++i)
 				new(mpData+i) Etype(carray[i]);
 		}
-	
+
 		/**
 		   Destructor. */
 		template<template<typename> class T, typename Etype>
@@ -149,7 +151,7 @@ namespace ExitGames
 		{
 			return static_cast<T<Etype>&>(*this) = static_cast<const T<Etype>&>(toCopy);
 		}
-		
+
 		/** @overload */
 		template<template<typename> class T, typename Etype>
 		template<template<typename> class FT>
@@ -183,7 +185,7 @@ namespace ExitGames
 			for(unsigned int i=0; i<mSize; i++)
 				new(mpData+i) Etype(toCopy.mpData[i]);
 		}
-		
+
 		/**
 		   operator==.
 		   @returns true, if both operands are equal, false otherwise.
@@ -438,13 +440,13 @@ namespace ExitGames
 				new(mpData+mSize+i) Etype(carray[i]);
 			mSize += elementCount;
 		}
-		
+
 		/**
 		   @overload
 		   Calls the above function with container.getCArray() and container.getSize() as parameters
 		   @param container the container class instance from which to copy the elements */
 		template<template<typename> class T, typename Etype>
-		template<template<typename> class FT> 
+		template<template<typename> class FT>
 		void SequenceContainer<T, Etype>::addElements(const SequenceContainer<FT, Etype>& container)
 		{
 			addElements(container.getCArray(), container.getSize());

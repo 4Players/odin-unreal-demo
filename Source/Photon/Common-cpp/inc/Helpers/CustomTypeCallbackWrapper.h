@@ -8,7 +8,7 @@
 
 #include "Common-cpp/inc/defines.h"
 
-typedef void* (*CB_CALLOC)(short count, nByte customTypeCode);
+typedef void* (*CB_CALLOC)(int count, nByte customTypeCode);
 typedef void (*CB_FREE)(const void* pData, nByte customTypeCode);
 typedef unsigned int (*CB_SIZEOF)(nByte customTypeCode);
 
@@ -25,14 +25,14 @@ namespace ExitGames
 				CustomTypeCallbackWrapper(CB_CALLOC cbCalloc, CB_FREE cbFree, CB_SIZEOF cbSizeOf);
 				virtual ~CustomTypeCallbackWrapper(void);
 
-				virtual bool compare(void* pData1, void* pData2);
-				virtual void duplicate(void* pData, void* retVal);
-				virtual void deserialize(nByte* pData, short length, void* retVal);
+				virtual bool compare(const void* pData1, const void* pData2);
+				virtual void duplicate(const void* pData, void* retVal);
+				virtual void deserialize(const nByte* pData, short length, void* retVal);
 				virtual short serialize(const void* pData, nByte* retVal);
-				virtual unsigned int toString(void* pData, EG_CHAR* buffer);
+				virtual unsigned int toString(const void* pData, EG_CHAR* buffer);
 				virtual CustomTypeCallbackWrapper* copy(void) const;
-				void* alloc(short count, nByte customTypeCode);
-				void (free)(const void* pData, nByte customTypeCode);
+				void* alloc(int count, nByte customTypeCode);
+				void free(const void* pData, nByte customTypeCode);
 				unsigned int getSizeof(nByte customTypeCode);
 				void reset(void);
 

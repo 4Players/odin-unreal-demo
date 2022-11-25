@@ -6,25 +6,31 @@
 
 #pragma once
 
-#include "Common-cpp/inc/Helpers/DeSerializerImplementation.h"
+#include "Common-cpp/inc/Enums/SerializationProtocol.h"
+#include "Common-cpp/inc/Object.h"
 
 namespace ExitGames
 {
 	namespace Common
 	{
-		class DeSerializer : public Base
+		namespace Helpers
+		{
+			class DeserializerImplementation;
+		}
+
+		class Deserializer : public Base
 		{
 		public:
 			using ToString::toString;
 
-			DeSerializer(const nByte* data, int size);
+			Deserializer(const nByte* data, unsigned int size, nByte protocol=SerializationProtocol::DEFAULT);
+			virtual ~Deserializer(void);
 
 			bool pop(Object& object);
 
 			virtual JString& toString(JString& retStr, bool withTypes=false) const;
 		private:
-			Helpers::DeSerializerImplementation mImp;
-			int mSize;
+			Helpers::DeserializerImplementation& mImp;
 		};
 	}
 }

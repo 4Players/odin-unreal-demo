@@ -49,11 +49,12 @@ namespace ExitGames
 			bool getPublishUserID(void) const;
 			const Common::JVector<Common::JString>& getExpectedUsers(void) const;
 			bool setExpectedUsers(const Common::JVector<Common::JString>& expectedUsers, const WebFlags& webflags=WebFlags());
+			bool setMasterClient(const Player& masterClientPlayer);
 
 			bool mergeCustomProperties(const Common::Hashtable& customProperties, const Common::Hashtable& expectedCustomProperties=Common::Hashtable(), const WebFlags& webflags=WebFlags());
 			template<typename ktype, typename vtype> bool addCustomProperty(const ktype& key, const vtype& value, const Common::Hashtable& expectedCustomProperties=Common::Hashtable(), const WebFlags& webflags=WebFlags());
-			template<typename ktype, typename vtype> bool addCustomProperty(const ktype& key, const vtype pValueArray, typename Common::Helpers::ArrayLengthType<vtype>::type arrSize, const Common::Hashtable& expectedCustomProperties=Common::Hashtable(), const WebFlags& webflags=WebFlags());
-			template<typename ktype, typename vtype> bool addCustomProperty(const ktype& key, const vtype pValueArray, const short* pArrSizes, const Common::Hashtable& expectedCustomProperties=Common::Hashtable(), const WebFlags& webflags=WebFlags());
+			template<typename ktype, typename vtype> bool addCustomProperty(const ktype& key, const vtype pValueArray, int arrSize, const Common::Hashtable& expectedCustomProperties=Common::Hashtable(), const WebFlags& webflags=WebFlags());
+			template<typename ktype, typename vtype> bool addCustomProperty(const ktype& key, const vtype pValueArray, const int* pArrSizes, const Common::Hashtable& expectedCustomProperties=Common::Hashtable(), const WebFlags& webflags=WebFlags());
 			bool addCustomProperties(const Common::Hashtable& customProperties, const Common::Hashtable& expectedCustomProperties=Common::Hashtable(), const WebFlags& webflags=WebFlags());
 			template<typename ktype> bool removeCustomProperty(const ktype& key, const Common::Hashtable& expectedCustomProperties=Common::Hashtable(), const WebFlags& webflags=WebFlags());
 			template<typename ktype> bool removeCustomProperties(const ktype* keys, unsigned int count, const Common::Hashtable& expectedCustomProperties=Common::Hashtable(), const WebFlags& webflags=WebFlags());
@@ -72,8 +73,8 @@ namespace ExitGames
 		private:
 			void cacheProperties(const Common::Hashtable& properties);
 			template<typename Etype> bool setRoomProperty(nByte key, Etype val, const WebFlags& webflags);
-			template<typename Etype> bool setRoomProperty(nByte key, const Etype pValueArray, typename Common::Helpers::ArrayLengthType<Etype>::type arrSize, const WebFlags& webflags);
-			template<typename Etype> bool setRoomProperty(nByte key, const Etype pValueArray, const short* pArrSizes, const WebFlags& webflags);
+			template<typename Etype> bool setRoomProperty(nByte key, const Etype pValueArray, int arrSize, const WebFlags& webflags);
+			template<typename Etype> bool setRoomProperty(nByte key, const Etype pValueArray, const int* pArrSizes, const WebFlags& webflags);
 
 			void setPlayers(const Common::JVector<Player*>& players);
 			void removeAllPlayers(void);
@@ -117,7 +118,7 @@ namespace ExitGames
 		}
 		
 		template<typename ktype, typename vtype>
-		bool MutableRoom::addCustomProperty(const ktype& key, const vtype pValueArray, typename Common::Helpers::ArrayLengthType<vtype>::type arrSize, const Common::Hashtable& expectedCustomProperties, const WebFlags& webflags)
+		bool MutableRoom::addCustomProperty(const ktype& key, const vtype pValueArray, int arrSize, const Common::Hashtable& expectedCustomProperties, const WebFlags& webflags)
 		{
 			Common::Hashtable hash;
 			hash.put(key, pValueArray, arrSize);
@@ -125,7 +126,7 @@ namespace ExitGames
 		}
 
 		template<typename ktype, typename vtype>
-		bool MutableRoom::addCustomProperty(const ktype& key, const vtype pValueArray, const short* pArrSizes, const Common::Hashtable& expectedCustomProperties, const WebFlags& webflags)
+		bool MutableRoom::addCustomProperty(const ktype& key, const vtype pValueArray, const int* pArrSizes, const Common::Hashtable& expectedCustomProperties, const WebFlags& webflags)
 		{
 			Common::Hashtable hash;
 			hash.put(key, pValueArray, pArrSizes);

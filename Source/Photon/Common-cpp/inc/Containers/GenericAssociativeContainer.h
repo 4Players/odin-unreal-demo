@@ -34,8 +34,8 @@ namespace ExitGames
 			virtual void put(const T<EKeyType, EValueType>& src);
 			template<template<typename, typename> class FT> void put(const GenericAssociativeContainer<FT, EKeyType, EValueType>& src);
 			void put(const EKeyType& key, const EValueType& val);
-			void put(const EKeyType& key, const EValueType pVal, typename Common::Helpers::ArrayLengthType<EValueType>::type size);
-			void put(const EKeyType& key, const EValueType pVal, const short* sizes);
+			void put(const EKeyType& key, const EValueType pVal, int size);
+			void put(const EKeyType& key, const EValueType pVal, const int* sizes);
 			virtual void remove(const EKeyType& key);
 			virtual bool contains(const EKeyType& key) const;
 
@@ -161,16 +161,16 @@ namespace ExitGames
 			super::put(key, val);
 		}
 
-		/** @copydoc ExitGames::Common::AssociativeContainerBase::put(const FKeyType&,FValueType,typename Common::Helpers::ArrayLengthType<FValueType>::type) */
+		/** @copydoc ExitGames::Common::AssociativeContainerBase::put(const FKeyType&,FValueType,int) */
 		template<template<typename, typename> class T, typename EKeyType, typename EValueType>
-		void GenericAssociativeContainer<T, EKeyType, EValueType>::put(const EKeyType& key, const EValueType pVal, typename Common::Helpers::ArrayLengthType<EValueType>::type size)
+		void GenericAssociativeContainer<T, EKeyType, EValueType>::put(const EKeyType& key, const EValueType pVal, int size)
 		{
 			super::put(key, pVal, size);
 		}
 
 		/** @copydoc ExitGames::Common::AssociativeContainerBase::put(const FKeyType&,FValueType,const short*) */
 		template<template<typename, typename> class T, typename EKeyType, typename EValueType>
-		void GenericAssociativeContainer<T, EKeyType, EValueType>::put(const EKeyType& key, const EValueType pVal, const short* const sizes)
+		void GenericAssociativeContainer<T, EKeyType, EValueType>::put(const EKeyType& key, const EValueType pVal, const int* const sizes)
 		{
 			super::put(key, pVal, sizes);
 		}

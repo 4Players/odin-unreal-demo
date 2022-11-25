@@ -9,6 +9,7 @@
 #include "Common-cpp/inc/CustomType.h"
 #include "Common-cpp/inc/Enums/TypeCode.h"
 #include "Common-cpp/inc/Helpers/CompileTimeAssertTrue.h"
+#include "Common-cpp/inc/Helpers/TypeTraits/EnableIf.h"
 #include "Common-cpp/inc/Helpers/TypeTraits/IsDerivedFrom.h"
 
 namespace ExitGames
@@ -22,7 +23,7 @@ namespace ExitGames
 
 		namespace Helpers
 		{
-			template<typename CType, unsigned int N=0> struct ConfirmAllowed
+			template<typename CType, size_t N=0> struct ConfirmAllowed
 			{
 				COMPILE_TIME_ASSERT_TRUE_MSG((IsDerivedFrom<CType, CustomType<CType, CType::TypeCode> >::is), ERROR_UNSUPPORTED_VALUE_TYPE);
 				typedef CType type;
@@ -119,7 +120,7 @@ namespace ExitGames
 				static const nByte typeName = TypeCode::STRING;
 				static const nByte customTypeName = 0;
 			};
-			template<unsigned int N> struct ConfirmAllowed<char[N]>
+			template<size_t N> struct ConfirmAllowed<char[N]>
 			{
 				typedef JString type;
 				typedef JString scalarType;
@@ -127,7 +128,7 @@ namespace ExitGames
 				static const nByte typeName = TypeCode::STRING;
 				static const nByte customTypeName = 0;
 			};
-			template<unsigned int N> struct ConfirmAllowed<const char[N]>
+			template<size_t N> struct ConfirmAllowed<const char[N]>
 			{
 				typedef JString type;
 				typedef JString scalarType;
@@ -151,7 +152,7 @@ namespace ExitGames
 				static const nByte typeName = TypeCode::STRING;
 				static const nByte customTypeName = 0;
 			};
-			template<unsigned int N> struct ConfirmAllowed<wchar_t[N]>
+			template<size_t N> struct ConfirmAllowed<wchar_t[N]>
 			{
 				typedef JString type;
 				typedef JString scalarType;
@@ -159,7 +160,7 @@ namespace ExitGames
 				static const nByte typeName = TypeCode::STRING;
 				static const nByte customTypeName = 0;
 			};
-			template<unsigned int N> struct ConfirmAllowed<const wchar_t[N]>
+			template<size_t N> struct ConfirmAllowed<const wchar_t[N]>
 			{
 				typedef JString type;
 				typedef JString scalarType;
@@ -188,7 +189,7 @@ namespace ExitGames
 				typedef const typename ConfirmAllowed<CType>::type type;
 				typedef const typename ConfirmAllowed<CType>::scalarType scalarType;
 				static const unsigned int dimensions = ConfirmAllowed<CType>::dimensions;
-				static const nByte typeName =ConfirmAllowed<CType>::typeName;
+				static const nByte typeName = ConfirmAllowed<CType>::typeName;
 				static const nByte customTypeName = ConfirmAllowed<CType>::customTypeName;
 			};
 			template<typename CType> struct ConfirmAllowed<CType*>
@@ -207,7 +208,7 @@ namespace ExitGames
 				static const nByte typeName = ConfirmAllowed<const CType>::typeName;
 				static const nByte customTypeName = ConfirmAllowed<const CType>::customTypeName;
 			};
-			template<typename CType, unsigned int N> struct ConfirmAllowed<CType[N]>
+			template<typename CType, size_t N> struct ConfirmAllowed<CType[N]>
 			{
 				typedef typename ConfirmAllowed<CType>::type* type;
 				typedef typename ConfirmAllowed<CType>::scalarType scalarType;
@@ -215,7 +216,7 @@ namespace ExitGames
 				static const nByte typeName = ConfirmAllowed<CType>::typeName;
 				static const nByte customTypeName = ConfirmAllowed<CType>::customTypeName;
 			};
-			template<typename CType, unsigned int N> struct ConfirmAllowed<const CType[N]>
+			template<typename CType, size_t N> struct ConfirmAllowed<const CType[N]>
 			{
 				typedef typename ConfirmAllowed<const CType>::type* type;
 				typedef typename ConfirmAllowed<const CType>::scalarType scalarType;

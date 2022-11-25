@@ -20,6 +20,7 @@ namespace ExitGames
 			static void registerType(void);
 			static void unregisterType(void);
 
+			virtual nByte getTypeCode(void) const;
 			static const nByte TypeCode = typeCode;
 		protected:
 			CustomType(void);
@@ -28,7 +29,7 @@ namespace ExitGames
 		private:
 			typedef CustomTypeBase super;
 
-			static void* ccalloc(short count, nByte customTypeCode);
+			static void* ccalloc(int count, nByte customTypeCode);
 			static void cfree(const void* pData, nByte customTypeCode);
 			static unsigned int csizeOf(nByte customTypeCode);
 
@@ -86,6 +87,12 @@ namespace ExitGames
 		}
 
 		template<typename T, nByte typeCode>
+		nByte CustomType<T, typeCode>::getTypeCode(void) const
+		{
+			return typeCode;
+		}
+
+		template<typename T, nByte typeCode>
 		CustomType<T, typeCode>::CustomType(void)
 		{
 		}
@@ -101,7 +108,7 @@ namespace ExitGames
 		}
 
 		template<typename T, nByte typeCode>
-		void* CustomType<T, typeCode>::ccalloc(short count, nByte /*customTypeCode*/)
+		void* CustomType<T, typeCode>::ccalloc(int count, nByte /*customTypeCode*/)
 		{
 			return mpFactory->create(count);
 		}

@@ -7,7 +7,6 @@
 #pragma once
 
 #include "Common-cpp/inc/Containers/JVector.h"
-#include "Common-cpp/inc/Helpers/ArrayLengthType.h"
 #include "Common-cpp/inc/MemoryManagement/Allocate.h"
 #include "Common-cpp/inc/MemoryManagement/Internal/Interface.h"
 
@@ -43,8 +42,8 @@ namespace ExitGames
 			virtual T& assign(const GenericAssociativeContainerBase<T, TImplementation, TObject>& toCopy);
 
 			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType& val);
-			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, typename Common::Helpers::ArrayLengthType<FValueType>::type size);
-			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, const short* sizes);
+			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, int size);
+			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, const int* sizes);
 
 			template<typename FKeyType> void remove(const FKeyType& key);
 			template<typename FKeyType> bool contains(const FKeyType& key) const;
@@ -236,14 +235,14 @@ namespace ExitGames
 
 		template<typename T, typename TImplementation, typename TObject>
 		template<typename FKeyType, typename FValueType>
-		void GenericAssociativeContainerBase<T, TImplementation, TObject>::put(const FKeyType& key, FValueType pVal, typename Common::Helpers::ArrayLengthType<FValueType>::type size)
+		void GenericAssociativeContainerBase<T, TImplementation, TObject>::put(const FKeyType& key, FValueType pVal, int size)
 		{
 			mHashtable.put(key, pVal, size);
 		}
 
 		template<typename T, typename TImplementation, typename TObject>
 		template<typename FKeyType, typename FValueType>
-		void GenericAssociativeContainerBase<T, TImplementation, TObject>::put(const FKeyType& key, FValueType pVal, const short* const sizes)
+		void GenericAssociativeContainerBase<T, TImplementation, TObject>::put(const FKeyType& key, FValueType pVal, const int* const sizes)
 		{
 			mHashtable.put(key, pVal, sizes);
 		}

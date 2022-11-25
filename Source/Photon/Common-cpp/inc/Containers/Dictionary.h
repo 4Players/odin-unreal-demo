@@ -58,8 +58,8 @@ namespace ExitGames
 			virtual void put(const DictionaryBase& src);
 			void put(const EKeyType& key, const EValueType& val);
 			void put(const EKeyType& key);
-			void put(const EKeyType& key, const EValueType pVal, typename Common::Helpers::ArrayLengthType<EValueType>::type size);
-			void put(const EKeyType& key, const EValueType pVal, const short* sizes);
+			void put(const EKeyType& key, const EValueType pVal, int size);
+			void put(const EKeyType& key, const EValueType pVal, const int* sizes);
 			void remove(const EKeyType& key);
 			bool contains(const EKeyType& key) const;
 
@@ -76,20 +76,20 @@ namespace ExitGames
 			typedef DictionaryBase super;
 
 			virtual bool compare(const DictionaryBase& toCompare) const;
-			virtual DictionaryBase* copy(short amount) const;
+			virtual DictionaryBase* copy(int amount) const;
 
-			static bool mStaticMembersHaveBeenInitialized;
+			EG_ATTRIBUTE_VISIBILITY_HIDDEN static bool mStaticMembersHaveBeenInitialized;
 
 			template<typename EType> struct NestingDepth{static const unsigned int nestingDepth = 0;};
 			template<template<typename, typename> class EType, typename ENestedKeyType, typename ENestedValueType> struct NestingDepth<EType<ENestedKeyType, ENestedValueType> >{static const unsigned int nestingDepth = NestingDepth<ENestedValueType>::nestingDepth+1;};
 			template<typename EType> struct NestedCustomType{static const nByte nestedCustomType = Helpers::ConfirmAllowed<EType>::customTypeName;};
 			template<template<typename, typename> class EType, typename ENestedKeyType, typename ENestedValueType> struct NestedCustomType<EType<ENestedKeyType, ENestedValueType> >{static const nByte nestedCustomType = NestedCustomType<ENestedValueType>::nestedCustomType;};
 
-			static const unsigned int M_NESTING_DEPTH = NestingDepth<Dictionary<EKeyType, EValueType> >::nestingDepth;
-			static nByte mpKeyTypes[M_NESTING_DEPTH+DEBUG_RELEASE(1, 0)]; // one unused byte at the end in debug config for easier debugging
-			static nByte mpValueTypes[M_NESTING_DEPTH+DEBUG_RELEASE(1, 0)];
-			static unsigned int mpValueDimensions[M_NESTING_DEPTH+DEBUG_RELEASE(1, 0)];
-			static const nByte mValueCustomType = NestedCustomType<Dictionary<EKeyType, EValueType> >::nestedCustomType;
+			EG_ATTRIBUTE_VISIBILITY_HIDDEN static const unsigned int M_NESTING_DEPTH = NestingDepth<Dictionary<EKeyType, EValueType> >::nestingDepth;
+			EG_ATTRIBUTE_VISIBILITY_HIDDEN static nByte mpKeyTypes[M_NESTING_DEPTH+DEBUG_RELEASE(1, 0)]; // one unused byte at the end in debug config for easier debugging
+			EG_ATTRIBUTE_VISIBILITY_HIDDEN static nByte mpValueTypes[M_NESTING_DEPTH+DEBUG_RELEASE(1, 0)];
+			EG_ATTRIBUTE_VISIBILITY_HIDDEN static unsigned int mpValueDimensions[M_NESTING_DEPTH+DEBUG_RELEASE(1, 0)];
+			EG_ATTRIBUTE_VISIBILITY_HIDDEN static const nByte mValueCustomType = NestedCustomType<Dictionary<EKeyType, EValueType> >::nestedCustomType;
 
 			template<typename EType, typename ERPType = typename Helpers::RemovePointer<EType>::type> struct NestedInfos{static void fillArrays(nByte keyTypes[M_NESTING_DEPTH], nByte valueTypes[M_NESTING_DEPTH], unsigned int valueDimensions[M_NESTING_DEPTH], unsigned int recursionDepth=0);};
 			template<typename EType, template<typename, typename> class ETemplate, typename ENestedKeyType, typename ENestedValueType> struct NestedInfos<EType, ETemplate<ENestedKeyType, ENestedValueType> >{static void fillArrays(nByte keyTypes[M_NESTING_DEPTH], nByte valueTypes[M_NESTING_DEPTH], unsigned int valueDimensions[M_NESTING_DEPTH], unsigned int recursionDepth=0);};
@@ -206,16 +206,16 @@ namespace ExitGames
 			mHashtable.put(key);
 		}
 
-		/** @copydoc AssociativeContainerBase::put(const FKeyType&,FValueType,typename Common::Helpers::ArrayLengthType<FValueType>::type) */
+		/** @copydoc AssociativeContainerBase::put(const FKeyType&,FValueType,int) */
 		template<typename EKeyType, typename EValueType>
-		void Dictionary<EKeyType, EValueType>::put(const EKeyType& key, const EValueType pVal, typename Common::Helpers::ArrayLengthType<EValueType>::type size)
+		void Dictionary<EKeyType, EValueType>::put(const EKeyType& key, const EValueType pVal, int size)
 		{
 			super::put(key, pVal, size);
 		}
 
 		/** @copydoc AssociativeContainerBase::put(const FKeyType&,FValueType,const short*) */
 		template<typename EKeyType, typename EValueType>
-		void Dictionary<EKeyType, EValueType>::put(const EKeyType& key, const EValueType pVal, const short* const sizes)
+		void Dictionary<EKeyType, EValueType>::put(const EKeyType& key, const EValueType pVal, const int* const sizes)
 		{
 			super::put(key, pVal, sizes);
 		}
@@ -308,7 +308,7 @@ namespace ExitGames
 		}
 
 		template<typename EKeyType, typename EValueType>
-		DictionaryBase* Dictionary<EKeyType, EValueType>::copy(short amount) const
+		DictionaryBase* Dictionary<EKeyType, EValueType>::copy(int amount) const
 		{
 			DictionaryBase* pRetVal = MemoryManagement::allocateArray<Dictionary<EKeyType, EValueType> >(amount);
 			for(short i=0; i<amount; i++)

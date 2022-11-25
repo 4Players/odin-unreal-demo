@@ -13,6 +13,12 @@ namespace ExitGames
 {
 	namespace Common
 	{
+		namespace Helpers
+		{
+			class DeserializerImplementationProtocol16;
+			class DeserializerImplementationProtocol18;
+		}
+
 		class DictionaryBase : public GenericAssociativeContainerBase<DictionaryBase, Hashtable, Object>
 		{
 		private:
@@ -27,7 +33,7 @@ namespace ExitGames
 
 			virtual const nByte* getKeyTypes(void) const;
 			virtual const nByte* getValueTypes(void) const;
-			template<typename FKeyType> const short* getValueSizes(const FKeyType& key) const;
+			template<typename FKeyType> const int* getValueSizes(const FKeyType& key) const;
 			virtual const unsigned int* getValueDimensions(void) const;
 			virtual nByte getValueCustomType(void) const;
 
@@ -47,7 +53,7 @@ namespace ExitGames
 			template<typename FValueType> const FValueType& getValueAtImplementation(unsigned int index, const FValueType* pDummyDeducer) const;
 			template<typename FValueType> FValueType& getValueAtImplementation(unsigned int index, const FValueType* pDummyDeducer);
 
-			virtual DictionaryBase* copy(short amount) const;
+			virtual DictionaryBase* copy(int amount) const;
 
 			class TypeInfo : public Base
 			{
@@ -80,7 +86,8 @@ namespace ExitGames
 			TypeInfo* mpTypeInfo;
 
 			friend super;
-			friend class Helpers::DeSerializerImplementation;
+			friend class Helpers::DeserializerImplementationProtocol16;
+			friend class Helpers::DeserializerImplementationProtocol18;
 			friend class Object;
 			friend class ::EGUtilsHelper;
 		};
@@ -91,7 +98,7 @@ namespace ExitGames
 		    @param key Reference to the key to return the corresponding value sizes for
 			*/
 		template<typename FKeyType>
-		const short* DictionaryBase::getValueSizes(const FKeyType& key) const
+		const int* DictionaryBase::getValueSizes(const FKeyType& key) const
 		{
 			return getHashtable().getValue(key)->getSizes();
 		}

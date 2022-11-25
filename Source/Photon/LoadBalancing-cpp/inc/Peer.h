@@ -20,7 +20,7 @@ namespace ExitGames
 		class Peer : public Photon::PhotonPeer
 		{
 		public:
-			Peer(Photon::PhotonListener& listener, nByte connectionProtocol=Photon::ConnectionProtocol::DEFAULT);
+			Peer(Photon::PhotonListener& listener, nByte connectionProtocol=Photon::ConnectionProtocol::DEFAULT, nByte serializationProtocol=Common::SerializationProtocol::DEFAULT);
 			virtual ~Peer(void);
 
 #if defined EG_DOC
@@ -33,8 +33,8 @@ namespace ExitGames
 			virtual bool opJoinRandomRoom(const Common::JString& gameID=Common::JString(), const RoomOptions& options=RoomOptions(), bool createIfNotExists=false, const Common::Hashtable& customRoomProperties=Common::Hashtable(), nByte maxPlayers=0, nByte matchmakingMode=MatchmakingMode::FILL_ROOM, const Common::JString& lobbyName=Common::JString(), nByte lobbyType=LobbyType::DEFAULT, const Common::JString& sqlLobbyFilter=Common::JString(), const Common::JVector<Common::JString>& expectedUsers=Common::JVector<Common::JString>());
 			virtual bool opLeaveRoom(bool willComeBack=false, bool sendAuthCookie=false);
 			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype& parameters, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
-			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
-			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype pParameterArray, const short* pArrSizes, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
+			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype pParameterArray, int arrSize, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
+			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype pParameterArray, const int* pArrSizes, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
 			virtual bool opAuthenticate(const Common::JString& appID, const Common::JString& appVersion, bool encrypted, const AuthenticationValues& authenticationValues=AuthenticationValues(), bool lobbyStats=false, const Common::JString& regionCode=Common::JString());
 			virtual bool opAuthenticateOnce(const Common::JString& appID, const Common::JString& appVersion, nByte connectionProtocol, nByte encryptionMode, const AuthenticationValues& authenticationValues=AuthenticationValues(), bool lobbyStats=false, const Common::JString& regionCode=Common::JString());
 			virtual bool opFindFriends(const Common::JString* friendsToFind, short numFriendsToFind);
@@ -42,8 +42,8 @@ namespace ExitGames
 			virtual bool opChangeGroups(const Common::JVector<nByte>* pGroupsToRemove, const Common::JVector<nByte>* pGroupsToAdd);
 			virtual bool opWebRpc(const Common::JString& uriPath);
 			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype& parameters, bool sendAuthCookie=false);
-			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, bool sendAuthCookie=false);
-			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, const short* pArrSizes, bool sendAuthCookie=false);
+			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, int arrSize, bool sendAuthCookie=false);
+			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, const int* pArrSizes, bool sendAuthCookie=false);
 			virtual bool opGetRoomList(const Common::JString& lobby, const Common::JString& sqlLobbyFilter);
 			virtual bool opGetRegions(bool encrypted, const Common::JString& appID);
 			virtual bool opSetPropertiesOfPlayer(int playerNr, const Common::Hashtable& properties, const Common::Hashtable& expectedProperties=Common::Hashtable(), WebFlags webFlags=WebFlags());
@@ -74,14 +74,14 @@ namespace ExitGames
 		}
 
 		template<typename Ftype>
-		bool Peer::opRaiseEvent(bool reliable, const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, nByte eventCode, const RaiseEventOptions& options)
+		bool Peer::opRaiseEvent(bool reliable, const Ftype pParameterArray, int arrSize, nByte eventCode, const RaiseEventOptions& options)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG(Common::Helpers::ConfirmAllowed<Ftype>::dimensions==1, ERROR_THIS_OVERLOAD_IS_ONLY_FOR_1D_ARRAYS);
 			return opRaiseEvent(reliable, Common::Helpers::ValueToObject<Common::Object>::get(pParameterArray, arrSize), eventCode, options);
 		}
 
 		template<typename Ftype>
-		bool Peer::opRaiseEvent(bool reliable, const Ftype pParameterArray, const short* pArrSizes, nByte eventCode, const RaiseEventOptions& options)
+		bool Peer::opRaiseEvent(bool reliable, const Ftype pParameterArray, const int* pArrSizes, nByte eventCode, const RaiseEventOptions& options)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG((Common::Helpers::ConfirmAllowed<Ftype>::dimensions>1), ERROR_THIS_OVERLOAD_IS_ONLY_FOR_MULTIDIMENSIONAL_ARRAYS);
 			return opRaiseEvent(reliable, Common::Helpers::ValueToObject<Common::Object>::get(pParameterArray, pArrSizes), eventCode, options);
@@ -95,14 +95,14 @@ namespace ExitGames
 		}
 
 		template<typename Ftype>
-		bool Peer::opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, bool sendAuthCookie)
+		bool Peer::opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, int arrSize, bool sendAuthCookie)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG(Common::Helpers::ConfirmAllowed<Ftype>::dimensions==1, ERROR_THIS_OVERLOAD_IS_ONLY_FOR_1D_ARRAYS);
 			return opWebRpc(uriPath, Common::Helpers::ValueToObject<Common::Object>::get(pParameterArray, arrSize), sendAuthCookie);
 		}
 
 		template<typename Ftype>
-		bool Peer::opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, const short* pArrSizes, bool sendAuthCookie)
+		bool Peer::opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, const int* pArrSizes, bool sendAuthCookie)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG((Common::Helpers::ConfirmAllowed<Ftype>::dimensions>1), ERROR_THIS_OVERLOAD_IS_ONLY_FOR_MULTIDIMENSIONAL_ARRAYS);
 			return opWebRpc(uriPath, Common::Helpers::ValueToObject<Common::Object>::get(pParameterArray, pArrSizes), sendAuthCookie);

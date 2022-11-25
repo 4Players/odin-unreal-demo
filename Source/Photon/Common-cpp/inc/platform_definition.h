@@ -1,3 +1,3 @@
 #pragma once
 
-#define _EG_WINDOWS_PLATFORM 1
+#define _EG_IMAC_PLATFORM 1

@@ -16,7 +16,8 @@
 
 #if defined _EG_IPHONE_PLATFORM
 #	include <TargetConditionals.h>
-#	if defined TARGET_OS_MACCATALYST
+	// attention: TARGET_OS_MACCATALYST is always defined on iOS: it is defined to 1 for catalyst and to 0 for iOS non-catalyst targets
+#	if TARGET_OS_MACCATALYST
 #		define _EG_IPHONE_MACCATALYST_PLATFORM
 #	endif
 #endif
@@ -343,4 +344,15 @@ typedef wchar_t EG_CHAR;
 #	define EG_UNUSED(arg) arg
 #else
 #	define EG_UNUSED(arg)
+#endif
+
+// attribute and pragma definitions //////////////////////////////////////
+#if defined _EG_APPLE_PLATFORM
+#	define EG_ATTRIBUTE_VISIBILITY_HIDDEN __attribute__((visibility("hidden")))
+#	define EG_PRAGMA_VISIBILITY_PUSH_HIDDEN _Pragma("GCC visibility push(hidden)")
+#	define EG_PRAGMA_VISIBILITY_POP _Pragma("GCC visibility pop")
+#else
+#	define EG_ATTRIBUTE_VISIBILITY_HIDDEN
+#	define EG_PRAGMA_VISIBILITY_PUSH_HIDDEN
+#	define EG_PRAGMA_VISIBILITY_POP
 #endif

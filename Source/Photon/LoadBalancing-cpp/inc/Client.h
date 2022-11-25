@@ -6,11 +6,11 @@
 
 #pragma once
 
+#include "LoadBalancing-cpp/inc/ClientConstructOptions.h"
 #include "LoadBalancing-cpp/inc/ConnectOptions.h"
 #include "LoadBalancing-cpp/inc/Enums/DisconnectCause.h"
 #include "LoadBalancing-cpp/inc/Enums/ErrorCode.h"
 #include "LoadBalancing-cpp/inc/Enums/PeerStates.h"
-#include "LoadBalancing-cpp/inc/Enums/RegionSelectionMode.h"
 #include "LoadBalancing-cpp/inc/Enums/ServerType.h"
 #include "LoadBalancing-cpp/inc/FriendInfo.h"
 #include "LoadBalancing-cpp/inc/Listener.h"
@@ -30,7 +30,7 @@ namespace ExitGames
 		class Client : protected Photon::PhotonListener
 		{
 		public:
-			Client(LoadBalancing::Listener& listener, const Common::JString& applicationID, const Common::JString& appVersion, nByte connectionProtocol=Photon::ConnectionProtocol::DEFAULT, bool autoLobbyStats=false, nByte regionSelectionMode=RegionSelectionMode::DEFAULT, bool useAlternativePorts=false);
+			Client(LoadBalancing::Listener& listener, const Common::JString& applicationID, const Common::JString& appVersion, const ClientConstructOptions& clientConstructOptions=ClientConstructOptions());
 			virtual ~Client(void);
 
 			virtual bool connect(const ConnectOptions& connectOptions=ConnectOptions());
@@ -56,23 +56,23 @@ namespace ExitGames
 			virtual bool opJoinRandomRoom(const Common::Hashtable& customRoomProperties=Common::Hashtable(), nByte maxPlayers=0, nByte matchmakingMode=MatchmakingMode::FILL_ROOM, const Common::JString& lobbyName=Common::JString(), nByte lobbyType=LobbyType::DEFAULT, const Common::JString& sqlLobbyFilter=Common::JString(), const Common::JVector<Common::JString>& expectedUsers=Common::JVector<Common::JString>());
 			virtual bool opLeaveRoom(bool willComeBack=false, bool sendAuthCookie=false);
 			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype& parameters, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
-			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
-			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype pParameterArray, const short* pArrSizes, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
+			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype pParameterArray, int arrSize, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
+			template<typename Ftype> bool opRaiseEvent(bool reliable, const Ftype pParameterArray, const int* pArrSizes, nByte eventCode, const RaiseEventOptions& options=RaiseEventOptions());
 			virtual bool opFindFriends(const Common::JString* friendsToFind, short numFriendsToFind);
 			virtual bool opLobbyStats(const Common::JVector<LoadBalancing::LobbyStatsRequest>& lobbiesToQuery=Common::JVector<LoadBalancing::LobbyStatsRequest>());
 			virtual bool opChangeGroups(const Common::JVector<nByte>* pGroupsToRemove, const Common::JVector<nByte>* pGroupsToAdd);
 			virtual bool opCustomAuthenticationSendNextStepData(const AuthenticationValues& authenticationValues);
 			virtual bool opWebRpc(const Common::JString& uriPath);
 			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype& parameters, bool sendAuthCookie=false);
-			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, bool sendAuthCookie=false);
-			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, const short* pArrSizes, bool sendAuthCookie=false);
+			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, int arrSize, bool sendAuthCookie=false);
+			template<typename Ftype> bool opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, const int* pArrSizes, bool sendAuthCookie=false);
 			virtual bool opGetRoomList(const Common::JString& lobby, const Common::JString& sqlLobbyFilter);
 
 			virtual bool selectRegion(const Common::JString& selectedRegion);
 			virtual bool reconnectAndRejoin(void);
 			template<typename Ftype> int sendDirect(const Ftype& parameters, const SendDirectOptions& options=SendDirectOptions());
-			template<typename Ftype> int sendDirect(const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, const SendDirectOptions& options=SendDirectOptions());
-			template<typename Ftype> int sendDirect(const Ftype pParameterArray, const short* pArrSizes, const SendDirectOptions& options=SendDirectOptions());
+			template<typename Ftype> int sendDirect(const Ftype pParameterArray, int arrSize, const SendDirectOptions& options=SendDirectOptions());
+			template<typename Ftype> int sendDirect(const Ftype pParameterArray, const int* pArrSizes, const SendDirectOptions& options=SendDirectOptions());
 
 			int getServerTimeOffset(void) const;
 			int getServerTime(void) const;
@@ -114,6 +114,7 @@ namespace ExitGames
 			nByte getQuickResendAttempts(void) const;
 			void setQuickResendAttempts(nByte quickResendAttempts);
 			nByte getChannelCountUserChannels(void) const;
+			nByte getSerializationProtocol(void) const;
 
 			static short getPeerCount(void);
 
@@ -138,6 +139,7 @@ namespace ExitGames
 #if defined EG_PLATFORM_SUPPORTS_CPP11 && defined EG_PLATFORM_SUPPORTS_MULTITHREADING
 			const Common::JString& getRegionWithBestPing(void) const;
 #endif
+			bool setMasterClient(const Player& masterClientPlayer);
 		protected:
 			virtual bool opSetPropertiesOfPlayer(int playerNr, const Common::Hashtable& properties, const Common::Hashtable& expectedProperties=Common::Hashtable(), WebFlags webFlags=WebFlags());
 			virtual bool opSetPropertiesOfRoom(const Common::Hashtable& properties, const Common::Hashtable& expectedProperties=Common::Hashtable(), WebFlags webFlags=WebFlags());
@@ -224,6 +226,7 @@ namespace ExitGames
 			Common::JString mCluster;
 			bool mUseAlternativePorts;
 			Internal::PuncherClient* mpPuncherClient;
+			const nByte M_SERIALIZATION_PROTOCOL;
 
 			static const unsigned int M_PINGS_PER_REGION = 5;
 
@@ -241,14 +244,14 @@ namespace ExitGames
 		}
 
 		template<typename Ftype>
-		bool Client::opRaiseEvent(bool reliable, const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, nByte eventCode, const RaiseEventOptions& options)
+		bool Client::opRaiseEvent(bool reliable, const Ftype pParameterArray, int arrSize, nByte eventCode, const RaiseEventOptions& options)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG(Common::Helpers::ConfirmAllowed<Ftype>::dimensions==1, ERROR_THIS_OVERLOAD_IS_ONLY_FOR_1D_ARRAYS);
 			return opRaiseEvent(reliable, Common::Helpers::ValueToObject<Common::Object>::get(pParameterArray, arrSize), eventCode, options);
 		}
 
 		template<typename Ftype>
-		bool Client::opRaiseEvent(bool reliable, const Ftype pParameterArray, const short* pArrSizes, nByte eventCode, const RaiseEventOptions& options)
+		bool Client::opRaiseEvent(bool reliable, const Ftype pParameterArray, const int* pArrSizes, nByte eventCode, const RaiseEventOptions& options)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG((Common::Helpers::ConfirmAllowed<Ftype>::dimensions>1), ERROR_THIS_OVERLOAD_IS_ONLY_FOR_MULTIDIMENSIONAL_ARRAYS);
 			return opRaiseEvent(reliable, Common::Helpers::ValueToObject<Common::Object>::get(pParameterArray, pArrSizes), eventCode, options);
@@ -262,14 +265,14 @@ namespace ExitGames
 		}
 
 		template<typename Ftype>
-		bool Client::opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, bool sendAuthCookie)
+		bool Client::opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, int arrSize, bool sendAuthCookie)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG(Common::Helpers::ConfirmAllowed<Ftype>::dimensions==1, ERROR_THIS_OVERLOAD_IS_ONLY_FOR_1D_ARRAYS);
 			return mpPeer->opWebRpc(uriPath, pParameterArray, arrSize, sendAuthCookie);
 		}
 
 		template<typename Ftype>
-		bool Client::opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, const short* pArrSizes, bool sendAuthCookie)
+		bool Client::opWebRpc(const Common::JString& uriPath, const Ftype pParameterArray, const int* pArrSizes, bool sendAuthCookie)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG((Common::Helpers::ConfirmAllowed<Ftype>::dimensions>1), ERROR_THIS_OVERLOAD_IS_ONLY_FOR_MULTIDIMENSIONAL_ARRAYS);
 			return mpPeer->opWebRpc(uriPath, pParameterArray, pArrSizes, sendAuthCookie);
@@ -279,25 +282,25 @@ namespace ExitGames
 		int Client::sendDirect(const Ftype& parameters, const SendDirectOptions& options)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG(!Common::Helpers::ConfirmAllowed<Ftype>::dimensions, ERROR_THIS_OVERLOAD_IS_ONLY_FOR_SINGLE_VALUES);
-			Common::Serializer s;
+			Common::Serializer s(M_SERIALIZATION_PROTOCOL);
 			s.push(parameters);
 			return sendDirect(Common::JVector<nByte>(s.getData(), s.getSize()), options);
 		}
 
 		template<typename Ftype>
-		int Client::sendDirect(const Ftype pParameterArray, typename Common::Helpers::ArrayLengthType<Ftype>::type arrSize, const SendDirectOptions& options)
+		int Client::sendDirect(const Ftype pParameterArray, int arrSize, const SendDirectOptions& options)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG(Common::Helpers::ConfirmAllowed<Ftype>::dimensions==1, ERROR_THIS_OVERLOAD_IS_ONLY_FOR_1D_ARRAYS);
-			Common::Serializer s;
+			Common::Serializer s(M_SERIALIZATION_PROTOCOL);
 			s.push(pParameterArray, arrSize);
 			return sendDirect(Common::JVector<nByte>(s.getData(), s.getSize()), options);
 		}
 
 		template<typename Ftype>
-		int Client::sendDirect(const Ftype pParameterArray, const short* pArrSizes, const SendDirectOptions& options)
+		int Client::sendDirect(const Ftype pParameterArray, const int* pArrSizes, const SendDirectOptions& options)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG((Common::Helpers::ConfirmAllowed<Ftype>::dimensions>1), ERROR_THIS_OVERLOAD_IS_ONLY_FOR_MULTIDIMENSIONAL_ARRAYS);
-			Common::Serializer s;
+			Common::Serializer s(M_SERIALIZATION_PROTOCOL);
 			s.push(pParameterArray, pArrSizes);
 			return sendDirect(Common::JVector<nByte>(s.getData(), s.getSize()), options);
 		}

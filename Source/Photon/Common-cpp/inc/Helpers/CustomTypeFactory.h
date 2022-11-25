@@ -7,6 +7,7 @@
 #pragma once
 
 #include "Common-cpp/inc/Helpers/TypeName.h"
+#include "Common-cpp/inc/MemoryManagement/Allocate.h"
 
 namespace ExitGames
 {
@@ -23,8 +24,8 @@ namespace ExitGames
 
 				virtual ~CustomTypeFactory(void) {};
 
-				virtual CustomType<T, typeCode>* create(short amount) const;
-				virtual CustomType<T, typeCode>* copy(const CustomType<T, typeCode>* pToCopy, short amount) const;
+				virtual CustomType<T, typeCode>* create(unsigned int amount) const;
+				virtual CustomType<T, typeCode>* copy(const CustomType<T, typeCode>* pToCopy, unsigned int amount) const;
 				virtual void destroy(const CustomType<T, typeCode>* pToDestroy) const;
 				virtual unsigned int sizeOf(void) const;
 
@@ -34,16 +35,16 @@ namespace ExitGames
 
 
 			template<typename T, nByte typeCode>
-			CustomType<T, typeCode>* CustomTypeFactory<T, typeCode>::create(short amount) const
+			CustomType<T, typeCode>* CustomTypeFactory<T, typeCode>::create(unsigned int amount) const
 			{
 				return MemoryManagement::allocateArray<T>(amount);
 			}
 
 			template<typename T, nByte typeCode>
-			CustomType<T, typeCode>* CustomTypeFactory<T, typeCode>::copy(const CustomType<T, typeCode>* pToCopy, short amount) const
+			CustomType<T, typeCode>* CustomTypeFactory<T, typeCode>::copy(const CustomType<T, typeCode>* pToCopy, unsigned int amount) const
 			{
 				T* pRetVal = static_cast<T*>(create(amount));
-				for(short i=0; i<amount; i++)
+				for(unsigned int  i=0; i<amount; ++i)
 					pRetVal[i] = static_cast<const T*>(pToCopy)[i];
 				return pRetVal;
 			}

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "Common-cpp/inc/Base.h"
+#include "Common-cpp/inc/defines.h"
 
 #ifdef EG_PLATFORM_SUPPORTS_MOVE_SEMANTICS
 
@@ -25,8 +25,8 @@ namespace ExitGames
 				Data(Data&& rhs);
 				Data& operator=(Data&& rhs);
 
-				int getSize() const;
-				nByte* getBuffer() const;
+				int getSize(void) const;
+				nByte* getBuffer(void) const;
 			private:
 				Data(const Data& rhs);
 				Data& operator=(const Data& rhs);

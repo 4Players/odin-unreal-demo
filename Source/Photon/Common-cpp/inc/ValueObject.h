@@ -6,9 +6,7 @@
 
 #pragma once
 
-#include "Common-cpp/inc/Helpers/ArrayLengthType.h"
 #include "Common-cpp/inc/Helpers/ConfirmAllowed.h"
-#include "Common-cpp/inc/Helpers/EndianCorrectCast.h"
 #include "Common-cpp/inc/Object.h"
 
 namespace ExitGames
@@ -33,14 +31,14 @@ namespace ExitGames
 			ValueObject(const Object& obj);
 			ValueObject(const Object* obj);
 			ValueObject(const typename Helpers::ConfirmAllowed<Etype>::type& data);
-			ValueObject(const typename Helpers::ConfirmAllowed<Etype>::type pData, typename Helpers::ArrayLengthType<Etype>::type size);
-			ValueObject(const typename Helpers::ConfirmAllowed<Etype>::type pData, const short* sizes);
+			ValueObject(const typename Helpers::ConfirmAllowed<Etype>::type pData, int size);
+			ValueObject(const typename Helpers::ConfirmAllowed<Etype>::type pData, const int* sizes);
 			virtual ~ValueObject(void);
 
 			virtual ValueObject<Etype>& operator=(const ValueObject<Etype>& toCopy);
 			virtual ValueObject<Etype>& operator=(const Object& toCopy);
 
-			const typename Helpers::ArrayLengthType<Etype>::type* getSizes(void) const;
+			const int* getSizes(void) const;
 
 			Etype getDataCopy(void) const;
 			Etype* getDataAddress(void) const;
@@ -49,8 +47,8 @@ namespace ExitGames
 		private:
 			typedef Object super;
 
-			template<typename Ftype> struct getDataCopyImplementation {Ftype operator()(const void* pData, const short* pSizes, nByte type, unsigned int dimensions) const;};
-			template<typename Ftype> struct getDataCopyImplementation<Ftype*> {Ftype* operator()(const void* pData, const typename Helpers::ArrayLengthType<Ftype*>::type* pSizes, nByte type, unsigned int dimensions) const; private: void* dimensionRecursion(void* pArrayOut, const void* pArrayIn, const typename Helpers::ArrayLengthType<Ftype*>::type* pSizes, nByte type, unsigned int dimensions, unsigned int recursionDepth) const; void* lastDimension(const void* ArrayIn, typename Helpers::ArrayLengthType<Ftype*>::type size) const;};
+			template<typename Ftype> struct getDataCopyImplementation {Ftype operator()(const void* pData, const int* pSizes, nByte type, unsigned int dimensions) const;};
+			template<typename Ftype> struct getDataCopyImplementation<Ftype*> {Ftype* operator()(const void* pData, const int* pSizes, nByte type, unsigned int dimensions) const; private: void* dimensionRecursion(void* pArrayOut, const void* pArrayIn, const int* pSizes, nByte type, unsigned int dimensions, unsigned int recursionDepth) const; void* lastDimension(const void* ArrayIn, int size) const;};
 			template<typename Ftype> struct getDataAddressImplementation {Ftype* operator()(const void* const* ppData) const;};
 			template<typename Ftype> struct getDataAddressImplementation<Ftype*> {Ftype** operator()(const void* const* ppData) const;};
 			void convert(const Object* obj, nByte type, unsigned int dimensions);
@@ -129,7 +127,7 @@ namespace ExitGames
 		   @param pData The array to copy.
 		   @param size The element count of data.                               */
 		template<typename Etype>
-		ValueObject<Etype>::ValueObject(const typename Helpers::ConfirmAllowed<Etype>::type pData, typename Helpers::ArrayLengthType<Etype>::type size) : Object(pData, Helpers::ConfirmAllowed<Etype>::typeName, Helpers::ConfirmAllowed<Etype>::customTypeName, size, true)
+		ValueObject<Etype>::ValueObject(const typename Helpers::ConfirmAllowed<Etype>::type pData, int size) : Object(pData, Helpers::ConfirmAllowed<Etype>::typeName, Helpers::ConfirmAllowed<Etype>::customTypeName, size, true)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG(Helpers::ConfirmAllowed<Etype>::dimensions==1, ERROR_THIS_OVERLOAD_IS_ONLY_FOR_1D_ARRAYS);
 		}
@@ -142,7 +140,7 @@ namespace ExitGames
 		   @param pData The array to copy.
 		   @param sizes The array of element counts for the different dimensions of data.                               */
 		template<typename Etype>
-		ValueObject<Etype>::ValueObject(const typename Helpers::ConfirmAllowed<Etype>::type pData, const short* const sizes) : Object(pData, Helpers::ConfirmAllowed<Etype>::typeName, Helpers::ConfirmAllowed<Etype>::customTypeName, Helpers::ConfirmAllowed<Etype>::dimensions, sizes, true)
+		ValueObject<Etype>::ValueObject(const typename Helpers::ConfirmAllowed<Etype>::type pData, const int* const sizes) : Object(pData, Helpers::ConfirmAllowed<Etype>::typeName, Helpers::ConfirmAllowed<Etype>::customTypeName, Helpers::ConfirmAllowed<Etype>::dimensions, sizes, true)
 		{
 			COMPILE_TIME_ASSERT2_TRUE_MSG(!!Helpers::ConfirmAllowed<Etype>::dimensions, ERROR_THIS_OVERLOAD_IS_ONLY_FOR_FOR_ARRAYS);
 		}
@@ -185,9 +183,9 @@ namespace ExitGames
 		}
 
 		template<typename Etype>
-		const typename Helpers::ArrayLengthType<Etype>::type* ValueObject<Etype>::getSizes(void) const
+		const int* ValueObject<Etype>::getSizes(void) const
 		{
-			return Helpers::endianCorrectCast<const typename Helpers::ArrayLengthType<Etype>::type*>(super::getSizes());
+			return super::getSizes();
 		}
 
 		/**
@@ -219,7 +217,7 @@ namespace ExitGames
 
 		template<typename Etype>
 		template<typename Ftype>
-		Ftype ValueObject<Etype>::getDataCopyImplementation<Ftype>::operator()(const void* const pData, const short* const /*pSizes*/, nByte type, unsigned int dimensions) const
+		Ftype ValueObject<Etype>::getDataCopyImplementation<Ftype>::operator()(const void* const pData, const int* const /*pSizes*/, nByte type, unsigned int dimensions) const
 		{
 			if(type == Helpers::ConfirmAllowed<Ftype>::typeName && !dimensions)
 				return *(Ftype*)pData;
@@ -229,7 +227,7 @@ namespace ExitGames
 
 		template<typename Etype>
 		template<typename Ftype>
-		Ftype* ValueObject<Etype>::getDataCopyImplementation<Ftype*>::operator()(const void* const pData, const typename Helpers::ArrayLengthType<Ftype*>::type* const pSizes, nByte type, unsigned int dimensions) const
+		Ftype* ValueObject<Etype>::getDataCopyImplementation<Ftype*>::operator()(const void* const pData, const int* const pSizes, nByte type, unsigned int dimensions) const
 		{
 			if(type == Helpers::ConfirmAllowed<Ftype*>::typeName && dimensions)
 				return reinterpret_cast<Ftype*>(dimensionRecursion(NULL, pData, pSizes, type, dimensions, 0));
@@ -240,12 +238,12 @@ namespace ExitGames
 		/** @cond DOXYGEN_IGNORE */
 		template<typename Etype>
 		template<typename Ftype>
-		void* ValueObject<Etype>::getDataCopyImplementation<Ftype*>::dimensionRecursion(void* pArrayOut, const void* const pArrayIn, const typename Helpers::ArrayLengthType<Ftype*>::type* const pSizes, nByte type, unsigned int dimensions, unsigned int recursionDepth) const
+		void* ValueObject<Etype>::getDataCopyImplementation<Ftype*>::dimensionRecursion(void* pArrayOut, const void* const pArrayIn, const int* const pSizes, nByte type, unsigned int dimensions, unsigned int recursionDepth) const
 		{
 			if(dimensions && recursionDepth < dimensions-1)
 			{
 				pArrayOut = MemoryManagement::allocateArray<void*>(pSizes[recursionDepth]);
-				for(typename Helpers::ArrayLengthType<Ftype>::type i=0; i<pSizes[recursionDepth]; ++i)
+				for(int i=0; i<pSizes[recursionDepth]; ++i)
 					((void**)pArrayOut)[i] = dimensionRecursion(((void**)pArrayOut)[i], ((void**)pArrayIn)[i], pSizes, type, dimensions, recursionDepth+1);
 				return pArrayOut;
 			}
@@ -255,11 +253,11 @@ namespace ExitGames
 
 		template<typename Etype>
 		template<typename Ftype>
-		void* ValueObject<Etype>::getDataCopyImplementation<Ftype*>::lastDimension(const void* const pArrayIn, typename Helpers::ArrayLengthType<Ftype*>::type size) const
+		void* ValueObject<Etype>::getDataCopyImplementation<Ftype*>::lastDimension(const void* const pArrayIn, int size) const
 		{
 			// Helpers::ConfirmAllowed<Ftype*>::scalarType* will be a 1d pointer, even if Ftype* has multiple pointer abstraction levels
 			typename Helpers::ConfirmAllowed<Ftype*>::scalarType* pRetVal = size?MemoryManagement::allocateArray<typename Helpers::ConfirmAllowed<Ftype*>::scalarType>(size):NULL;
-			for(typename Helpers::ArrayLengthType<Ftype*>::type i=0; i<size; i++)
+			for(int i=0; i<size; i++)
 				pRetVal[i] = ((typename Helpers::ConfirmAllowed<Ftype*>::scalarType*)pArrayIn)[i];
 			return pRetVal;
 		}

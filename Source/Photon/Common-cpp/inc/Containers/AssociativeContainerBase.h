@@ -7,7 +7,6 @@
 #pragma once
 
 #include "Common-cpp/inc/Containers/JVector.h"
-#include "Common-cpp/inc/Helpers/ArrayLengthType.h"
 #include "Common-cpp/inc/Helpers/KeyToObject.h"
 #include "Common-cpp/inc/Helpers/ValueToObject.h"
 
@@ -34,8 +33,8 @@ namespace ExitGames
 
 			virtual void put(const T& src);
 			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType& val);
-			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, typename Common::Helpers::ArrayLengthType<FValueType>::type size);
-			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, const short* sizes);
+			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, int size);
+			template<typename FKeyType, typename FValueType> void put(const FKeyType& key, const FValueType pVal, const int* sizes);
 
 			template<typename FKeyType> const OT* getValue(const FKeyType& key) const;
 			template<typename FKeyType> OT* getValue(const FKeyType& key);
@@ -320,7 +319,7 @@ namespace ExitGames
 		   @param size the size of the value array */
 		template<typename T, typename OT>
 		template<typename FKeyType, typename FValueType>
-		void AssociativeContainerBase<T, OT>::put(const FKeyType& key, const FValueType pVal, typename Common::Helpers::ArrayLengthType<FValueType>::type size)
+		void AssociativeContainerBase<T, OT>::put(const FKeyType& key, const FValueType pVal, int size)
 		{
 			putImplementation(Helpers::KeyToObject<OT>::get(key), Helpers::ValueToObject<OT>::get(pVal, size));
 		}
@@ -338,7 +337,7 @@ namespace ExitGames
 		   @param sizes the sizes for every dimension of the value array - the length of this array has to match the dimensions of pVal */
 		template<typename T, typename OT>
 		template<typename FKeyType, typename FValueType>
-		void AssociativeContainerBase<T, OT>::put(const FKeyType& key, const FValueType pVal, const short* const sizes)
+		void AssociativeContainerBase<T, OT>::put(const FKeyType& key, const FValueType pVal, const int* const sizes)
 		{
 			putImplementation(Helpers::KeyToObject<OT>::get(key), Helpers::ValueToObject<OT>::get(pVal, sizes));
 		}
