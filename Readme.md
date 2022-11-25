@@ -1,16 +1,20 @@
 # Odin Unreal Demo
 
-This is a simple demonstration of the usage of the [Unreal SDK](https://github.com/4Players/odin-sdk) of 4Player's Odin, a Voice Chat service. The SDK provides an audio stream that can be processed in the audio engine of Unreal to add spatialization or audio effects.
+This is a simple demonstration of the usage of the [Unreal SDK](https://github.com/4Players/odin-sdk) of 4Player's ODIN, a Voice Chat full service solution. The SDK provides an audio stream that can be processed in the audio engine of Unreal to add spatialization or audio effects.
 
 This version is built upon the free tier of the [Photon Networking Engine](https://doc.photonengine.com/en-us/realtime/current/getting-started/unreal-engine). The audio stream is processed with the help of [Steam Audio](https://valvesoftware.github.io/steam-audio/), which is delivered together with the Unreal Engine.
 
 ## Features
 
-The Demo showcases the usage of Odin together with Unreal's Audio Engine. The example uses two Odin voice chat rooms - one for spatialized (proximity) chat, and one for a radio simulation with audio effects applied. It shows:
+The Demo showcases the usage of ODIN together with Unreal's Audio Engine. The example uses two Odin voice chat rooms - one for spatialized (proximity) chat, and one for a radio simulation with audio effects applied. It shows:
 
-- how to connect to an Odin voice chat room with an acquired access token
-- how to attach spatialization to the incoming audio stream, using an audio engine plugin like Steam Audio
-- how to send the voice chat audio stream to audio effect processors
+- how to connect to an ODIN voice chat room with an acquired room token generated from your access key
+- how to attach the incoming audio stream to an ODIN synth component, adding spatialization (3D / proximity) 
+- how to connect an additional audio engine plugin like Steam Audio and use it together with ODIN
+- how to increase immersion by adding audio occlusion effects through collision rays
+- how to send the voice chat audio stream to audio effect processors, e.g. for environmental effects that also apply to voice
+- how to use a second ODIN room for simulating 2D radio communication (press and hold R key while talking)
+- how to activate different filters (APMs) to improve the audio capture quality
 
 ## Getting Started
 
@@ -140,7 +144,7 @@ We handle the Room Events in different events:
 
 Additionally we have some functionality to adjust the APM Settings of the rooms - this is done in the `SetApmSettings` event. Also we can open the APM Settings menu with the `OpenOptions` event and close them with `CloseOptions`.
 
-Lastly, in the `Tick` Event we start and stop the Capturing of the Proximity Chat and Radio Chat Audio Captures - depending on whether we press the R Key or not. The RPressed variable is set from the player controller class.
+Lastly, in the `Tick` Event we start and stop the Capturing of the Proximity Chat and Radio Chat Audio Captures - depending on whether we press the **R Key** or not. The `RPressed` variable is set from the player controller class.
 
 ![OdinClientComponentTick.png.png](/Documentation/img/OdinClientComponentTick.png.png)
 
