@@ -146,7 +146,7 @@ Additionally we have some functionality to adjust the APM Settings of the rooms 
 
 Lastly, in the `Tick` Event we start and stop the Capturing of the Proximity Chat and Radio Chat Audio Captures - depending on whether we press the **R Key** or not. The `RPressed` variable is set from the player controller class.
 
-![OdinClientComponentTick.png.png](/Documentation/img/OdinClientComponentTick.png.png)
+![OdinClientComponentTick.png.png](/Documentation/img/OdinClientComponentTick.png)
 
 ## Conclusion
 
