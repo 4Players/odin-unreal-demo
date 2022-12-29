@@ -12,15 +12,7 @@
 	],
 	"Plugins": [
 		{
-			"Name": "Spatialization",
-			"Enabled": true
-		},
-		{
 			"Name": "SteamAudio",
-			"Enabled": true
-		},
-		{
-			"Name": "AudioModulation",
 			"Enabled": true
 		}
 	],
