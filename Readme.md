@@ -20,15 +20,17 @@ The Demo showcases the usage of ODIN together with Unreal's Audio Engine. The ex
 
 In the releases you can find a pre-built game executable and the current project's code base.  The pre-built game can likely be executed without any installations required - if you do not have the redistributable packages of C++ installed, that Unreal needs, you can find it in the `\Engine\Extras\Redist\en-us`folder of the pre-built game.
 
-To open the project in the Unreal Editor you need to install the Unreal Engine 4.26, 4.27 or 5.0. You can open the source code with UE5.0 easily. If you need to open it with a 4.26 or 4.27 build of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
+To open the project in the Unreal Editor you need to install the Unreal Engine 4.26, 4.27, 5.0 or 5.1. You can open the source code with UE4.26 easily. If you need to open it with a 4.27, 5.0 or 5.1 build of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
 
 ### Dependencies
 
-* The sample is built with the Unreal Engine version 5.0. Alternatively you need UE4.26 or UE4.27.
+* The sample is built with the Unreal Engine version 4.26. Alternatively you need UE4.27, UE5.0 or UE5.1.
 * Although it builts upon Photon's networking engine, you do not need to install anything, since the sample delivers all needed libraries for that
 * The sample depends on Steam Audio, which is delivered together with the Unreal Engine so you do not need to install the plugin manually, if you have installed plugins with your Unreal Engine version
 * ## Version History
-* 0.2
+* 1.1.0
+  * started support for UE4.26
+* 1.0.1
   * Extended Documentation
   * Small changes to tidy up blueprints
 * 0.1
