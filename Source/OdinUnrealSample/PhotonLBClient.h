@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable)
 class UPhotonLBClient : public UActorComponent, public BaseView
 {
 	GENERATED_UCLASS_BODY()

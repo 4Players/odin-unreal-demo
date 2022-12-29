@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{04D4A755-47E8-0248-72C4-B7A9A8B437EE}",
+	"EngineAssociation": "4.26",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -25,11 +25,11 @@
 		}
 	],
 	"TargetPlatforms": [
-		"Android",
 		"IOS",
 		"WindowsNoEditor",
 		"MacNoEditor",
 		"Linux",
-		"Windows"
+		"Windows",
+		"Android"
 	]
 }
