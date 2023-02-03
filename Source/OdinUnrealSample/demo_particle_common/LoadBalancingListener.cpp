@@ -237,6 +237,18 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		else
 			Console::get().writeLine(L"Bad position event");
 	}
+
+	else if (eventCode == 3)
+	{
+		Object const* obj = eventContent.getValue("1");
+		if (!obj) obj = eventContent.getValue((nByte)1);
+		if (!obj) obj = eventContent.getValue(1);
+		if (!obj) obj = eventContent.getValue(1.0);
+		if (obj)
+		{
+			mpView->triggerEvent(playerNr, (int)((ValueObject<int>*)obj)->getDataCopy());
+		}
+	}
 }
 
 void LoadBalancingListener::connectReturn(int errorCode, const JString& errorString, const JString& region, const JString& cluster)
@@ -495,6 +507,17 @@ bool LoadBalancingListener::setLocalPlayerPos(float x, float y, float z, float r
 	/*}
 	else
 		return false;*/
+}
+
+bool LoadBalancingListener::sendTriggerEvent(int id)
+{
+	Hashtable data;
+	data.put((int)1, id);
+
+
+	mpLbc->opRaiseEvent(false, data, 3, RaiseEventOptions().setInterestGroup(0));
+	mpView->triggerEvent(mLocalPlayerNr, id);
+	return true;
 }
 
 bool LoadBalancingListener::setLocalPlayerRot(float x, float y, float z)

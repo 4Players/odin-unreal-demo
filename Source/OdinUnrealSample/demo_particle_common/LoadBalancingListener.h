@@ -36,6 +36,7 @@ public:
 	void nextGridSize(void);
 	bool setLocalPlayerPos(float x, float y, float z, float rotX, float rotY, float rotZ);
 	bool setLocalPlayerRot(float x, float y, float z);
+	bool sendTriggerEvent(int id);
 	void moveLocalPlayer(void);
 private:
 	//From Common::BaseListener

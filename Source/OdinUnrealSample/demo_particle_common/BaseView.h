@@ -12,6 +12,7 @@ public:
 	virtual void removePlayer(int playerNr) = 0;
 	virtual void changePlayerColor(int playerNr, int color) = 0;
 	virtual void changePlayerPos(int playerNr, float x, float y, float z, float rotX, float rotY, float rotZ) = 0;
+	virtual void triggerEvent(int playerNr, int id) = 0;
 	virtual void changePlayerRot(int playerNr, float x, float y, float z) = 0;
     virtual void setupScene(int gridSize) = 0;
 	virtual void updateRoomList(const ExitGames::Common::JVector<ExitGames::Common::JString>& roomNames) = 0;

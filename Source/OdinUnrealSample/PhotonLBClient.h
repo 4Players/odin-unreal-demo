@@ -27,6 +27,8 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Demo")
 	void changePlayerPos(int32 playerNr, float x, float y, float z, float rotX, float rotY, float rotZ);
 	UFUNCTION(BlueprintImplementableEvent, Category = "Demo")
+	void triggerEvent(int32 playerNr, int id);
+	UFUNCTION(BlueprintImplementableEvent, Category = "Demo")
 	void changePlayerRot(int32 playerNr, float x, float y, float z);
 	UFUNCTION(BlueprintImplementableEvent, Category = "Demo")
 	void setupScene(int32 gridSize);
@@ -86,6 +88,8 @@ public:
 	void SetLocalPlayerPos(float x, float y, float z, float rotX, float rotY, float rotZ);
 	UFUNCTION(BlueprintCallable, Category = "Demo")
 	void SetLocalPlayerRot(float x, float y, float z);
+	UFUNCTION(BlueprintCallable, Category = "Demo")
+	void SendTriggerEvent(int id);
 
 	// Util
 	UFUNCTION(BlueprintCallable, Category = "Demo")

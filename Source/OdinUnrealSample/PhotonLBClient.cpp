@@ -63,6 +63,11 @@ void UPhotonLBClient::SetLocalPlayerPos(float x, float y, float z, float rotX, f
 	mpListener->setLocalPlayerPos(x, y, z, rotX, rotY, rotZ);
 }
 
+void UPhotonLBClient::SendTriggerEvent(int id)
+{
+	mpListener->sendTriggerEvent(id);
+}
+
 void UPhotonLBClient::SetLocalPlayerRot(float x, float y, float z)
 {
 	mpListener->setLocalPlayerRot(x, y, z);
