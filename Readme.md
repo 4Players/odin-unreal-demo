@@ -22,6 +22,20 @@ In the releases you can find a pre-built game executable and the current project
 
 To open the project in the Unreal Editor you need to install the Unreal Engine 4.26, 4.27, 5.0 or 5.1. You can open the source code with UE4.26 easily. If you need to open it with a 4.27, 5.0 or 5.1 build of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
 
+### Installing Visual Studio and Compiling the Project
+
+As stated above, sometimes it is necessary to compile from Visual Studio:
+
+1. Download the newest version of Visual Studio: https://visualstudio.microsoft.com/de/
+2. Community Edition is fine for this project.
+3. Open the installer.
+4. Make sure to enable "Game development withC++" Workload. And then include "Unreal Engine installer" and "Windows 10 SDK" in its options on the right side of the Installer's Window.
+5. You might need to right-click the `OdinUnrealSample.uproject` file and `Generate Visual Studio project files`.
+6. Double-click the `OdinUnrealSample.uproject`
+7. It should compile automatically now. If this does not work, open the `OdinUnrealSample.sln` file instead.
+8. Visual Studio will open.
+9. Once done hit F5 to start the debugger - and compile using Visual Studio.
+
 ### Dependencies
 
 * The sample is built with the Unreal Engine version 4.26. Alternatively you need UE4.27, UE5.0 or UE5.1.
