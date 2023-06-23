@@ -1,4 +1,4 @@
-/* Copyright (c) 2022 4Players GmbH. All rights reserved. */
+/* Copyright (c) 2022-2023 4Players GmbH. All rights reserved. */
 
 #include "OdinPlaybackMedia.h"
 #include "OdinRoom.h"
@@ -47,10 +47,10 @@ FOdinAudioStreamStats UOdinPlaybackMedia::AudioStreamStats()
 
 void UOdinPlaybackMedia::BeginDestroy()
 {
+    Super::BeginDestroy();
     if (this->stream_handle_) {
         odin_media_stream_destroy(this->stream_handle_);
         this->stream_handle_ = 0;
     }
-    this->Room = nullptr;
-    Super::BeginDestroy();
+    Room.Reset();
 }
