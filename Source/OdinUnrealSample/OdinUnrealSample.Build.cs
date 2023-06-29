@@ -54,7 +54,7 @@ public class OdinUnrealSample : ModuleRules
 
 	private void AddPhotonLibPathIOS(ReadOnlyTargetRules Target, string name)
 	{
-		string archStr = (Target.Architecture == "-simulator") ? "iphonesimulator" : "iphoneos";
+		string archStr = (Target.Architecture.ToString() == "-simulator") ? "iphonesimulator" : "iphoneos";
 		PublicAdditionalLibraries.Add(Path.Combine(PhotonPath, "lib", "iOS", "lib" + name + "-cpp_debug_" + archStr + ".a"));
 	}
 
