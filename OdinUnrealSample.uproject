@@ -12,10 +12,6 @@
 	],
 	"Plugins": [
 		{
-			"Name": "SteamAudio",
-			"Enabled": true
-		},
-		{
 			"Name": "OculusVR",
 			"Enabled": false,
 			"SupportedTargetPlatforms": [
