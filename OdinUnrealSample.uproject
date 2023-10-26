@@ -43,6 +43,10 @@
 		{
 			"Name": "OnlineServicesEOS",
 			"Enabled": true
+		},
+		{
+			"Name": "ResonanceAudio",
+			"Enabled": false
 		}
 	],
 	"TargetPlatforms": [
