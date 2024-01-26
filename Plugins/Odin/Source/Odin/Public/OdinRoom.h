@@ -17,10 +17,11 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FJoinRoomResponsePin, bool, success);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FAddMediaResponsePin, bool, success);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPauseMediaResponsePin, bool, success);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FResumeMediaResponsePin, bool, success);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRemoveMediaResponsePin, bool, success);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdatePositionResponsePin, bool, success);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdatePeerUserDataResponsePin, bool, success);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdateRoomUserDataResponsePin, bool, success);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FSendMessageResponsePin, bool, success);
 
 UENUM(BlueprintType)
@@ -49,7 +50,7 @@ class ODIN_API UOdinRoomJoin : public UBlueprintAsyncActionBase
     static UOdinRoomJoin *JoinRoom(UObject *WorldContextObject, UPARAM(ref) UOdinRoom *&room,
                                    const FString url, const FString token,
                                    const TArray<uint8> &initialPeerUserData,
-                                   FVector2D initialPosition, const FOdinRoomJoinError &onError,
+                                   FVector initialPosition, const FOdinRoomJoinError &onError,
                                    const FOdinRoomJoinSuccess &onSuccess);
 
     virtual void Activate() override;
@@ -58,12 +59,12 @@ class ODIN_API UOdinRoomJoin : public UBlueprintAsyncActionBase
     FJoinRoomResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinRoom* Room;
+    UOdinRoom *Room;
 
     FString              Url;
     FString              Token;
     TArray<uint8>        InitialPeerUserData;
-    FVector2D            InitialPosition;
+    FVector              InitialPosition;
     FOdinRoomJoinError   OnError;
     FOdinRoomJoinSuccess OnSuccess;
 };
@@ -91,13 +92,76 @@ class ODIN_API UOdinRoomAddMedia : public UBlueprintAsyncActionBase
     FAddMediaResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinRoom* Room;
+    UOdinRoom *Room;
 
     UPROPERTY()
-    UOdinCaptureMedia* CaptureMedia;
+    UOdinCaptureMedia *CaptureMedia;
 
     FOdinRoomAddMediaError   OnError;
     FOdinRoomAddMediaSuccess OnSuccess;
+};
+
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOdinRoomPauseMediaError, int64, errorCode);
+DECLARE_DYNAMIC_DELEGATE(FOdinRoomPauseMediaSuccess);
+UCLASS(ClassGroup = Odin)
+class ODIN_API UOdinRoomPauseMedia : public UBlueprintAsyncActionBase
+{
+    GENERATED_BODY()
+  public:
+    UFUNCTION(
+        BlueprintCallable,
+        meta =
+            (BlueprintInternalUseOnly = "true", Category = "Odin|Sound",
+             DisplayName = "Pause Playback Media",
+             ToolTip = "Pause the specified playback media handle, ceasing the reception of data",
+             WorldContext = "WorldContextObject", AutoCreateRefTerm = "onSuccess,onError"))
+    static UOdinRoomPauseMedia *PauseMedia(UObject                          *WorldContextObject,
+                                           UPARAM(ref) UOdinPlaybackMedia  *&media,
+                                           const FOdinRoomPauseMediaError   &onError,
+                                           const FOdinRoomPauseMediaSuccess &onSuccess);
+
+    virtual void Activate() override;
+
+    UPROPERTY(BlueprintAssignable)
+    FPauseMediaResponsePin OnResponse;
+
+    UPROPERTY()
+    UOdinPlaybackMedia *PlaybackMedia;
+
+    FOdinRoomPauseMediaError   OnError;
+    FOdinRoomPauseMediaSuccess OnSuccess;
+};
+
+DECLARE_DYNAMIC_DELEGATE_OneParam(FOdinRoomResumeMediaError, int64, errorCode);
+DECLARE_DYNAMIC_DELEGATE(FOdinRoomResumeMediaSuccess);
+UCLASS(ClassGroup = Odin)
+class ODIN_API UOdinRoomResumeMedia : public UBlueprintAsyncActionBase
+{
+    GENERATED_BODY()
+  public:
+    UFUNCTION(
+        BlueprintCallable,
+        meta =
+            (BlueprintInternalUseOnly = "true", Category = "Odin|Sound",
+             DisplayName = "Resume Playback Media",
+             ToolTip =
+                 "Resume the specified playback media handle, re-initiating the reception of data",
+             WorldContext = "WorldContextObject", AutoCreateRefTerm = "onSuccess,onError"))
+    static UOdinRoomResumeMedia *ResumeMedia(UObject                           *WorldContextObject,
+                                             UPARAM(ref) UOdinPlaybackMedia   *&media,
+                                             const FOdinRoomResumeMediaError   &onError,
+                                             const FOdinRoomResumeMediaSuccess &onSuccess);
+
+    virtual void Activate() override;
+
+    UPROPERTY(BlueprintAssignable)
+    FResumeMediaResponsePin OnResponse;
+
+    UPROPERTY()
+    UOdinPlaybackMedia *PlaybackMedia;
+
+    FOdinRoomResumeMediaError   OnError;
+    FOdinRoomResumeMediaSuccess OnSuccess;
 };
 
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOdinRoomRemoveMediaError, int64, errorCode);
@@ -123,10 +187,10 @@ class ODIN_API UOdinRoomRemoveMedia : public UBlueprintAsyncActionBase
     FRemoveMediaResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinRoom* Room;
+    UOdinRoom *Room;
 
     UPROPERTY()
-    UOdinCaptureMedia* CaptureMedia;
+    UOdinCaptureMedia *CaptureMedia;
 
     FOdinRoomRemoveMediaError   OnError;
     FOdinRoomRemoveMediaSuccess OnSuccess;
@@ -145,7 +209,7 @@ class ODIN_API UOdinRoomUpdatePosition : public UBlueprintAsyncActionBase
                       ToolTip = "Updates the two-dimensional position of the own peer in the room",
                       WorldContext = "WorldContextObject", AutoCreateRefTerm = "onSuccess,onError"))
     static UOdinRoomUpdatePosition *UpdatePosition(UObject                *WorldContextObject,
-                                                   UPARAM(ref) UOdinRoom *&room, FVector2D position,
+                                                   UPARAM(ref) UOdinRoom *&room, FVector position,
                                                    const FOdinRoomUpdatePositionError   &onError,
                                                    const FOdinRoomUpdatePositionSuccess &onSuccess);
 
@@ -155,9 +219,9 @@ class ODIN_API UOdinRoomUpdatePosition : public UBlueprintAsyncActionBase
     FUpdatePositionResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinRoom* Room;
+    UOdinRoom *Room;
 
-    FVector2D Position;
+    FVector Position;
 
     FOdinRoomUpdatePositionError   OnError;
     FOdinRoomUpdatePositionSuccess OnSuccess;
@@ -186,43 +250,12 @@ class ODIN_API UOdinRoomUpdatePeerUserData : public UBlueprintAsyncActionBase
     FUpdatePeerUserDataResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinRoom* Room;
+    UOdinRoom *Room;
 
     TArray<uint8> Data;
 
     FOdinRoomUpdatePeerUserDataError   OnError;
     FOdinRoomUpdatePeerUserDataSuccess OnSuccess;
-};
-
-DECLARE_DYNAMIC_DELEGATE_OneParam(FOdinRoomUpdateRoomUserDataError, int64, errorCode);
-DECLARE_DYNAMIC_DELEGATE(FOdinRoomUpdateRoomUserDataSuccess);
-UCLASS(ClassGroup = Odin)
-class ODIN_API UOdinRoomUpdateRoomUserData : public UBlueprintAsyncActionBase
-{
-    GENERATED_BODY()
-  public:
-    UFUNCTION(BlueprintCallable,
-              meta = (BlueprintInternalUseOnly = "true", Category = "Odin|Custom Data",
-                      DisplayName  = "Update Room User Data",
-                      ToolTip      = "Updates the custom user data of the room",
-                      WorldContext = "WorldContextObject", AutoCreateRefTerm = "onSuccess,onError"))
-    static UOdinRoomUpdateRoomUserData *
-    UpdateRoomUserData(UObject *WorldContextObject, UPARAM(ref) UOdinRoom *&room,
-                       const TArray<uint8> &data, const FOdinRoomUpdateRoomUserDataError &onError,
-                       const FOdinRoomUpdateRoomUserDataSuccess &onSuccess);
-
-    virtual void Activate() override;
-
-    UPROPERTY(BlueprintAssignable)
-    FUpdateRoomUserDataResponsePin OnResponse;
-
-    UPROPERTY()
-    UOdinRoom* Room;
-
-    TArray<uint8> Data;
-
-    FOdinRoomUpdateRoomUserDataError   OnError;
-    FOdinRoomUpdateRoomUserDataSuccess OnSuccess;
 };
 
 DECLARE_DYNAMIC_DELEGATE_OneParam(FOdinRoomSendMessageError, int64, errorCode);
@@ -250,7 +283,7 @@ class ODIN_API UOdinRoomSendMessage : public UBlueprintAsyncActionBase
     FSendMessageResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinRoom* Room;
+    UOdinRoom *Room;
 
     TArray<uint8> Data;
     TArray<int64> Targets;
@@ -491,11 +524,13 @@ class ODIN_API UOdinRoom : public /* USceneComponent */ UObject
                       Category = "Odin|Room"))
     void UpdateAPMConfig(FOdinApmSettings apm_config);
 
-    UFUNCTION(BlueprintCallable,
-              meta = (DisplayName = "Set Room APM Stream Delay",
-                      ToolTip     = "Updates the delay estimate in ms for reverse stream used in echo cancellation",
-                      HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject",
-                      Category = "Odin|Room"))
+    UFUNCTION(
+        BlueprintCallable,
+        meta = (DisplayName = "Set Room APM Stream Delay",
+                ToolTip =
+                    "Updates the delay estimate in ms for reverse stream used in echo cancellation",
+                HidePin = "WorldContextObject", DefaultToSelf = "WorldContextObject",
+                Category = "Odin|Room"))
     void UpdateAPMStreamDelay(int64 DelayInMs);
 
     UFUNCTION(
@@ -534,11 +569,11 @@ class ODIN_API UOdinRoom : public /* USceneComponent */ UObject
 
     FCriticalSection capture_medias_cs_;
     UPROPERTY(transient)
-    TArray<UOdinCaptureMedia*> capture_medias_;
+    TArray<UOdinCaptureMedia *> capture_medias_;
 
     FCriticalSection medias_cs_;
     UPROPERTY(transient)
-    TMap<uint64, UOdinMediaBase*> medias_;
+    TMap<uint64, UOdinMediaBase *> medias_;
 
     FCriticalSection joined_callbacks_cs_;
 
@@ -549,13 +584,12 @@ class ODIN_API UOdinRoom : public /* USceneComponent */ UObject
     void HandleOdinEvent(const OdinEvent event);
 
     UPROPERTY(transient)
-    UOdinSubmixListener* submix_listener_;
+    UOdinSubmixListener *submix_listener_;
 
     friend class UOdinRoomJoin;
     friend class UOdinRoomAddMedia;
     friend class UOdinRoomUpdatePosition;
     friend class UOdinRoomUpdatePeerUserData;
-    friend class UOdinRoomUpdateRoomUserData;
     friend class UOdinRoomSendMessage;
     friend class UOdinRoomJoinTask;
 };

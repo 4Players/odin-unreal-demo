@@ -12,7 +12,7 @@
 
 class OdinMediaSoundGenerator;
 
-UCLASS(ClassGroup = Synth, meta = (BlueprintSpawnableComponent))
+UCLASS(Blueprintable, ClassGroup = Synth, meta = (BlueprintSpawnableComponent))
 class ODIN_API UOdinSynthComponent : public USynthComponent
 {
     GENERATED_BODY()
@@ -23,10 +23,10 @@ class ODIN_API UOdinSynthComponent : public USynthComponent
     void Odin_AssignSynthToMedia(UPARAM(ref) UOdinPlaybackMedia *&media);
 
     /**
-     * This function can be used to reset media handle assigned to the targeted ODIN Synth instance.
-     * Resetting a media handle will restore it to its default configuration. This operation resets
-     * the internal Opus encoder/decoder, ensuring a clean state. Additionally, it clears internal
-     * buffers, providing a fresh start.
+     * This function can be used to reset the media handle assigned to the targeted ODIN Synth
+     * instance. Resetting a media handle will restore it to its default configuration. This
+     * operation resets the internal Opus encoder/decoder, ensuring a clean state. Additionally, it
+     * clears internal buffers, providing a fresh start.
      */
     UFUNCTION(BlueprintCallable, meta = (Category = "Odin|Sound", DisplayName = "Reset Odin Media"))
     void Reset();
@@ -38,6 +38,9 @@ class ODIN_API UOdinSynthComponent : public USynthComponent
      */
     UFUNCTION(BlueprintCallable, Category = "Odin|Sound")
     void AdjustAttenuation(const FSoundAttenuationSettings &InAttenuationSettings);
+
+    void AddAudioBufferListener(IAudioBufferListener *InAudioBufferListener);
+    void RemoveAudioBufferListener(IAudioBufferListener *InAudioBufferListener);
 
   protected:
     bool Init(int32 &SampleRate) override;
@@ -57,4 +60,5 @@ class ODIN_API UOdinSynthComponent : public USynthComponent
     UOdinPlaybackMedia *playback_media_ = nullptr;
 
     TSharedPtr<OdinMediaSoundGenerator, ESPMode::ThreadSafe> sound_generator_;
+    TArray<IAudioBufferListener *>                           AudioBufferListeners;
 };

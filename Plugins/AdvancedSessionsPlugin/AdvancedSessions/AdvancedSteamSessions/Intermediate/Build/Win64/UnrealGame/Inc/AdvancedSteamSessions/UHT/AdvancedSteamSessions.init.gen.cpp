@@ -23,13 +23,13 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedSteamSessions_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x115EF40F,
+				0x9536AE42,
 				0x72D08D04,
-				METADATA_PARAMS(nullptr, 0)
+				METADATA_PARAMS(0, nullptr)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_AdvancedSteamSessions.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_AdvancedSteamSessions.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedSteamSessions(Z_Construct_UPackage__Script_AdvancedSteamSessions, TEXT("/Script/AdvancedSteamSessions"), Z_Registration_Info_UPackage__Script_AdvancedSteamSessions, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x115EF40F, 0x72D08D04));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_AdvancedSteamSessions(Z_Construct_UPackage__Script_AdvancedSteamSessions, TEXT("/Script/AdvancedSteamSessions"), Z_Registration_Info_UPackage__Script_AdvancedSteamSessions, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x9536AE42, 0x72D08D04));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -104,20 +104,26 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::NewProp_PlayerNum = { "PlayerNum", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginChanged_Parms, PlayerNum), METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::NewProp_PlayerNum = { "PlayerNum", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginChanged_Parms, PlayerNum), METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::NewProp_PlayerNum,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::Function_MetaDataParams[] = {
 		{ "Category", "AdvancedIdentity" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// Called when the designated LocalUser has changed login state\n" },
+#endif
 		{ "DisplayName", "OnPlayerLoginChanged" },
 		{ "ModuleRelativePath", "Classes/AdvancedFriendsGameInstance.h" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Called when the designated LocalUser has changed login state" },
+#endif
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnPlayerLoginChanged", nullptr, nullptr, sizeof(AdvancedFriendsGameInstance_eventOnPlayerLoginChanged_Parms), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnPlayerLoginChanged", nullptr, nullptr, Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::PropPointers), sizeof(AdvancedFriendsGameInstance_eventOnPlayerLoginChanged_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged_Statics::PropPointers) < 2048);
+	static_assert(sizeof(AdvancedFriendsGameInstance_eventOnPlayerLoginChanged_Parms) < MAX_uint16);
 	UFunction* Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -141,12 +147,12 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_PlayerNum = { "PlayerNum", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms, PlayerNum), METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_PreviousStatus_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_PreviousStatus = { "PreviousStatus", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms, PreviousStatus), Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus, METADATA_PARAMS(nullptr, 0) }; // 3702083630
-	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_NewStatus_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_NewStatus = { "NewStatus", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms, NewStatus), Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus, METADATA_PARAMS(nullptr, 0) }; // 3702083630
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_NewPlayerUniqueNetID = { "NewPlayerUniqueNetID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms, NewPlayerUniqueNetID), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(nullptr, 0) }; // 766028705
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_PlayerNum = { "PlayerNum", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms, PlayerNum), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_PreviousStatus_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_PreviousStatus = { "PreviousStatus", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms, PreviousStatus), Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus, METADATA_PARAMS(0, nullptr) }; // 2728875483
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_NewStatus_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_NewStatus = { "NewStatus", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms, NewStatus), Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus, METADATA_PARAMS(0, nullptr) }; // 2728875483
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_NewPlayerUniqueNetID = { "NewPlayerUniqueNetID", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms, NewPlayerUniqueNetID), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 740343174
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_PlayerNum,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::NewProp_PreviousStatus_Underlying,
@@ -158,13 +164,19 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::Function_MetaDataParams[] = {
 		{ "Category", "AdvancedIdentity" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// Called when the designated LocalUser has changed login status\n" },
+#endif
 		{ "DisplayName", "OnPlayerLoginStatusChanged" },
 		{ "ModuleRelativePath", "Classes/AdvancedFriendsGameInstance.h" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Called when the designated LocalUser has changed login status" },
+#endif
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnPlayerLoginStatusChanged", nullptr, nullptr, sizeof(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnPlayerLoginStatusChanged", nullptr, nullptr, Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::PropPointers), sizeof(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged_Statics::PropPointers) < 2048);
+	static_assert(sizeof(AdvancedFriendsGameInstance_eventOnPlayerLoginStatusChanged_Parms) < MAX_uint16);
 	UFunction* Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -185,12 +197,12 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::NewProp_PlayerId = { "PlayerId", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerTalkingStateChanged_Parms, PlayerId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(nullptr, 0) }; // 766028705
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::NewProp_PlayerId = { "PlayerId", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnPlayerTalkingStateChanged_Parms, PlayerId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 740343174
 	void Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::NewProp_bIsTalking_SetBit(void* Obj)
 	{
 		((AdvancedFriendsGameInstance_eventOnPlayerTalkingStateChanged_Parms*)Obj)->bIsTalking = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::NewProp_bIsTalking = { "bIsTalking", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(AdvancedFriendsGameInstance_eventOnPlayerTalkingStateChanged_Parms), &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::NewProp_bIsTalking_SetBit, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::NewProp_bIsTalking = { "bIsTalking", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AdvancedFriendsGameInstance_eventOnPlayerTalkingStateChanged_Parms), &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::NewProp_bIsTalking_SetBit, METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::NewProp_PlayerId,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::NewProp_bIsTalking,
@@ -198,12 +210,18 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::Function_MetaDataParams[] = {
 		{ "Category", "AdvancedVoice" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// After a voice status has changed this event is triggered if the bEnableTalkingStatusDelegate property is true\n" },
+#endif
 		{ "ModuleRelativePath", "Classes/AdvancedFriendsGameInstance.h" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "After a voice status has changed this event is triggered if the bEnableTalkingStatusDelegate property is true" },
+#endif
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnPlayerTalkingStateChanged", nullptr, nullptr, sizeof(AdvancedFriendsGameInstance_eventOnPlayerTalkingStateChanged_Parms), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnPlayerTalkingStateChanged", nullptr, nullptr, Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::PropPointers), sizeof(AdvancedFriendsGameInstance_eventOnPlayerTalkingStateChanged_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged_Statics::PropPointers) < 2048);
+	static_assert(sizeof(AdvancedFriendsGameInstance_eventOnPlayerTalkingStateChanged_Parms) < MAX_uint16);
 	UFunction* Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -227,14 +245,14 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_LocalPlayerNum = { "LocalPlayerNum", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteAccepted_Parms, LocalPlayerNum), METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_PersonInvited = { "PersonInvited", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteAccepted_Parms, PersonInvited), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(nullptr, 0) }; // 766028705
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_LocalPlayerNum = { "LocalPlayerNum", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteAccepted_Parms, LocalPlayerNum), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_PersonInvited = { "PersonInvited", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteAccepted_Parms, PersonInvited), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 740343174
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_SessionToJoin_MetaData[] = {
 		{ "NativeConst", "" },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_SessionToJoin = { "SessionToJoin", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteAccepted_Parms, SessionToJoin), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_SessionToJoin_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_SessionToJoin_MetaData)) }; // 399430119
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_SessionToJoin = { "SessionToJoin", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteAccepted_Parms, SessionToJoin), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_SessionToJoin_MetaData), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_SessionToJoin_MetaData) }; // 3738885261
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_LocalPlayerNum,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::NewProp_PersonInvited,
@@ -243,12 +261,18 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::Function_MetaDataParams[] = {
 		{ "Category", "AdvancedFriends" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// After a session invite has been accepted by the local player this event is triggered, call JoinSession on the session result to join it\n// This function is currently not hooked up in any of Epics default subsystems, it is here for custom subsystems\n" },
+#endif
 		{ "ModuleRelativePath", "Classes/AdvancedFriendsGameInstance.h" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "After a session invite has been accepted by the local player this event is triggered, call JoinSession on the session result to join it\nThis function is currently not hooked up in any of Epics default subsystems, it is here for custom subsystems" },
+#endif
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnSessionInviteAccepted", nullptr, nullptr, sizeof(AdvancedFriendsGameInstance_eventOnSessionInviteAccepted_Parms), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08420800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnSessionInviteAccepted", nullptr, nullptr, Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::PropPointers), sizeof(AdvancedFriendsGameInstance_eventOnSessionInviteAccepted_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08420800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted_Statics::PropPointers) < 2048);
+	static_assert(sizeof(AdvancedFriendsGameInstance_eventOnSessionInviteAccepted_Parms) < MAX_uint16);
 	UFunction* Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -276,20 +300,20 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 #endif
 		static const UECodeGen_Private::FFunctionParams FuncParams;
 	};
-	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_LocalPlayerNum = { "LocalPlayerNum", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms, LocalPlayerNum), METADATA_PARAMS(nullptr, 0) };
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_PersonInviting = { "PersonInviting", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms, PersonInviting), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(nullptr, 0) }; // 766028705
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_LocalPlayerNum = { "LocalPlayerNum", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms, LocalPlayerNum), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_PersonInviting = { "PersonInviting", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms, PersonInviting), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(0, nullptr) }; // 740343174
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_AppId_MetaData[] = {
 		{ "NativeConst", "" },
 	};
 #endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_AppId = { "AppId", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms, AppId), METADATA_PARAMS(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_AppId_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_AppId_MetaData)) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_AppId = { "AppId", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms, AppId), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_AppId_MetaData), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_AppId_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_SessionToJoin_MetaData[] = {
 		{ "NativeConst", "" },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_SessionToJoin = { "SessionToJoin", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms, SessionToJoin), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_SessionToJoin_MetaData, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_SessionToJoin_MetaData)) }; // 399430119
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_SessionToJoin = { "SessionToJoin", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms, SessionToJoin), Z_Construct_UScriptStruct_FBlueprintSessionResult, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_SessionToJoin_MetaData), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_SessionToJoin_MetaData) }; // 3738885261
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_LocalPlayerNum,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::NewProp_PersonInviting,
@@ -299,12 +323,18 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::Function_MetaDataParams[] = {
 		{ "Category", "AdvancedFriends" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// After a session invite has been accepted by the local player this event is triggered, call JoinSession on the session result to join it\n" },
+#endif
 		{ "ModuleRelativePath", "Classes/AdvancedFriendsGameInstance.h" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "After a session invite has been accepted by the local player this event is triggered, call JoinSession on the session result to join it" },
+#endif
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnSessionInviteReceived", nullptr, nullptr, sizeof(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08420800, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::Function_MetaDataParams)) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UAdvancedFriendsGameInstance, nullptr, "OnSessionInviteReceived", nullptr, nullptr, Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::PropPointers), sizeof(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08420800, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::Function_MetaDataParams), Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived_Statics::PropPointers) < 2048);
+	static_assert(sizeof(AdvancedFriendsGameInstance_eventOnSessionInviteReceived_Parms) < MAX_uint16);
 	UFunction* Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -354,13 +384,15 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 		(UObject* (*)())Z_Construct_UClass_UGameInstance,
 		(UObject* (*)())Z_Construct_UPackage__Script_AdvancedSessions,
 	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged, "OnPlayerLoginChanged" }, // 1796331219
-		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged, "OnPlayerLoginStatusChanged" }, // 3188658775
-		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged, "OnPlayerTalkingStateChanged" }, // 4070072312
-		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted, "OnSessionInviteAccepted" }, // 3389341844
-		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived, "OnSessionInviteReceived" }, // 2522296910
+		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginChanged, "OnPlayerLoginChanged" }, // 2024346437
+		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerLoginStatusChanged, "OnPlayerLoginStatusChanged" }, // 2356462560
+		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnPlayerTalkingStateChanged, "OnPlayerTalkingStateChanged" }, // 493250917
+		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteAccepted, "OnSessionInviteAccepted" }, // 1936138075
+		{ &Z_Construct_UFunction_UAdvancedFriendsGameInstance_OnSessionInviteReceived, "OnSessionInviteReceived" }, // 2925356283
 	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::Class_MetaDataParams[] = {
 		{ "IncludePath", "AdvancedFriendsGameInstance.h" },
@@ -378,7 +410,7 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 	{
 		((UAdvancedFriendsGameInstance*)Obj)->bCallFriendInterfaceEventsOnPlayerControllers = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallFriendInterfaceEventsOnPlayerControllers = { "bCallFriendInterfaceEventsOnPlayerControllers", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UAdvancedFriendsGameInstance), &Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallFriendInterfaceEventsOnPlayerControllers_SetBit, METADATA_PARAMS(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallFriendInterfaceEventsOnPlayerControllers_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallFriendInterfaceEventsOnPlayerControllers_MetaData)) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallFriendInterfaceEventsOnPlayerControllers = { "bCallFriendInterfaceEventsOnPlayerControllers", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UAdvancedFriendsGameInstance), &Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallFriendInterfaceEventsOnPlayerControllers_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallFriendInterfaceEventsOnPlayerControllers_MetaData), Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallFriendInterfaceEventsOnPlayerControllers_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers_MetaData[] = {
 		{ "Category", "AdvancedFriendsInterface" },
@@ -389,7 +421,7 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 	{
 		((UAdvancedFriendsGameInstance*)Obj)->bCallIdentityInterfaceEventsOnPlayerControllers = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers = { "bCallIdentityInterfaceEventsOnPlayerControllers", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UAdvancedFriendsGameInstance), &Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers_SetBit, METADATA_PARAMS(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers_MetaData)) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers = { "bCallIdentityInterfaceEventsOnPlayerControllers", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UAdvancedFriendsGameInstance), &Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers_MetaData), Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallVoiceInterfaceEventsOnPlayerControllers_MetaData[] = {
 		{ "Category", "AdvancedFriendsInterface" },
@@ -400,7 +432,7 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 	{
 		((UAdvancedFriendsGameInstance*)Obj)->bCallVoiceInterfaceEventsOnPlayerControllers = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallVoiceInterfaceEventsOnPlayerControllers = { "bCallVoiceInterfaceEventsOnPlayerControllers", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UAdvancedFriendsGameInstance), &Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallVoiceInterfaceEventsOnPlayerControllers_SetBit, METADATA_PARAMS(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallVoiceInterfaceEventsOnPlayerControllers_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallVoiceInterfaceEventsOnPlayerControllers_MetaData)) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallVoiceInterfaceEventsOnPlayerControllers = { "bCallVoiceInterfaceEventsOnPlayerControllers", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UAdvancedFriendsGameInstance), &Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallVoiceInterfaceEventsOnPlayerControllers_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallVoiceInterfaceEventsOnPlayerControllers_MetaData), Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallVoiceInterfaceEventsOnPlayerControllers_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bEnableTalkingStatusDelegate_MetaData[] = {
 		{ "Category", "AdvancedVoiceInterface" },
@@ -411,7 +443,7 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 	{
 		((UAdvancedFriendsGameInstance*)Obj)->bEnableTalkingStatusDelegate = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bEnableTalkingStatusDelegate = { "bEnableTalkingStatusDelegate", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(UAdvancedFriendsGameInstance), &Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bEnableTalkingStatusDelegate_SetBit, METADATA_PARAMS(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bEnableTalkingStatusDelegate_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bEnableTalkingStatusDelegate_MetaData)) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bEnableTalkingStatusDelegate = { "bEnableTalkingStatusDelegate", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UAdvancedFriendsGameInstance), &Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bEnableTalkingStatusDelegate_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bEnableTalkingStatusDelegate_MetaData), Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bEnableTalkingStatusDelegate_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallFriendInterfaceEventsOnPlayerControllers,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::NewProp_bCallIdentityInterfaceEventsOnPlayerControllers,
@@ -434,8 +466,9 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 		UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::PropPointers),
 		0,
 		0x009000A8u,
-		METADATA_PARAMS(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::Class_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::Class_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::Class_MetaDataParams), Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::Class_MetaDataParams)
 	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UAdvancedFriendsGameInstance_Statics::PropPointers) < 2048);
 	UClass* Z_Construct_UClass_UAdvancedFriendsGameInstance()
 	{
 		if (!Z_Registration_Info_UClass_UAdvancedFriendsGameInstance.OuterSingleton)
@@ -450,15 +483,15 @@ void EmptyLinkFunctionForGeneratedCodeAdvancedFriendsGameInstance() {}
 	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UAdvancedFriendsGameInstance);
 	UAdvancedFriendsGameInstance::~UAdvancedFriendsGameInstance() {}
-	struct Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_Statics
+	struct Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_Statics
 	{
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
-	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UAdvancedFriendsGameInstance, UAdvancedFriendsGameInstance::StaticClass, TEXT("UAdvancedFriendsGameInstance"), &Z_Registration_Info_UClass_UAdvancedFriendsGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedFriendsGameInstance), 93427740U) },
+	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_Statics::ClassInfo[] = {
+		{ Z_Construct_UClass_UAdvancedFriendsGameInstance, UAdvancedFriendsGameInstance::StaticClass, TEXT("UAdvancedFriendsGameInstance"), &Z_Registration_Info_UClass_UAdvancedFriendsGameInstance, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UAdvancedFriendsGameInstance), 4275303968U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_2288616539(TEXT("/Script/AdvancedSessions"),
-		Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_Statics::ClassInfo),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_3822043630(TEXT("/Script/AdvancedSessions"),
+		Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_AdvancedFriendsGameInstance_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -4,8 +4,8 @@
 
 #include "AudioCapture.h"
 #include "CoreMinimal.h"
-#include "Tickable.h"
 #include "Runtime/Launch/Resources/Version.h"
+#include "Tickable.h"
 
 #if ENGINE_MAJOR_VERSION >= 5
 #include "AudioDeviceNotificationSubsystem.h"
@@ -36,7 +36,7 @@ DECLARE_DYNAMIC_DELEGATE_OneParam(FChangeCaptureDeviceDelegate, bool, bSuccess);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FCaptureDeviceChange);
 
-UCLASS(ClassGroup = (Odin), meta = (BlueprintSpawnableComponent))
+UCLASS(ClassGroup = (Odin), Blueprintable, meta = (BlueprintSpawnableComponent))
 class ODIN_API UOdinAudioCapture : public UAudioCapture, public FTickableGameObject
 {
     GENERATED_BODY()
@@ -117,6 +117,18 @@ class ODIN_API UOdinAudioCapture : public UAudioCapture, public FTickableGameObj
     float GetStreamTime() const;
 
     /**
+     * @brief Restart the stream, using CurrentSelectedDeviceIndex as the new input.
+     */
+    UFUNCTION(BlueprintCallable, Category = "AudioCapture")
+    bool RestartCapturing(bool bAutomaticallyStartCapture = true);
+
+    UFUNCTION(BlueprintInternalUseOnly, BlueprintPure, Category = "AudioCapture")
+    bool GetIsPaused() const;
+
+    UFUNCTION(BlueprintInternalUseOnly, BlueprintCallable, Category = "AudioCapture")
+    void SetIsPaused(bool newValue);
+
+    /**
      * @brief Will be called, if ODIN recognizes that the selected capture device does not supply
      * data anymore, i.e. if a microphone was unplugged. ODIN will wait for
      * AllowedTimeWithoutStreamUpdate seconds, before trying a stream restart.
@@ -179,10 +191,14 @@ class ODIN_API UOdinAudioCapture : public UAudioCapture, public FTickableGameObj
     template <typename DeviceCheck>
     bool ChangeCaptureDevice(const DeviceCheck& DeviceCheckFunction);
 
-    /**
-     * @brief Restart the stream, using CurrentSelectedDeviceIndex as the new input.
-     */
-    void RestartStream();
+    void InitializeGenerator();
+
+    void TryRunAsyncChangeDeviceRequest(FChangeCaptureDeviceDelegate OnChangeCompleted,
+                                        TFunction<void()>            ChangeDeviceFunction);
+    void FinalizeCaptureDeviceChange(FChangeCaptureDeviceDelegate OnChangeCompleted,
+                                     bool&                        bSuccess);
+
+    void RetrieveCurrentSelectedDeviceIndex();
 
     /**
      * @brief The index of the currently selected device. -1 and 0 both refer to the Default Device.
@@ -204,6 +220,9 @@ class ODIN_API UOdinAudioCapture : public UAudioCapture, public FTickableGameObj
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AudioCapture")
     float AllowedTimeForStreamSetup = 3.0f;
 
+    UPROPERTY(BlueprintGetter = GetIsPaused, BlueprintSetter = SetIsPaused,
+              Category = "AudioCapture")
+    bool bIsCapturingPaused;
     /**
      * @brief Will be filled in, once a device was selected by the user.
      * We can't have access to this before the custom selection, because - at least the Windows
@@ -212,6 +231,7 @@ class ODIN_API UOdinAudioCapture : public UAudioCapture, public FTickableGameObj
      */
     FOdinCaptureDeviceInfo CustomSelectedDevice;
 
-    double LastStreamTime          = -1.0f;
-    double TimeWithoutStreamUpdate = 0.0f;
+    double LastStreamTime            = -1.0f;
+    double TimeWithoutStreamUpdate   = 0.0f;
+    bool   IsCurrentlyChangingDevice = false;
 };

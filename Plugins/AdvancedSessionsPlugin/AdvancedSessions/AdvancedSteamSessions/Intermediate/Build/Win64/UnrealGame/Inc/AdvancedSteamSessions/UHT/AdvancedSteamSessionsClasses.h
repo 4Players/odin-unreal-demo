@@ -7,8 +7,8 @@
 #pragma once
 
 
-#include "C:/Users/morde/Documents/Unreal Projects/PluginExpProject/Plugins/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/AdvancedSteamFriendsLibrary.h"
-#include "C:/Users/morde/Documents/Unreal Projects/PluginExpProject/Plugins/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/AdvancedSteamWorkshopLibrary.h"
-#include "C:/Users/morde/Documents/Unreal Projects/PluginExpProject/Plugins/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/SteamRequestGroupOfficersCallbackProxy.h"
-#include "C:/Users/morde/Documents/Unreal Projects/PluginExpProject/Plugins/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/SteamWSRequestUGCDetailsCallbackProxy.h"
+#include "F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/AdvancedSteamFriendsLibrary.h"
+#include "F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/AdvancedSteamWorkshopLibrary.h"
+#include "F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/SteamRequestGroupOfficersCallbackProxy.h"
+#include "F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/SteamWSRequestUGCDetailsCallbackProxy.h"
 

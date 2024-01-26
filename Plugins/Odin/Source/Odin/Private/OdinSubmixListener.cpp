@@ -1,10 +1,13 @@
 /* Copyright (c) 2022-2023 4Players GmbH. All rights reserved. */
 
-#pragma once
 
 #include "OdinSubmixListener.h"
-
 #include "Odin.h"
+#include "Sound/SoundSubmix.h"
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 3
+#include "ISubmixBufferListener.h"
+#endif
+#include "AudioDevice.h"
 
 using namespace Audio;
 
@@ -65,7 +68,7 @@ void UOdinSubmixListener::OnNewSubmixBuffer(const USoundSubmix *OwningSubmix, fl
 
     FScopeLock Lock(&submix_cs_);
 
-    Audio::TSampleBuffer<float> buffer(AudioData, InNumSamples, InNumChannels, InSampleRate);
+    TSampleBuffer<float> buffer(AudioData, InNumSamples, InNumChannels, InSampleRate);
     if (buffer.GetNumChannels() != OdinChannels)
         buffer.MixBufferToChannels(OdinChannels);
 

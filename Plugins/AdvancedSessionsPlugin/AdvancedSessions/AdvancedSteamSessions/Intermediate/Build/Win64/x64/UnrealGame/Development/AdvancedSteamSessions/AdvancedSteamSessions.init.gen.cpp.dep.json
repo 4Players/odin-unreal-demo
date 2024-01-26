@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\tool1\\odin-unreal-demo\\plugins\\advancedsessionsplugin\\advancedsessions\\advancedsteamsessions\\intermediate\\build\\win64\\unrealgame\\inc\\advancedsteamsessions\\uht\\advancedsteamsessions.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\tool1\\odin-unreal-demo\\intermediate\\build\\win64\\x64\\odinunrealsample\\development\\engine\\sharedpch.engine.cpp17.inclorderunreal5_0.h.pch",
+        "Includes": [
+            "f:\\tool1\\odin-unreal-demo\\plugins\\advancedsessionsplugin\\advancedsessions\\advancedsteamsessions\\intermediate\\build\\win64\\x64\\unrealgame\\development\\advancedsteamsessions\\definitions.advancedsteamsessions.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

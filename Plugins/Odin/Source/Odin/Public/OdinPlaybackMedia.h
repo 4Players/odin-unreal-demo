@@ -79,10 +79,14 @@ class ODIN_API UOdinPlaybackMedia : public UOdinMediaBase
     }
 
     UFUNCTION(BlueprintCallable,
-              meta = (DeprecatedFunction,
-                      DeprecationMessage =
-                          "Media IDs are deprecated! Use media objects/handles instead."))
+              meta = (DisplayName = "Get Output Media ID",
+                      ToolTip = "Get the internal ID of an output media", Category = "Odin|Debug"))
     int32 GetMediaId();
+
+    UFUNCTION(BlueprintCallable,
+              meta = (DisplayName = "Get Output Media Peer ID",
+                      ToolTip = "Get the peer ID of an output media", Category = "Odin|Debug"))
+    int64 GetPeerId();
 
     UFUNCTION(BlueprintCallable,
               meta = (DisplayName = "Get Output Media Audio Stats",
@@ -95,5 +99,5 @@ class ODIN_API UOdinPlaybackMedia : public UOdinMediaBase
     void BeginDestroy() override;
 
     UPROPERTY(BlueprintReadOnly, Category = "Room")
-    UOdinRoom* Room;
+    UOdinRoom *Room;
 };

@@ -79,11 +79,11 @@ void EmptyLinkFunctionForGeneratedCodeBlueprintDataDefinitions() {}
 		"EBPUserPrivileges",
 		"EBPUserPrivileges",
 		Z_Construct_UEnum_AdvancedSessions_EBPUserPrivileges_Statics::Enumerators,
-		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPUserPrivileges_Statics::Enumerators),
 		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPUserPrivileges_Statics::Enumerators),
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(Z_Construct_UEnum_AdvancedSessions_EBPUserPrivileges_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPUserPrivileges_Statics::Enum_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPUserPrivileges_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedSessions_EBPUserPrivileges_Statics::Enum_MetaDataParams)
 	};
 	UEnum* Z_Construct_UEnum_AdvancedSessions_EBPUserPrivileges()
 	{
@@ -140,11 +140,11 @@ void EmptyLinkFunctionForGeneratedCodeBlueprintDataDefinitions() {}
 		"EBPLoginStatus",
 		"EBPLoginStatus",
 		Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus_Statics::Enumerators,
-		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus_Statics::Enumerators),
 		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus_Statics::Enumerators),
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus_Statics::Enum_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus_Statics::Enum_MetaDataParams)
 	};
 	UEnum* Z_Construct_UEnum_AdvancedSessions_EBPLoginStatus()
 	{
@@ -190,13 +190,13 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		nullptr,
 		&NewStructOps,
 		"BPUserOnlineAccount",
-		sizeof(FBPUserOnlineAccount),
-		alignof(FBPUserOnlineAccount),
 		nullptr,
 		0,
+		sizeof(FBPUserOnlineAccount),
+		alignof(FBPUserOnlineAccount),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::Struct_MetaDataParams)
 	};
 	UScriptStruct* Z_Construct_UScriptStruct_FBPUserOnlineAccount()
 	{
@@ -252,11 +252,11 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		"ESessionSettingSearchResult",
 		"ESessionSettingSearchResult",
 		Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult_Statics::Enumerators,
-		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult_Statics::Enumerators),
 		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult_Statics::Enumerators),
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult_Statics::Enum_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult_Statics::Enum_MetaDataParams)
 	};
 	UEnum* Z_Construct_UEnum_AdvancedSessions_ESessionSettingSearchResult()
 	{
@@ -293,7 +293,9 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch_Statics::Enum_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// This makes a lot of the blueprint functions cleaner\n" },
+#endif
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 		{ "OnFailure.Comment", "// On Failure\n" },
 		{ "OnFailure.Name", "EBlueprintResultSwitch::OnFailure" },
@@ -301,7 +303,9 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		{ "OnSuccess.Comment", "// On Success\n" },
 		{ "OnSuccess.Name", "EBlueprintResultSwitch::OnSuccess" },
 		{ "OnSuccess.ToolTip", "On Success" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "This makes a lot of the blueprint functions cleaner" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch_Statics::EnumParams = {
@@ -310,11 +314,11 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		"EBlueprintResultSwitch",
 		"EBlueprintResultSwitch",
 		Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch_Statics::Enumerators,
-		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch_Statics::Enumerators),
 		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch_Statics::Enumerators),
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch_Statics::Enum_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch_Statics::Enum_MetaDataParams)
 	};
 	UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintResultSwitch()
 	{
@@ -355,7 +359,9 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		{ "AsyncLoading.Comment", "// Still loading\n" },
 		{ "AsyncLoading.Name", "EBlueprintAsyncResultSwitch::AsyncLoading" },
 		{ "AsyncLoading.ToolTip", "Still loading" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// This makes a lot of the blueprint functions cleaner\n" },
+#endif
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 		{ "OnFailure.Comment", "// On Failure\n" },
 		{ "OnFailure.Name", "EBlueprintAsyncResultSwitch::OnFailure" },
@@ -363,7 +369,9 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		{ "OnSuccess.Comment", "// On Success\n" },
 		{ "OnSuccess.Name", "EBlueprintAsyncResultSwitch::OnSuccess" },
 		{ "OnSuccess.ToolTip", "On Success" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "This makes a lot of the blueprint functions cleaner" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch_Statics::EnumParams = {
@@ -372,11 +380,11 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		"EBlueprintAsyncResultSwitch",
 		"EBlueprintAsyncResultSwitch",
 		Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch_Statics::Enumerators,
-		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch_Statics::Enumerators),
 		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch_Statics::Enumerators),
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch_Statics::Enum_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch_Statics::Enum_MetaDataParams)
 	};
 	UEnum* Z_Construct_UEnum_AdvancedSessions_EBlueprintAsyncResultSwitch()
 	{
@@ -417,10 +425,14 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		{ "AllServers.Name", "EBPServerPresenceSearchType::AllServers" },
 		{ "BlueprintType", "true" },
 		{ "ClientServersOnly.Name", "EBPServerPresenceSearchType::ClientServersOnly" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// This is to define server type searches\n" },
+#endif
 		{ "DedicatedServersOnly.Name", "EBPServerPresenceSearchType::DedicatedServersOnly" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "This is to define server type searches" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType_Statics::EnumParams = {
@@ -429,11 +441,11 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		"EBPServerPresenceSearchType",
 		"EBPServerPresenceSearchType",
 		Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType_Statics::Enumerators,
-		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType_Statics::Enumerators),
 		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType_Statics::Enumerators),
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType_Statics::Enum_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType_Statics::Enum_MetaDataParams)
 	};
 	UEnum* Z_Construct_UEnum_AdvancedSessions_EBPServerPresenceSearchType()
 	{
@@ -477,13 +489,17 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		{ "Away.Name", "EBPOnlinePresenceState::Away" },
 		{ "BlueprintType", "true" },
 		{ "Chat.Name", "EBPOnlinePresenceState::Chat" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// Wanted this to be switchable in the editor\n" },
+#endif
 		{ "DoNotDisturb.Name", "EBPOnlinePresenceState::DoNotDisturb" },
 		{ "ExtendedAway.Name", "EBPOnlinePresenceState::ExtendedAway" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 		{ "Offline.Name", "EBPOnlinePresenceState::Offline" },
 		{ "Online.Name", "EBPOnlinePresenceState::Online" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Wanted this to be switchable in the editor" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState_Statics::EnumParams = {
@@ -492,11 +508,11 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		"EBPOnlinePresenceState",
 		"EBPOnlinePresenceState",
 		Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState_Statics::Enumerators,
-		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState_Statics::Enumerators),
 		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState_Statics::Enumerators),
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState_Statics::Enum_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState_Statics::Enum_MetaDataParams)
 	};
 	UEnum* Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState()
 	{
@@ -573,11 +589,11 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUserOnlineAccount
 		"EBPOnlineSessionState",
 		"EBPOnlineSessionState",
 		Z_Construct_UEnum_AdvancedSessions_EBPOnlineSessionState_Statics::Enumerators,
-		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPOnlineSessionState_Statics::Enumerators),
 		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPOnlineSessionState_Statics::Enumerators),
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(Z_Construct_UEnum_AdvancedSessions_EBPOnlineSessionState_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPOnlineSessionState_Statics::Enum_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EBPOnlineSessionState_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedSessions_EBPOnlineSessionState_Statics::Enum_MetaDataParams)
 	};
 	UEnum* Z_Construct_UEnum_AdvancedSessions_EBPOnlineSessionState()
 	{
@@ -611,9 +627,13 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUniqueNetId>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// Boy oh boy is this a dirty hack, but I can't figure out a good way to do it otherwise at the moment\n// The UniqueNetId is an abstract class so I can't exactly re-initialize it to make a shared pointer on some functions\n// So I made the blueprintable UniqueNetID into a dual variable struct with access functions and I am converting the const var for the pointer\n// I really need to re-think this later\n" },
+#endif
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Boy oh boy is this a dirty hack, but I can't figure out a good way to do it otherwise at the moment\nThe UniqueNetId is an abstract class so I can't exactly re-initialize it to make a shared pointer on some functions\nSo I made the blueprintable UniqueNetID into a dual variable struct with access functions and I am converting the const var for the pointer\nI really need to re-think this later" },
+#endif
 	};
 #endif
 	void* Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::NewStructOps()
@@ -625,13 +645,13 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPUniqueNetId>()
 		nullptr,
 		&NewStructOps,
 		"BPUniqueNetId",
-		sizeof(FBPUniqueNetId),
-		alignof(FBPUniqueNetId),
 		nullptr,
 		0,
+		sizeof(FBPUniqueNetId),
+		alignof(FBPUniqueNetId),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::Struct_MetaDataParams)
 	};
 	UScriptStruct* Z_Construct_UScriptStruct_FBPUniqueNetId()
 	{
@@ -691,21 +711,21 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPOnlineUser>()
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPOnlineUser, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_UniqueNetId_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_UniqueNetId_MetaData)) }; // 766028705
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPOnlineUser, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_UniqueNetId_MetaData), Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_UniqueNetId_MetaData) }; // 740343174
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_DisplayName_MetaData[] = {
 		{ "Category", "Online|Friend" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_DisplayName = { "DisplayName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPOnlineUser, DisplayName), METADATA_PARAMS(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_DisplayName_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_DisplayName_MetaData)) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_DisplayName = { "DisplayName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPOnlineUser, DisplayName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_DisplayName_MetaData), Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_DisplayName_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_RealName_MetaData[] = {
 		{ "Category", "Online|Friend" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_RealName = { "RealName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPOnlineUser, RealName), METADATA_PARAMS(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_RealName_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_RealName_MetaData)) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_RealName = { "RealName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPOnlineUser, RealName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_RealName_MetaData), Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_RealName_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FBPOnlineUser_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_UniqueNetId,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewProp_DisplayName,
@@ -716,14 +736,15 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPOnlineUser>()
 		nullptr,
 		&NewStructOps,
 		"BPOnlineUser",
-		sizeof(FBPOnlineUser),
-		alignof(FBPOnlineUser),
 		Z_Construct_UScriptStruct_FBPOnlineUser_Statics::PropPointers,
 		UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::PropPointers),
+		sizeof(FBPOnlineUser),
+		alignof(FBPOnlineUser),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FBPOnlineUser_Statics::Struct_MetaDataParams)
 	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineUser_Statics::PropPointers) < 2048);
 	UScriptStruct* Z_Construct_UScriptStruct_FBPOnlineUser()
 	{
 		if (!Z_Registration_Info_UScriptStruct_BPOnlineUser.InnerSingleton)
@@ -777,7 +798,7 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPOnlineRecentPlaye
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewProp_LastSeen = { "LastSeen", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPOnlineRecentPlayer, LastSeen), METADATA_PARAMS(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewProp_LastSeen_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewProp_LastSeen_MetaData)) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewProp_LastSeen = { "LastSeen", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPOnlineRecentPlayer, LastSeen), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewProp_LastSeen_MetaData), Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewProp_LastSeen_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewProp_LastSeen,
 	};
@@ -786,14 +807,15 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPOnlineRecentPlaye
 		Z_Construct_UScriptStruct_FBPOnlineUser,
 		&NewStructOps,
 		"BPOnlineRecentPlayer",
-		sizeof(FBPOnlineRecentPlayer),
-		alignof(FBPOnlineRecentPlayer),
 		Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::PropPointers,
 		UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::PropPointers),
+		sizeof(FBPOnlineRecentPlayer),
+		alignof(FBPOnlineRecentPlayer),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::Struct_MetaDataParams)
 	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::PropPointers) < 2048);
 	UScriptStruct* Z_Construct_UScriptStruct_FBPOnlineRecentPlayer()
 	{
 		if (!Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer.InnerSingleton)
@@ -878,7 +900,7 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendPresenceInf
 	{
 		((FBPFriendPresenceInfo*)Obj)->bIsOnline = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsOnline = { "bIsOnline", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsOnline_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsOnline_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsOnline_MetaData)) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsOnline = { "bIsOnline", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsOnline_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsOnline_MetaData), Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsOnline_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying_MetaData[] = {
 		{ "Category", "Online|Friend" },
@@ -889,7 +911,7 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendPresenceInf
 	{
 		((FBPFriendPresenceInfo*)Obj)->bIsPlaying = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying = { "bIsPlaying", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying_MetaData)) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying = { "bIsPlaying", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying_MetaData), Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlayingThisGame_MetaData[] = {
 		{ "Category", "Online|Friend" },
@@ -900,7 +922,7 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendPresenceInf
 	{
 		((FBPFriendPresenceInfo*)Obj)->bIsPlayingThisGame = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlayingThisGame = { "bIsPlayingThisGame", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlayingThisGame_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlayingThisGame_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlayingThisGame_MetaData)) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlayingThisGame = { "bIsPlayingThisGame", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlayingThisGame_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlayingThisGame_MetaData), Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlayingThisGame_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsJoinable_MetaData[] = {
 		{ "Category", "Online|Friend" },
@@ -911,7 +933,7 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendPresenceInf
 	{
 		((FBPFriendPresenceInfo*)Obj)->bIsJoinable = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsJoinable = { "bIsJoinable", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsJoinable_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsJoinable_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsJoinable_MetaData)) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsJoinable = { "bIsJoinable", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsJoinable_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsJoinable_MetaData), Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsJoinable_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bHasVoiceSupport_MetaData[] = {
 		{ "Category", "Online|Friend" },
@@ -922,22 +944,22 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendPresenceInf
 	{
 		((FBPFriendPresenceInfo*)Obj)->bHasVoiceSupport = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bHasVoiceSupport = { "bHasVoiceSupport", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bHasVoiceSupport_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bHasVoiceSupport_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bHasVoiceSupport_MetaData)) };
-	const UECodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_PresenceState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bHasVoiceSupport = { "bHasVoiceSupport", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FBPFriendPresenceInfo), &Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bHasVoiceSupport_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bHasVoiceSupport_MetaData), Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bHasVoiceSupport_MetaData) };
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_PresenceState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_PresenceState_MetaData[] = {
 		{ "Category", "Online|Friend" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_PresenceState = { "PresenceState", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPFriendPresenceInfo, PresenceState), Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_PresenceState_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_PresenceState_MetaData)) }; // 2879031986
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_PresenceState = { "PresenceState", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendPresenceInfo, PresenceState), Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_PresenceState_MetaData), Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_PresenceState_MetaData) }; // 1671449928
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_StatusString_MetaData[] = {
 		{ "Category", "Online|Friend" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_StatusString = { "StatusString", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPFriendPresenceInfo, StatusString), METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_StatusString_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_StatusString_MetaData)) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_StatusString = { "StatusString", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendPresenceInfo, StatusString), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_StatusString_MetaData), Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_StatusString_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsOnline,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewProp_bIsPlaying,
@@ -953,14 +975,15 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendPresenceInf
 		nullptr,
 		&NewStructOps,
 		"BPFriendPresenceInfo",
-		sizeof(FBPFriendPresenceInfo),
-		alignof(FBPFriendPresenceInfo),
 		Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::PropPointers,
 		UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::PropPointers),
+		sizeof(FBPFriendPresenceInfo),
+		alignof(FBPFriendPresenceInfo),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::Struct_MetaDataParams)
 	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::PropPointers) < 2048);
 	UScriptStruct* Z_Construct_UScriptStruct_FBPFriendPresenceInfo()
 	{
 		if (!Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo.InnerSingleton)
@@ -1033,29 +1056,29 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendInfo>()
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_DisplayName = { "DisplayName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPFriendInfo, DisplayName), METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_DisplayName_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_DisplayName_MetaData)) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_DisplayName = { "DisplayName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, DisplayName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_DisplayName_MetaData), Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_DisplayName_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName_MetaData[] = {
 		{ "Category", "Online|Friend" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName = { "RealName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPFriendInfo, RealName), METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName_MetaData)) };
-	const UECodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FStrPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName = { "RealName", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, RealName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName_MetaData), Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName_MetaData) };
+	const UECodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState_MetaData[] = {
 		{ "Category", "Online|Friend" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState = { "OnlineState", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPFriendInfo, OnlineState), Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState_MetaData)) }; // 2879031986
+	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState = { "OnlineState", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, OnlineState), Z_Construct_UEnum_AdvancedSessions_EBPOnlinePresenceState, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState_MetaData), Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_OnlineState_MetaData) }; // 1671449928
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_UniqueNetId_MetaData[] = {
 		{ "Category", "Online|Friend" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPFriendInfo, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_UniqueNetId_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_UniqueNetId_MetaData)) }; // 766028705
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_UniqueNetId = { "UniqueNetId", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, UniqueNetId), Z_Construct_UScriptStruct_FBPUniqueNetId, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_UniqueNetId_MetaData), Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_UniqueNetId_MetaData) }; // 740343174
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame_MetaData[] = {
 		{ "Category", "Online|Friend" },
@@ -1066,14 +1089,14 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendInfo>()
 	{
 		((FBPFriendInfo*)Obj)->bIsPlayingSameGame = 1;
 	}
-	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame = { "bIsPlayingSameGame", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, sizeof(bool), sizeof(FBPFriendInfo), &Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame_SetBit, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame_MetaData)) };
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame = { "bIsPlayingSameGame", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FBPFriendInfo), &Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame_MetaData), Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_bIsPlayingSameGame_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_PresenceInfo_MetaData[] = {
 		{ "Category", "Online|Friend" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_PresenceInfo = { "PresenceInfo", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, nullptr, nullptr, STRUCT_OFFSET(FBPFriendInfo, PresenceInfo), Z_Construct_UScriptStruct_FBPFriendPresenceInfo, METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_PresenceInfo_MetaData, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_PresenceInfo_MetaData)) }; // 3848083864
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_PresenceInfo = { "PresenceInfo", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FBPFriendInfo, PresenceInfo), Z_Construct_UScriptStruct_FBPFriendPresenceInfo, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_PresenceInfo_MetaData), Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_PresenceInfo_MetaData) }; // 4034718125
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FBPFriendInfo_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_DisplayName,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewProp_RealName,
@@ -1088,14 +1111,15 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendInfo>()
 		nullptr,
 		&NewStructOps,
 		"BPFriendInfo",
-		sizeof(FBPFriendInfo),
-		alignof(FBPFriendInfo),
 		Z_Construct_UScriptStruct_FBPFriendInfo_Statics::PropPointers,
 		UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::PropPointers),
+		sizeof(FBPFriendInfo),
+		alignof(FBPFriendInfo),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FBPFriendInfo_Statics::Struct_MetaDataParams)
 	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FBPFriendInfo_Statics::PropPointers) < 2048);
 	UScriptStruct* Z_Construct_UScriptStruct_FBPFriendInfo()
 	{
 		if (!Z_Registration_Info_UScriptStruct_BPFriendInfo.InnerSingleton)
@@ -1136,7 +1160,9 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendInfo>()
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux_Statics::Enum_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "/** The types of comparison operations for a given search query */// Used to compare session properties\n" },
+#endif
 		{ "Equals.Name", "EOnlineComparisonOpRedux::Equals" },
 		{ "GreaterThan.Name", "EOnlineComparisonOpRedux::GreaterThan" },
 		{ "GreaterThanEquals.Name", "EOnlineComparisonOpRedux::GreaterThanEquals" },
@@ -1144,7 +1170,9 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendInfo>()
 		{ "LessThanEquals.Name", "EOnlineComparisonOpRedux::LessThanEquals" },
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
 		{ "NotEquals.Name", "EOnlineComparisonOpRedux::NotEquals" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "The types of comparison operations for a given search query // Used to compare session properties" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FEnumParams Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux_Statics::EnumParams = {
@@ -1153,11 +1181,11 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FBPFriendInfo>()
 		"EOnlineComparisonOpRedux",
 		"EOnlineComparisonOpRedux",
 		Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux_Statics::Enumerators,
-		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux_Statics::Enumerators),
 		RF_Public|RF_Transient|RF_MarkAsNative,
+		UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux_Statics::Enumerators),
 		EEnumFlags::None,
 		(uint8)UEnum::ECppForm::EnumClass,
-		METADATA_PARAMS(Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux_Statics::Enum_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux_Statics::Enum_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux_Statics::Enum_MetaDataParams), Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux_Statics::Enum_MetaDataParams)
 	};
 	UEnum* Z_Construct_UEnum_AdvancedSessions_EOnlineComparisonOpRedux()
 	{
@@ -1191,9 +1219,13 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FSessionPropertyKeyP
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// Used to store session properties before converting to FVariantData\n" },
+#endif
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Used to store session properties before converting to FVariantData" },
+#endif
 	};
 #endif
 	void* Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::NewStructOps()
@@ -1205,13 +1237,13 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FSessionPropertyKeyP
 		nullptr,
 		&NewStructOps,
 		"SessionPropertyKeyPair",
-		sizeof(FSessionPropertyKeyPair),
-		alignof(FSessionPropertyKeyPair),
 		nullptr,
 		0,
+		sizeof(FSessionPropertyKeyPair),
+		alignof(FSessionPropertyKeyPair),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::Struct_MetaDataParams)
 	};
 	UScriptStruct* Z_Construct_UScriptStruct_FSessionPropertyKeyPair()
 	{
@@ -1245,9 +1277,13 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FSessionsSearchSetti
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::Struct_MetaDataParams[] = {
 		{ "BlueprintType", "true" },
+#if !UE_BUILD_SHIPPING
 		{ "Comment", "// Sent to the FindSessionsAdvanced to filter the end results\n" },
+#endif
 		{ "ModuleRelativePath", "Classes/BlueprintDataDefinitions.h" },
+#if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Sent to the FindSessionsAdvanced to filter the end results" },
+#endif
 	};
 #endif
 	void* Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::NewStructOps()
@@ -1259,13 +1295,13 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FSessionsSearchSetti
 		nullptr,
 		&NewStructOps,
 		"SessionsSearchSetting",
-		sizeof(FSessionsSearchSetting),
-		alignof(FSessionsSearchSetting),
 		nullptr,
 		0,
+		sizeof(FSessionsSearchSetting),
+		alignof(FSessionsSearchSetting),
 		RF_Public|RF_Transient|RF_MarkAsNative,
 		EStructFlags(0x00000001),
-		METADATA_PARAMS(Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::Struct_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::Struct_MetaDataParams))
+		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::Struct_MetaDataParams), Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::Struct_MetaDataParams)
 	};
 	UScriptStruct* Z_Construct_UScriptStruct_FSessionsSearchSetting()
 	{
@@ -1275,34 +1311,34 @@ template<> ADVANCEDSESSIONS_API UScriptStruct* StaticStruct<FSessionsSearchSetti
 		}
 		return Z_Registration_Info_UScriptStruct_SessionsSearchSetting.InnerSingleton;
 	}
-	struct Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics
+	struct Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics
 	{
 		static const FEnumRegisterCompiledInInfo EnumInfo[];
 		static const FStructRegisterCompiledInInfo ScriptStructInfo[];
 	};
-	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::EnumInfo[] = {
-		{ EBPUserPrivileges_StaticEnum, TEXT("EBPUserPrivileges"), &Z_Registration_Info_UEnum_EBPUserPrivileges, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2447095556U) },
-		{ EBPLoginStatus_StaticEnum, TEXT("EBPLoginStatus"), &Z_Registration_Info_UEnum_EBPLoginStatus, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3702083630U) },
-		{ ESessionSettingSearchResult_StaticEnum, TEXT("ESessionSettingSearchResult"), &Z_Registration_Info_UEnum_ESessionSettingSearchResult, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2263659386U) },
-		{ EBlueprintResultSwitch_StaticEnum, TEXT("EBlueprintResultSwitch"), &Z_Registration_Info_UEnum_EBlueprintResultSwitch, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2205063380U) },
-		{ EBlueprintAsyncResultSwitch_StaticEnum, TEXT("EBlueprintAsyncResultSwitch"), &Z_Registration_Info_UEnum_EBlueprintAsyncResultSwitch, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2700816328U) },
-		{ EBPServerPresenceSearchType_StaticEnum, TEXT("EBPServerPresenceSearchType"), &Z_Registration_Info_UEnum_EBPServerPresenceSearchType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1158256667U) },
-		{ EBPOnlinePresenceState_StaticEnum, TEXT("EBPOnlinePresenceState"), &Z_Registration_Info_UEnum_EBPOnlinePresenceState, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2879031986U) },
-		{ EBPOnlineSessionState_StaticEnum, TEXT("EBPOnlineSessionState"), &Z_Registration_Info_UEnum_EBPOnlineSessionState, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3100724136U) },
-		{ EOnlineComparisonOpRedux_StaticEnum, TEXT("EOnlineComparisonOpRedux"), &Z_Registration_Info_UEnum_EOnlineComparisonOpRedux, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 4140256452U) },
+	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::EnumInfo[] = {
+		{ EBPUserPrivileges_StaticEnum, TEXT("EBPUserPrivileges"), &Z_Registration_Info_UEnum_EBPUserPrivileges, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2073976752U) },
+		{ EBPLoginStatus_StaticEnum, TEXT("EBPLoginStatus"), &Z_Registration_Info_UEnum_EBPLoginStatus, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2728875483U) },
+		{ ESessionSettingSearchResult_StaticEnum, TEXT("ESessionSettingSearchResult"), &Z_Registration_Info_UEnum_ESessionSettingSearchResult, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1618835047U) },
+		{ EBlueprintResultSwitch_StaticEnum, TEXT("EBlueprintResultSwitch"), &Z_Registration_Info_UEnum_EBlueprintResultSwitch, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3142505353U) },
+		{ EBlueprintAsyncResultSwitch_StaticEnum, TEXT("EBlueprintAsyncResultSwitch"), &Z_Registration_Info_UEnum_EBlueprintAsyncResultSwitch, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 874431802U) },
+		{ EBPServerPresenceSearchType_StaticEnum, TEXT("EBPServerPresenceSearchType"), &Z_Registration_Info_UEnum_EBPServerPresenceSearchType, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3311164370U) },
+		{ EBPOnlinePresenceState_StaticEnum, TEXT("EBPOnlinePresenceState"), &Z_Registration_Info_UEnum_EBPOnlinePresenceState, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1671449928U) },
+		{ EBPOnlineSessionState_StaticEnum, TEXT("EBPOnlineSessionState"), &Z_Registration_Info_UEnum_EBPOnlineSessionState, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 974564090U) },
+		{ EOnlineComparisonOpRedux_StaticEnum, TEXT("EOnlineComparisonOpRedux"), &Z_Registration_Info_UEnum_EOnlineComparisonOpRedux, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 342661541U) },
 	};
-	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::ScriptStructInfo[] = {
-		{ FBPUserOnlineAccount::StaticStruct, Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::NewStructOps, TEXT("BPUserOnlineAccount"), &Z_Registration_Info_UScriptStruct_BPUserOnlineAccount, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPUserOnlineAccount), 2198226671U) },
-		{ FBPUniqueNetId::StaticStruct, Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::NewStructOps, TEXT("BPUniqueNetId"), &Z_Registration_Info_UScriptStruct_BPUniqueNetId, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPUniqueNetId), 766028705U) },
-		{ FBPOnlineUser::StaticStruct, Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewStructOps, TEXT("BPOnlineUser"), &Z_Registration_Info_UScriptStruct_BPOnlineUser, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPOnlineUser), 552463052U) },
-		{ FBPOnlineRecentPlayer::StaticStruct, Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewStructOps, TEXT("BPOnlineRecentPlayer"), &Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPOnlineRecentPlayer), 698331599U) },
-		{ FBPFriendPresenceInfo::StaticStruct, Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewStructOps, TEXT("BPFriendPresenceInfo"), &Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPFriendPresenceInfo), 3848083864U) },
-		{ FBPFriendInfo::StaticStruct, Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewStructOps, TEXT("BPFriendInfo"), &Z_Registration_Info_UScriptStruct_BPFriendInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPFriendInfo), 2347080177U) },
-		{ FSessionPropertyKeyPair::StaticStruct, Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::NewStructOps, TEXT("SessionPropertyKeyPair"), &Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSessionPropertyKeyPair), 687158847U) },
-		{ FSessionsSearchSetting::StaticStruct, Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::NewStructOps, TEXT("SessionsSearchSetting"), &Z_Registration_Info_UScriptStruct_SessionsSearchSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSessionsSearchSetting), 1855288757U) },
+	const FStructRegisterCompiledInInfo Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::ScriptStructInfo[] = {
+		{ FBPUserOnlineAccount::StaticStruct, Z_Construct_UScriptStruct_FBPUserOnlineAccount_Statics::NewStructOps, TEXT("BPUserOnlineAccount"), &Z_Registration_Info_UScriptStruct_BPUserOnlineAccount, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPUserOnlineAccount), 910726681U) },
+		{ FBPUniqueNetId::StaticStruct, Z_Construct_UScriptStruct_FBPUniqueNetId_Statics::NewStructOps, TEXT("BPUniqueNetId"), &Z_Registration_Info_UScriptStruct_BPUniqueNetId, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPUniqueNetId), 740343174U) },
+		{ FBPOnlineUser::StaticStruct, Z_Construct_UScriptStruct_FBPOnlineUser_Statics::NewStructOps, TEXT("BPOnlineUser"), &Z_Registration_Info_UScriptStruct_BPOnlineUser, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPOnlineUser), 839622077U) },
+		{ FBPOnlineRecentPlayer::StaticStruct, Z_Construct_UScriptStruct_FBPOnlineRecentPlayer_Statics::NewStructOps, TEXT("BPOnlineRecentPlayer"), &Z_Registration_Info_UScriptStruct_BPOnlineRecentPlayer, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPOnlineRecentPlayer), 2423836483U) },
+		{ FBPFriendPresenceInfo::StaticStruct, Z_Construct_UScriptStruct_FBPFriendPresenceInfo_Statics::NewStructOps, TEXT("BPFriendPresenceInfo"), &Z_Registration_Info_UScriptStruct_BPFriendPresenceInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPFriendPresenceInfo), 4034718125U) },
+		{ FBPFriendInfo::StaticStruct, Z_Construct_UScriptStruct_FBPFriendInfo_Statics::NewStructOps, TEXT("BPFriendInfo"), &Z_Registration_Info_UScriptStruct_BPFriendInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FBPFriendInfo), 435766678U) },
+		{ FSessionPropertyKeyPair::StaticStruct, Z_Construct_UScriptStruct_FSessionPropertyKeyPair_Statics::NewStructOps, TEXT("SessionPropertyKeyPair"), &Z_Registration_Info_UScriptStruct_SessionPropertyKeyPair, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSessionPropertyKeyPair), 1351564640U) },
+		{ FSessionsSearchSetting::StaticStruct, Z_Construct_UScriptStruct_FSessionsSearchSetting_Statics::NewStructOps, TEXT("SessionsSearchSetting"), &Z_Registration_Info_UScriptStruct_SessionsSearchSetting, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSessionsSearchSetting), 1046831353U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_3457543875(TEXT("/Script/AdvancedSessions"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_10991506(TEXT("/Script/AdvancedSessions"),
 		nullptr, 0,
-		Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::ScriptStructInfo),
-		Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_PluginExpProject_Plugins_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::EnumInfo));
+		Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::ScriptStructInfo),
+		Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_odin_unreal_demo_Plugins_AdvancedSessionsPlugin_AdvancedSessions_AdvancedSessions_Source_AdvancedSessions_Classes_BlueprintDataDefinitions_h_Statics::EnumInfo));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
