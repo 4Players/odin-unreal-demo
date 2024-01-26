@@ -1,4 +1,4 @@
-F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/a/UnrealGame/Development/AdvancedSessions/Module.AdvancedSessions.1.cpp.o: \
+F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/a/UnrealGame/Development/AdvancedSessions/Module.AdvancedSessions.3.cpp.o: \
   D:/UnrealEngine/UE_5.3/Engine/Source/Runtime/Engine/Public/VisualLogger/VisualLoggerCustomVersion.h \
   D:/UnrealEngine/UE_5.3/Engine/Source/Runtime/Engine/Public/VisualLogger/VisualLoggerTypes.h \
   D:/UnrealEngine/UE_5.3/Engine/Source/Runtime/Engine/Public/VisualLogger/VisualLogger.h \
@@ -2094,11 +2094,11 @@ F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/Advanc
   C:/Users/steph/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/__bsd_locale_fallbacks.h \
   C:/Users/steph/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/bitset \
   C:/Users/steph/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/istream \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/a/UnrealGame/Development/AdvancedSessions/Module.AdvancedSessions.1.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/a/UnrealGame/Development/AdvancedSessions/Module.AdvancedSessions.3.cpp \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/a/UnrealGame/Development/AdvancedSessions/Definitions.AdvancedSessions.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedExternalUILibrary.gen.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/SendFriendInviteCallbackProxy.gen.cpp \
   Runtime/CoreUObject/Public/UObject/GeneratedCppIncludes.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedExternalUILibrary.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/SendFriendInviteCallbackProxy.h \
   Runtime/Core/Public/CoreMinimal.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/BlueprintDataDefinitions.h \
   Runtime/Engine/Classes/Engine/Engine.h \
@@ -2344,20 +2344,58 @@ F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/Advanc
   ../Plugins/Online/OnlineSubsystemUtils/Intermediate/Build/Android/UnrealGame/Inc/OnlineSubsystemUtils/UHT/TurnBasedBlueprintLibrary.generated.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/BlueprintDataDefinitions.generated.h \
   Runtime/Engine/Classes/Engine/LocalPlayer.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/SendFriendInviteCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/StartSessionCallbackProxyAdvanced.gen.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/StartSessionCallbackProxyAdvanced.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/StartSessionCallbackProxyAdvanced.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/UpdateSessionCallbackProxyAdvanced.gen.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/UpdateSessionCallbackProxyAdvanced.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/UpdateSessionCallbackProxyAdvanced.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/AdvancedExternalUILibrary.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedExternalUILibrary.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedExternalUILibrary.generated.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedFriendsGameInstance.gen.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/AdvancedFriendsGameInstance.cpp \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedFriendsGameInstance.h \
   Runtime/Engine/Classes/Engine/GameInstance.h \
   Runtime/CoreUObject/Public/UObject/UObjectIterator.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedFriendsInterface.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedFriendsInterface.generated.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedFriendsGameInstance.generated.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedFriendsInterface.gen.cpp \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedFriendsLibrary.gen.cpp \
+  Runtime/Engine/Classes/Kismet/GameplayStatics.h \
+  Runtime/Engine/Public/CollisionQueryParams.h \
+  Runtime/Engine/Classes/Engine/LatentActionManager.h \
+  Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h \
+  Runtime/Engine/Classes/Engine/HitResult.h \
+  Runtime/CoreUObject/Public/UObject/UnrealType.h \
+  Runtime/CoreUObject/Public/UObject/SoftObjectPtr.h \
+  Runtime/CoreUObject/Public/UObject/PropertyAccessUtil.h \
+  Runtime/Core/Public/CoreGlobals.h \
+  Runtime/Core/Public/Misc/EnumClassFlags.h \
+  Runtime/Core/Public/Templates/Function.h \
+  Runtime/CoreUObject/Public/UObject/TopLevelAssetPath.h \
+  Runtime/Engine/Classes/Engine/CollisionProfile.h \
+  Runtime/CoreUObject/Public/AssetRegistry/ARFilter.h \
+  Runtime/CoreUObject/Public/UObject/Class.h \
+  Runtime/CoreUObject/Public/UObject/SoftObjectPath.h \
+  ../Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/KismetSystemLibrary.generated.h \
+  Runtime/Engine/Classes/Sound/DialogueTypes.h \
+  ../Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/DialogueTypes.generated.h \
+  D:/UnrealEngine/UE_5.3/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStaticsTypes.h \
+  D:/UnrealEngine/UE_5.3/Engine/Source/Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h \
+  ../Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/GameplayStaticsTypes.generated.h \
+  Runtime/Engine/Classes/Particles/WorldPSCPool.h \
+  ../Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/GameplayStatics.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/AdvancedFriendsInterface.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/AdvancedFriendsLibrary.cpp \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedFriendsLibrary.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedFriendsLibrary.generated.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedGameSession.gen.cpp \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedGameSession.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/AdvancedIdentityLibrary.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedIdentityLibrary.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedIdentityLibrary.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/AdvancedSessions.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedSessions.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/AdvancedSessionsLibrary.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedSessionsLibrary.h \
   Runtime/Engine/Classes/GameFramework/GameModeBase.h \
   Runtime/Core/Public/Misc/Guid.h \
   Runtime/Engine/Classes/GameFramework/Pawn.h \
@@ -2366,12 +2404,46 @@ F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/Advanc
   ../Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/GameModeBase.generated.h \
   Runtime/Engine/Classes/GameFramework/GameSession.h \
   ../Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/GameSession.generated.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedGameSession.generated.h \
-  Runtime/../../Source/Runtime/Engine/Classes/GameFramework/OnlineReplStructs.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedIdentityLibrary.gen.cpp \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedIdentityLibrary.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedIdentityLibrary.generated.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedSessions.init.gen.cpp \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedSessionsLibrary.gen.cpp \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedSessionsLibrary.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedSessionsLibrary.generated.h
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedSessionsLibrary.generated.h \
+  Runtime/Engine/Classes/GameFramework/GameStateBase.h \
+  Runtime/Core/Public/Stats/Stats.h \
+  ../Intermediate/Build/Android/UnrealGame/Inc/Engine/UHT/GameStateBase.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/AdvancedVoiceLibrary.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AdvancedVoiceLibrary.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AdvancedVoiceLibrary.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/AutoLoginUserCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/AutoLoginUserCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/AutoLoginUserCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/CancelFindSessionsCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/CancelFindSessionsCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/CancelFindSessionsCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/CreateSessionCallbackProxyAdvanced.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/CreateSessionCallbackProxyAdvanced.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/CreateSessionCallbackProxyAdvanced.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/EndSessionCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/EndSessionCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/EndSessionCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/FindFriendSessionCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/FindFriendSessionCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/FindFriendSessionCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/FindSessionsCallbackProxyAdvanced.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/FindSessionsCallbackProxyAdvanced.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/FindSessionsCallbackProxyAdvanced.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/GetFriendsCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/GetFriendsCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/GetFriendsCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/GetRecentPlayersCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/GetRecentPlayersCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/GetRecentPlayersCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/GetUserPrivilegeCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/GetUserPrivilegeCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/GetUserPrivilegeCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/LoginUserCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/LoginUserCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/LoginUserCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/LogoutUserCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/LogoutUserCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSessions/UHT/LogoutUserCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/SendFriendInviteCallbackProxy.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/StartSessionCallbackProxyAdvanced.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Private/UpdateSessionCallbackProxyAdvanced.cpp

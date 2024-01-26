@@ -2692,7 +2692,8 @@ F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/Advanc
   D:\UnrealEngine\UE_5.3\Engine\Source\ThirdParty\Unix\LibCxx\include\c++\v1\__bsd_locale_fallbacks.h \
   F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\x64\UnrealGame\Development\AdvancedSessions\Module.AdvancedSessions.1.cpp \
   F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\x64\UnrealGame\Development\AdvancedSessions\Definitions.AdvancedSessions.h \
-  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Private\AdvancedExternalUILibrary.cpp \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedExternalUILibrary.gen.cpp \
+  Runtime\CoreUObject\Public\UObject\GeneratedCppIncludes.h \
   F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedExternalUILibrary.h \
   Runtime\Core\Public\CoreMinimal.h \
   F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes\BlueprintDataDefinitions.h \
@@ -2940,4 +2941,34 @@ F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/Advanc
   ..\Plugins\Online\OnlineSubsystemUtils\Intermediate\Build\Linux\UnrealGame\Inc\OnlineSubsystemUtils\UHT\TurnBasedBlueprintLibrary.generated.h \
   F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\BlueprintDataDefinitions.generated.h \
   Runtime\Engine\Classes\Engine\LocalPlayer.h \
-  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedExternalUILibrary.generated.h
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedExternalUILibrary.generated.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedFriendsGameInstance.gen.cpp \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsGameInstance.h \
+  Runtime\Engine\Classes\Engine\GameInstance.h \
+  Runtime\CoreUObject\Public\UObject\UObjectIterator.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsInterface.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedFriendsInterface.generated.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedFriendsGameInstance.generated.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedFriendsInterface.gen.cpp \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedFriendsLibrary.gen.cpp \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedFriendsLibrary.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedFriendsLibrary.generated.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedGameSession.gen.cpp \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedGameSession.h \
+  Runtime\Engine\Classes\GameFramework\GameModeBase.h \
+  Runtime\Core\Public\Misc\Guid.h \
+  Runtime\Engine\Classes\GameFramework\Pawn.h \
+  Runtime\Engine\Classes\Engine\ServerStatReplicator.h \
+  ..\Intermediate\Build\Linux\UnrealGame\Inc\Engine\UHT\ServerStatReplicator.generated.h \
+  ..\Intermediate\Build\Linux\UnrealGame\Inc\Engine\UHT\GameModeBase.generated.h \
+  Runtime\Engine\Classes\GameFramework\GameSession.h \
+  ..\Intermediate\Build\Linux\UnrealGame\Inc\Engine\UHT\GameSession.generated.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedGameSession.generated.h \
+  Runtime\..\..\Source\Runtime\Engine\Classes\GameFramework\OnlineReplStructs.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedIdentityLibrary.gen.cpp \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedIdentityLibrary.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedIdentityLibrary.generated.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedSessions.init.gen.cpp \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedSessionsLibrary.gen.cpp \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes\AdvancedSessionsLibrary.h \
+  F:\Tool1\odin-unreal-demo\Plugins\AdvancedSessionsPlugin\AdvancedSessions\AdvancedSessions\Intermediate\Build\Linux\UnrealGame\Inc\AdvancedSessions\UHT\AdvancedSessionsLibrary.generated.h
