@@ -2096,7 +2096,8 @@ F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/Advanc
   C:/Users/steph/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1/istream \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/a/UnrealGame/Development/AdvancedSteamSessions/Module.AdvancedSteamSessions.cpp \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/a/UnrealGame/Development/AdvancedSteamSessions/Definitions.AdvancedSteamSessions.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Private/AdvancedSteamFriendsLibrary.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/AdvancedSteamFriendsLibrary.gen.cpp \
+  Runtime/CoreUObject/Public/UObject/GeneratedCppIncludes.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/AdvancedSteamFriendsLibrary.h \
   Runtime/Core/Public/CoreMinimal.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/BlueprintDataDefinitions.h \
@@ -2345,15 +2346,20 @@ F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/Advanc
   Runtime/Engine/Classes/Engine/GameInstance.h \
   Runtime/CoreUObject/Public/UObject/UObjectIterator.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/AdvancedSteamFriendsLibrary.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/AdvancedSteamSessions.init.gen.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/AdvancedSteamWorkshopLibrary.gen.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/AdvancedSteamWorkshopLibrary.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/AdvancedSteamWorkshopLibrary.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/SteamRequestGroupOfficersCallbackProxy.gen.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/SteamRequestGroupOfficersCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/SteamRequestGroupOfficersCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/SteamWSRequestUGCDetailsCallbackProxy.gen.cpp \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/SteamWSRequestUGCDetailsCallbackProxy.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/SteamWSRequestUGCDetailsCallbackProxy.generated.h \
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Private/AdvancedSteamFriendsLibrary.cpp \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSessions/Source/AdvancedSessions/Classes/OnlineSubSystemHeader.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Private/AdvancedSteamSessions.cpp \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/AdvancedSteamSessions.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Private/AdvancedSteamWorkshopLibrary.cpp \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/AdvancedSteamWorkshopLibrary.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/AdvancedSteamWorkshopLibrary.generated.h \
   F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Private/SteamRequestGroupOfficersCallbackProxy.cpp \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/SteamRequestGroupOfficersCallbackProxy.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/SteamRequestGroupOfficersCallbackProxy.generated.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Private/SteamWSRequestUGCDetailsCallbackProxy.cpp \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Classes/SteamWSRequestUGCDetailsCallbackProxy.h \
-  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Intermediate/Build/Android/UnrealGame/Inc/AdvancedSteamSessions/UHT/SteamWSRequestUGCDetailsCallbackProxy.generated.h
+  F:/Tool1/odin-unreal-demo/Plugins/AdvancedSessionsPlugin/AdvancedSessions/AdvancedSteamSessions/Source/AdvancedSteamSessions/Private/SteamWSRequestUGCDetailsCallbackProxy.cpp
