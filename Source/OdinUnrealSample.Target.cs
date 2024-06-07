@@ -7,7 +7,8 @@ public class OdinUnrealSampleTarget : TargetRules
 {
 	public OdinUnrealSampleTarget(TargetInfo Target) : base(Target)
     {
-		Type = TargetType.Game;
+        DefaultBuildSettings = BuildSettingsVersion.Latest;
+        Type = TargetType.Game;
 		ExtraModuleNames.Add("OdinUnrealSample");
     }
 }
