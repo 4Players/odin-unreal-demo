@@ -7,7 +7,9 @@ public class OdinUnrealSampleEditorTarget : TargetRules
 {
 	public OdinUnrealSampleEditorTarget(TargetInfo Target) : base(Target)
     {
-		Type = TargetType.Editor;
-		ExtraModuleNames.Add("OdinUnrealSample");
+        DefaultBuildSettings = BuildSettingsVersion.Latest;
+        bOverrideBuildEnvironment = true;
+        Type = TargetType.Editor;
+        ExtraModuleNames.Add("OdinUnrealSample");
 	}
 }
