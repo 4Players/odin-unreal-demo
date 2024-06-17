@@ -4,6 +4,8 @@ This is a simple demonstration of the usage of the [Unreal SDK](https://github.c
 
 This version is built upon the free tier of the [Photon Networking Engine](https://doc.photonengine.com/en-us/realtime/current/getting-started/unreal-engine). The audio stream is processed with the help of [Steam Audio](https://valvesoftware.github.io/steam-audio/), which is delivered together with the Unreal Engine.
 
+An alternative version without Photon but with Unreal Networking can be found on the [Unreal Networking Branch](https://github.com/4Players/odin-unreal-demo/tree/ue-networking).
+
 ## Features
 
 The Demo showcases the usage of ODIN together with Unreal's Audio Engine. The example uses two Odin voice chat rooms - one for spatialized (proximity) chat, and one for a radio simulation with audio effects applied. It shows:
@@ -20,7 +22,7 @@ The Demo showcases the usage of ODIN together with Unreal's Audio Engine. The ex
 
 In the releases you can find a pre-built game executable and the current project's code base.  The pre-built game can likely be executed without any installations required - if you do not have the redistributable packages of C++ installed, that Unreal needs, you can find it in the `\Engine\Extras\Redist\en-us`folder of the pre-built game.
 
-To open the project in the Unreal Editor you need to install the Unreal Engine 4.26, 4.27, 5.0 or 5.1. You can open the source code with UE4.26 easily. If you need to open it with a 4.27, 5.0 or 5.1 build of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
+To open the project in the Unreal Editor you need to install the Unreal Engine 4.26, 4.27 or 5.0-5.4. You can open the source code with UE4.26 easily. If you need to open it with a 4.27, 5.x build of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
 
 ### Installing Visual Studio and Compiling the Project
 
@@ -38,7 +40,7 @@ As stated above, sometimes it is necessary to compile from Visual Studio:
 
 ### Dependencies
 
-* The sample is built with the Unreal Engine version 4.26. Alternatively you need UE4.27, UE5.0 or UE5.1.
+* The sample is built with the Unreal Engine version 4.26. Alternatively you need UE4.27 or UE5.0-5.4.
 * Although it builts upon Photon's networking engine, you do not need to install anything, since the sample delivers all needed libraries for that
 * The sample depends on Steam Audio, which is delivered together with the Unreal Engine so you do not need to install the plugin manually, if you have installed plugins with your Unreal Engine version
 * ## Version History
