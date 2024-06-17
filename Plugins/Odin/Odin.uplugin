@@ -1,9 +1,9 @@
 {
 	"FileVersion": 2,
 	"EngineVersion": "4.26.0",
-	"Version": 324,
+	"Version": 384,
 	"WhitelistPlatforms": [ "Win64", "Mac", "IOS", "Linux", "Android" ],
-	"VersionName": "1.8.1",
+	"VersionName": "1.8.7",
 	"FriendlyName": "4Players ODIN",
 	"Description": "Unreal integration plugin to integrate real-time chat technology into your game",
 	"Category": "Other",
@@ -20,7 +20,7 @@
 		{
 			"Name": "Odin",
 			"Type": "Runtime",
-			"LoadingPhase": "PostConfigInit",
+			"LoadingPhase": "PostEngineInit",
 			"WhitelistPlatforms": [ "Win64", "Mac", "IOS", "Linux", "Android" ],
 			"AdditionalDependencies": [
 				"AudioMixer",

@@ -1,6 +1,5 @@
 // Copyright 1998-2014 Epic Games, Inc. All Rights Reserved.
 
-#include "OdinUnrealSample.h"
 #include "PhotonLBClient.h"
 #include "demo_particle_common/Console.h"
 

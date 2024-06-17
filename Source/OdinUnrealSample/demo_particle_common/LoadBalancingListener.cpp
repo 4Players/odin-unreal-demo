@@ -1,9 +1,6 @@
-#ifdef __UNREAL__
-#	include "OdinUnrealSample.h"
-#endif
+#include "LoadBalancingListener.h"
 #include <iostream>
 #include <stdlib.h>
-#include "LoadBalancingListener.h"
 #include "DemoConstants.h"
 #include "Console.h"
 

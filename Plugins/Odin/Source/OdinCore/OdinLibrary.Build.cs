@@ -1,4 +1,4 @@
-/* Copyright (c) 2022-2023 4Players GmbH. All rights reserved. */
+/* Copyright (c) 2022-2024 4Players GmbH. All rights reserved. */
 
 using System.IO;
 using UnrealBuildTool;
@@ -9,6 +9,7 @@ public class OdinLibrary : ModuleRules
   public OdinLibrary(ReadOnlyTargetRules Target) : base(Target)
   {
     Type = ModuleType.External;
+    PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "include"));
 
     if (Target.Platform == UnrealTargetPlatform.Win64)
     {

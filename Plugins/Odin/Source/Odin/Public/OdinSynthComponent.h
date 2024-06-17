@@ -1,4 +1,4 @@
-/* Copyright (c) 2022-2023 4Players GmbH. All rights reserved. */
+/* Copyright (c) 2022-2024 4Players GmbH. All rights reserved. */
 
 #pragma once
 
@@ -12,7 +12,7 @@
 
 class OdinMediaSoundGenerator;
 
-UCLASS(Blueprintable, ClassGroup = Synth, meta = (BlueprintSpawnableComponent))
+UCLASS(Blueprintable, BlueprintType, ClassGroup = Synth, meta = (BlueprintSpawnableComponent))
 class ODIN_API UOdinSynthComponent : public USynthComponent
 {
     GENERATED_BODY()

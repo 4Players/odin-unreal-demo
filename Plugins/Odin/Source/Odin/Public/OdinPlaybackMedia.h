@@ -1,12 +1,11 @@
-/* Copyright (c) 2022-2023 4Players GmbH. All rights reserved. */
+/* Copyright (c) 2022-2024 4Players GmbH. All rights reserved. */
 
 #pragma once
-
-#include "OdinCore/include/odin.h"
 
 #include "CoreMinimal.h"
 #include "OdinMediaBase.h"
 #include "UObject/Object.h"
+#include "odin_sdk.h"
 
 #include <memory>
 

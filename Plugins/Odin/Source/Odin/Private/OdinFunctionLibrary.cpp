@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022-2023 4Players GmbH. All rights reserved. */
+﻿/* Copyright (c) 2022-2024 4Players GmbH. All rights reserved. */
 
 #include "OdinFunctionLibrary.h"
 
@@ -23,7 +23,7 @@ UOdinFunctionLibrary* UOdinFunctionLibrary::getOdinFunctionLibrary()
 
 UOdinCaptureMedia* UOdinFunctionLibrary::Odin_CreateMedia(UPARAM(ref) UAudioCapture*& audioCapture)
 {
-    auto capture_media = NewObject<UOdinCaptureMedia>();
+    auto capture_media = NewObject<UOdinCaptureMedia>(audioCapture);
     capture_media->SetAudioCapture(audioCapture);
     return capture_media;
 }
@@ -58,7 +58,7 @@ FString UOdinFunctionLibrary::FormatError(int32 code, bool ueTrace)
 
 FString UOdinFunctionLibrary::BytesToString(const TArray<uint8>& data)
 {
-    return ::BytesToString(data.GetData(), data.Num());
+    return FString(data.Num(), UTF8_TO_TCHAR(data.GetData()));
 }
 
 UOdinAudioCapture* UOdinFunctionLibrary::CreateOdinAudioCapture(UObject* WorldContextObject)
@@ -77,4 +77,15 @@ UOdinAudioCapture* UOdinFunctionLibrary::CreateOdinAudioCapture(UObject* WorldCo
     }
     UE_LOG(Odin, Error, TEXT("Failed to open a default audio stream to the audio capture device."));
     return nullptr;
+}
+
+bool UOdinFunctionLibrary::Check(const TWeakObjectPtr<UObject> ObjectToCheck,
+                                 const FString&                CheckReferenceName)
+{
+    if (!ObjectToCheck.IsValid()) {
+        UE_LOG(Odin, Verbose, TEXT("Aborting %s due to invalid object ptr."), *CheckReferenceName);
+        return false;
+    }
+
+    return true;
 }

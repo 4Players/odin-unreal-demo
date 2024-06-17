@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2022-2023 4Players GmbH. All rights reserved. */
+﻿/* Copyright (c) 2022-2024 4Players GmbH. All rights reserved. */
 
 #pragma once
 
@@ -36,4 +36,7 @@ class ODIN_API UOdinFunctionLibrary : public UBlueprintFunctionLibrary
     UFUNCTION(BlueprintCallable, Category = "Odin|Audio Capture",
               meta = (WorldContext = "WorldContextObject"))
     static class UOdinAudioCapture *CreateOdinAudioCapture(UObject *WorldContextObject);
+
+    static bool Check(const TWeakObjectPtr<UObject> ObjectToCheck,
+                      const FString                &CheckReferenceName);
 };

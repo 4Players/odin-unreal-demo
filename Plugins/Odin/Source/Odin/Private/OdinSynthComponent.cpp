@@ -1,4 +1,4 @@
-/* Copyright (c) 2022-2023 4Players GmbH. All rights reserved. */
+/* Copyright (c) 2022-2024 4Players GmbH. All rights reserved. */
 
 #include "OdinSynthComponent.h"
 
@@ -11,8 +11,6 @@
 bool UOdinSynthComponent::Init(int32 &SampleRate)
 {
     NumChannels = 2;
-    SampleRate  = 48000;
-
     return true;
 }
 

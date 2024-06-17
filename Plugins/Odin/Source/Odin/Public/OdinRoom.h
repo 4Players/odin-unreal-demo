@@ -1,4 +1,4 @@
-/* Copyright (c) 2022-2023 4Players GmbH. All rights reserved. */
+/* Copyright (c) 2022-2024 4Players GmbH. All rights reserved. */
 
 #pragma once
 
@@ -92,10 +92,10 @@ class ODIN_API UOdinRoomAddMedia : public UBlueprintAsyncActionBase
     FAddMediaResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinRoom *Room;
+    TWeakObjectPtr<UOdinRoom> Room;
 
     UPROPERTY()
-    UOdinCaptureMedia *CaptureMedia;
+    TWeakObjectPtr<UOdinCaptureMedia> CaptureMedia;
 
     FOdinRoomAddMediaError   OnError;
     FOdinRoomAddMediaSuccess OnSuccess;
@@ -126,7 +126,7 @@ class ODIN_API UOdinRoomPauseMedia : public UBlueprintAsyncActionBase
     FPauseMediaResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinPlaybackMedia *PlaybackMedia;
+    TWeakObjectPtr<UOdinPlaybackMedia> PlaybackMedia;
 
     FOdinRoomPauseMediaError   OnError;
     FOdinRoomPauseMediaSuccess OnSuccess;
@@ -158,7 +158,7 @@ class ODIN_API UOdinRoomResumeMedia : public UBlueprintAsyncActionBase
     FResumeMediaResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinPlaybackMedia *PlaybackMedia;
+    TWeakObjectPtr<UOdinPlaybackMedia> PlaybackMedia;
 
     FOdinRoomResumeMediaError   OnError;
     FOdinRoomResumeMediaSuccess OnSuccess;
@@ -187,10 +187,10 @@ class ODIN_API UOdinRoomRemoveMedia : public UBlueprintAsyncActionBase
     FRemoveMediaResponsePin OnResponse;
 
     UPROPERTY()
-    UOdinRoom *Room;
+    TWeakObjectPtr<UOdinRoom> Room;
 
     UPROPERTY()
-    UOdinCaptureMedia *CaptureMedia;
+    TWeakObjectPtr<UOdinCaptureMedia> CaptureMedia;
 
     FOdinRoomRemoveMediaError   OnError;
     FOdinRoomRemoveMediaSuccess OnSuccess;
@@ -427,8 +427,7 @@ struct ODIN_API FOdinApmSettings {
 
 UCLASS(ClassGroup     = Odin, BlueprintType,
        hidecategories = (Activation, Transform, Object, ActorComponent, Physics, Rendering,
-                         Mobility, LOD),
-       meta           = (BlueprintSpawnableComponent))
+                         Mobility, LOD))
 class ODIN_API UOdinRoom : public /* USceneComponent */ UObject
 {
     GENERATED_BODY()
@@ -490,7 +489,6 @@ class ODIN_API UOdinRoom : public /* USceneComponent */ UObject
 
   public:
     UOdinRoom(const FObjectInitializer &ObjectInitializer);
-    ~UOdinRoom();
 
     UFUNCTION(BlueprintCallable, BlueprintPure,
               meta     = (DisplayName = "Construct Local Room Handle",
@@ -561,6 +559,8 @@ class ODIN_API UOdinRoom : public /* USceneComponent */ UObject
     void FinishDestroy() override;
 
   private:
+    static void HandleOdinEvent(OdinRoomHandle RoomHandle, const OdinEvent Event);
+
     OdinRoomHandle room_handle_;
 
     UPROPERTY(BlueprintGetter = GetCurrentApmSettings, Category = "Odin|Room",
@@ -581,7 +581,7 @@ class ODIN_API UOdinRoom : public /* USceneComponent */ UObject
                           int64 ownPeerId, FString ownUserId)>>
         joined_callbacks_;
 
-    void HandleOdinEvent(const OdinEvent event);
+    // void HandleOdinEvent(const OdinEvent event);
 
     UPROPERTY(transient)
     UOdinSubmixListener *submix_listener_;
