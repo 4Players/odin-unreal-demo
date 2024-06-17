@@ -4,7 +4,7 @@ This is a simple demonstration of the usage of the [Unreal SDK](https://github.c
 
 This version is built upon the free tier of the [Photon Networking Engine](https://doc.photonengine.com/en-us/realtime/current/getting-started/unreal-engine). The audio stream is processed with the help of [Steam Audio](https://valvesoftware.github.io/steam-audio/), which is delivered together with the Unreal Engine.
 
-An alternative version without Photon but with Unreal Networking can be found on the [Unreal Networking Branch](https://github.com/4Players/odin-unreal-demo/tree/ue-networking).
+An alternative version without Photon but with Unreal Networking can be found on the [Unreal Networking Branch](https://github.com/4Players/odin-unreal-demo/tree/ue-networking). This branch works for UE5.3+.
 
 ## Features
 
