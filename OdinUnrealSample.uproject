@@ -1,20 +1,19 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.26",
+	"EngineAssociation": "5.4",
 	"Category": "",
 	"Description": "",
 	"Modules": [
 		{
 			"Name": "OdinUnrealSample",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	],
 	"Plugins": [
-		{
-			"Name": "SteamAudio",
-			"Enabled": true
-		},
 		{
 			"Name": "OculusVR",
 			"Enabled": false,
@@ -32,6 +31,22 @@
 				"Win64",
 				"Linux"
 			]
+		},
+		{
+			"Name": "EOSShared",
+			"Enabled": true
+		},
+		{
+			"Name": "OnlineSubsystemEOS",
+			"Enabled": true
+		},
+		{
+			"Name": "OnlineServicesEOS",
+			"Enabled": true
+		},
+		{
+			"Name": "ResonanceAudio",
+			"Enabled": false
 		}
 	],
 	"TargetPlatforms": [
