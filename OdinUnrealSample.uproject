@@ -47,6 +47,10 @@
 		{
 			"Name": "ResonanceAudio",
 			"Enabled": false
+		},
+		{
+			"Name": "AdvancedSteamSessions",
+			"Enabled": false
 		}
 	],
 	"TargetPlatforms": [
