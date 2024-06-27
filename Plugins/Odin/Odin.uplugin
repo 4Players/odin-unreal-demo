@@ -1,6 +1,6 @@
 {
 	"FileVersion": 2,
-	"EngineVersion": "5.3.0",
+	"EngineVersion": "5.4.0",
 	"Version": 384,
 	"WhitelistPlatforms": [ "Win64", "Mac", "IOS", "Linux", "LinuxArm64", "Android" ],
 	"VersionName": "1.8.7",
