@@ -23,6 +23,8 @@ UOdinFunctionLibrary* UOdinFunctionLibrary::getOdinFunctionLibrary()
 
 UOdinCaptureMedia* UOdinFunctionLibrary::Odin_CreateMedia(UPARAM(ref) UAudioCapture*& audioCapture)
 {
+    if (!audioCapture)
+        return nullptr;
     auto capture_media = NewObject<UOdinCaptureMedia>(audioCapture);
     capture_media->SetAudioCapture(audioCapture);
     return capture_media;
@@ -71,7 +73,7 @@ UOdinAudioCapture* UOdinFunctionLibrary::CreateOdinAudioCapture(UObject* WorldCo
                TEXT("No World Context provided when creating Odin Audio Capture. Audio Capture "
                     "will not be able to react to capture devices being removed."));
     }
-    UOdinAudioCapture* OdinAudioCapture = NewObject<UOdinAudioCapture>(World);
+    UOdinAudioCapture* OdinAudioCapture = NewObject<UOdinAudioCapture>(WorldContextObject);
     if (OdinAudioCapture->RestartCapturing(false)) {
         return OdinAudioCapture;
     }
