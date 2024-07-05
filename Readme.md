@@ -23,6 +23,8 @@ In the releases you can find a pre-built game executable and the current project
 
 To open the project in the Unreal Editor you need to install the Unreal Engine 5.3 or higher. You can open the source code with the corresponding version of the branch easily. If you need to open it with a higher version of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
 
+:warning: In UE5.4 currently there is a bug, which causes UnfocusedVolumeMultiplier to not apply to the Odin Synth - so testing is best done on 2 devices instead of starting two clients in the editor process.
+
 ### Installing Visual Studio and Compiling the Project
 
 As stated above, sometimes it is necessary to compile from Visual Studio:
