@@ -74,3 +74,4 @@ DerivedDataCache/*
 
 !Plugins/Odin/ThirdParty/OdinLibrary/x64/Win/odin.dll
 !Plugins/Odin/ThirdParty/OdinLibrary/x64/Win/odin.lib
+!Plugins/Odin/Source/**
