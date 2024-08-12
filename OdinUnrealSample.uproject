@@ -45,12 +45,16 @@
 			"Enabled": true
 		},
 		{
+			"Name": "AdvancedSteamSessions",
+			"Enabled": false
+		},
+		{
 			"Name": "ResonanceAudio",
 			"Enabled": false
 		},
 		{
-			"Name": "AdvancedSteamSessions",
-			"Enabled": false
+			"Name": "SteamAudio",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
