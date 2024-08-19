@@ -34,7 +34,11 @@ FString UOdinFunctionLibrary::GenerateAccessKey()
 {
     char buf[128] = {0};
     odin_access_key_generate(buf, sizeof(buf));
+#if ENGINE_MAJOR_VERSION >= 5
+    return FString(128, buf);
+#else
     return ANSI_TO_TCHAR(buf);
+#endif
 }
 
 FString UOdinFunctionLibrary::FormatOdinError(int64 code, bool ueTrace)
@@ -60,20 +64,33 @@ FString UOdinFunctionLibrary::FormatError(int32 code, bool ueTrace)
 
 FString UOdinFunctionLibrary::BytesToString(const TArray<uint8>& data)
 {
+#if ENGINE_MAJOR_VERSION >= 5
+    const UTF8CHAR* UTF8Char = reinterpret_cast<const UTF8CHAR*>(data.GetData());
+    return FString(data.Num(), UTF8Char);
+#else
+    // ensure null terminated string is being returned
+    if (data.Num() > 0 && data[data.Num() - 1] != TEXT('\0')) {
+        TArray<uint8> NullTerminatedArray = data;
+        NullTerminatedArray.Add(TEXT('\0'));
+        return UTF8_TO_TCHAR(NullTerminatedArray.GetData());
+    }
     return FString(data.Num(), UTF8_TO_TCHAR(data.GetData()));
+#endif
 }
 
 UOdinAudioCapture* UOdinFunctionLibrary::CreateOdinAudioCapture(UObject* WorldContextObject)
 {
-    UWorld* World = nullptr;
+    TRACE_CPUPROFILER_EVENT_SCOPE(UOdinFunctionLibrary::CreateOdinAudioCapture)
+
+    UOdinAudioCapture* OdinAudioCapture;
     if (IsValid(WorldContextObject)) {
-        World = WorldContextObject->GetWorld();
+        OdinAudioCapture = NewObject<UOdinAudioCapture>(WorldContextObject);
     } else {
+        OdinAudioCapture = NewObject<UOdinAudioCapture>();
         UE_LOG(Odin, Warning,
                TEXT("No World Context provided when creating Odin Audio Capture. Audio Capture "
                     "will not be able to react to capture devices being removed."));
     }
-    UOdinAudioCapture* OdinAudioCapture = NewObject<UOdinAudioCapture>(WorldContextObject);
     if (OdinAudioCapture->RestartCapturing(false)) {
         return OdinAudioCapture;
     }
