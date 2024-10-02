@@ -148,7 +148,7 @@ void AEosPlayerController::CreateLobby(FName KeyName, FString KeyValue)
 	SessionSettings->bAllowJoinInProgress = false; //Once the session is started, no one can join.
 	SessionSettings->bIsDedicated = false; //Session created on dedicated server.
 	SessionSettings->bUseLobbiesIfAvailable = true; //For P2P we will use a lobby instead of a session
-	SessionSettings->bUseLobbiesVoiceChatIfAvailable = true; //We will also enable voice
+	SessionSettings->bUseLobbiesVoiceChatIfAvailable = false; //We will also enable voice
 	SessionSettings->bUsesStats = true; //Needed to keep track of player stats.
 	SessionSettings->Settings.Add(KeyName, FOnlineSessionSetting((KeyValue), EOnlineDataAdvertisementType::ViaOnlineService));
 
