@@ -71,16 +71,21 @@ void AEosPlayerController::Login()
 		Fallback if the CLI parameters are empty.Useful for PIE.
 		The type here could be developer if using the DevAuthTool, ExchangeCode if the game is launched via the Epic Games Launcher, etc...
 		*/
-		FOnlineAccountCredentials Credentials("AccountPortal", "", "");
+		FOnlineAccountCredentials Credentials("persistentauth", "", "");
 
-		UE_LOG(LogTemp, Log, TEXT("Logging into EOS...")); // Log to the UE logs that we are trying to log in. 
+		UE_LOG(LogTemp, Log, TEXT("Logging into EOS with persistentauth...")); // Log to the UE logs that we are trying to log in. 
 
 		if (!Identity->Login(0, Credentials))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Failed to login... ")); // Log to the UE logs that we are trying to log in.
-			// Clear our handle and reset the delegate. 
-			Identity->ClearOnLoginCompleteDelegate_Handle(0, LoginDelegateHandle);
-			LoginDelegateHandle.Reset();
+			UE_LOG(LogTemp, Warning, TEXT("Failed to login with persistentauth, trying accountportal... ")); // Log to the UE logs that we are trying to log in.
+			FOnlineAccountCredentials Credentials2("accountportal", "", "");
+			
+			if (!Identity->Login(0, Credentials2))
+			{
+				// Clear our handle and reset the delegate.
+				Identity->ClearOnLoginCompleteDelegate_Handle(0, LoginDelegateHandle);
+				LoginDelegateHandle.Reset();
+			}
 		}
 	}
 }
@@ -139,13 +144,13 @@ void AEosPlayerController::CreateLobby(FName KeyName, FString KeyValue)
 			&ThisClass::HandleCreateLobbyCompleted));
 
 	TSharedRef<FOnlineSessionSettings> SessionSettings = MakeShared<FOnlineSessionSettings>();
-	SessionSettings->NumPublicConnections = 2; //We will test our sessions with 2 players to keep things simple
+	SessionSettings->NumPublicConnections = 25; //We will test our sessions with 2 players to keep things simple
 	SessionSettings->bShouldAdvertise = true; //This creates a public match and will be searchable.
 	SessionSettings->bUsesPresence = false;   //No presence on dedicated server. This requires a local user.
 	SessionSettings->bAllowJoinViaPresence = false;
 	SessionSettings->bAllowJoinViaPresenceFriendsOnly = false;
 	SessionSettings->bAllowInvites = false;    //Allow inviting players into session. This requires presence and a local user. 
-	SessionSettings->bAllowJoinInProgress = false; //Once the session is started, no one can join.
+	SessionSettings->bAllowJoinInProgress = true; //Once the session is started, no one can join.
 	SessionSettings->bIsDedicated = false; //Session created on dedicated server.
 	SessionSettings->bUseLobbiesIfAvailable = true; //For P2P we will use a lobby instead of a session
 	SessionSettings->bUseLobbiesVoiceChatIfAvailable = false; //We will also enable voice
@@ -315,7 +320,8 @@ void AEosPlayerController::HandleJoinSessionCompleted(FName SessionName, EOnJoin
 	IOnlineSessionPtr Session = Subsystem->GetSessionInterface();
 	if (Result == EOnJoinSessionCompleteResult::Success)
 	{
-		UE_LOG(LogTemp, Log, TEXT("Joined lobby."));
+		UE_LOG(LogTemp, Log, TEXT("Joined lobby with name %s"), *(SessionName.ToString()));
+		UE_LOG(LogTemp, Warning, TEXT("Open Level: %s"), *ConnectString);
 		ClientTravel(ConnectString, TRAVEL_Absolute);
 		SetupNotifications(); // Setup our listeners for lobby event notifications
 	}
