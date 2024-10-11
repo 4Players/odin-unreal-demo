@@ -17,15 +17,6 @@
 
 void AEosPlayerController::Login()
 {
-	IOnlineSubsystem* Subsystem = Online::GetSubsystem(GetWorld());
-	IOnlineIdentityPtr Identity = Subsystem->GetIdentityInterface();
-
-	UE_LOG(LogTemp, Log, TEXT("Login callback completed!"));
-	UE_LOG(LogTemp, Log, TEXT("Searching for a session..."));
-	// Maybe via button or player action? Maybe add parameters here
-	FindSessions();
-	return;
-
 	/*
 	Tutorial 2: This function will access the EOS OSS via the OSS identity interface to log first into Epic Account Services, and then into Epic Game Services.
 	It will bind a delegate to handle the callback event once login call succeeeds or fails.
@@ -161,7 +152,7 @@ void AEosPlayerController::CreateLobby(FName KeyName, FString KeyValue)
 	SessionSettings->bAllowInvites = false;    //Allow inviting players into session. This requires presence and a local user. 
 	SessionSettings->bAllowJoinInProgress = true; //Once the session is started, no one can join.
 	SessionSettings->bIsDedicated = false; //Session created on dedicated server.
-	SessionSettings->bUseLobbiesIfAvailable = false; //For P2P we will use a lobby instead of a session
+	SessionSettings->bUseLobbiesIfAvailable = true; //For P2P we will use a lobby instead of a session
 	SessionSettings->bUseLobbiesVoiceChatIfAvailable = false; //We will also enable voice
 	SessionSettings->bUsesStats = true; //Needed to keep track of player stats.
 	SessionSettings->Settings.Add(KeyName, FOnlineSessionSetting((KeyValue), EOnlineDataAdvertisementType::ViaOnlineService));
@@ -237,7 +228,7 @@ void AEosPlayerController::FindSessions(FName SearchKey, FString SearchValue) //
 	Search->QuerySettings.SearchParams.Empty();
 
 	Search->QuerySettings.Set(SearchKey, SearchValue, EOnlineComparisonOp::Equals); // Seach using our Key/Value pair
-	//Search->QuerySettings.Set(SEARCH_LOBBIES, true, EOnlineComparisonOp::Equals);
+	Search->QuerySettings.Set(SEARCH_LOBBIES, true, EOnlineComparisonOp::Equals);
 	FindSessionsDelegateHandle =
 		Session->AddOnFindSessionsCompleteDelegate_Handle(FOnFindSessionsCompleteDelegate::CreateUObject(
 			this,
