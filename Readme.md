@@ -19,11 +19,24 @@ The Demo showcases the usage of ODIN together with Unreal's Audio Engine. The ex
 
 ## Getting Started
 
-In the releases you can find a pre-built game executable and the current project's code base.  The pre-built game can likely be executed without any installations required - if you do not have the redistributable packages of C++ installed, that Unreal needs, you can find it in the `\Engine\Extras\Redist\en-us`folder of the pre-built game.
+In the releases you can find a pre-built game executable and the current project's code base.  The pre-built game can likely be executed without any installations required - if you do not have the redistributable packages of C++ installed, that Unreal needs, you can find it in the `\Engine\Extras\Redist\en-us` folder of the pre-built game. Per platform there are two builds available in a release with different Online Subsystems active, changing how clients connect to each other:
+1. EOS Online Subsystem: This uses EOS for matchmaking. This version of the demo game needs the user to login to their Epic Games Account and allow the Demo Game to access basic information (user name and online presence).
+1. No Online Subsystem (also called "NULL"): This uses matchmaking over a local network. No account needed for this version but you will only be able to find other clients in the same local network.
 
-To open the project in the Unreal Editor you need to install the Unreal Engine 5.3 or higher. You can open the source code with the corresponding version of the branch easily. If you need to open it with a higher version of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
+To open the project in the Unreal Editor you need to install the Unreal Engine 5.4 or higher. You can open the source code with the corresponding version of the branch easily. If you need to open it with a higher version of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
 
 :warning: In UE5.4 currently there is a bug, which causes UnfocusedVolumeMultiplier to not apply to the Odin Synth - so testing is best done on 2 devices instead of starting two clients in the editor process.
+
+To change the Online Subsystem in the Unreal project open the `Config\DefaultEngine.ini` and change the lines
+```
+[OnlineSubsystem]
+DefaultPlatformService=EOS
+```
+to
+```
+[OnlineSubsystem]
+DefaultPlatformService=NULL
+```
 
 ### Installing Visual Studio and Compiling the Project
 
