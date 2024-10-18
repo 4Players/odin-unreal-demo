@@ -2,6 +2,7 @@
 
 
 #include "EosPlayerController.h"
+#include "Misc/ConfigCacheIni.h"
 #include "OnlineSubsystem.h"
 #include "OnlineSubsystemUtils.h"
 #include "OnlineSubsystemTypes.h"
@@ -129,6 +130,8 @@ void AEosPlayerController::BeginPlay()
 	// Tutorial 2: On BeginPlay call our login function. This is only on the GameClient, not on the DedicatedServer. 
 	Super::BeginPlay(); // Call parent class BeginPlay() function
 	//Login(); //Call login function 
+
+	GConfig->GetString(TEXT("OnlineSubsystem"), TEXT("DefaultPlatformService"), SelectedSubsystem, GEngineIni);
 }
 
 void AEosPlayerController::CreateLobby(FName KeyName, FString KeyValue)

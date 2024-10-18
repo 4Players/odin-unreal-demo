@@ -21,6 +21,9 @@ public:
 	// Class constructor. We won't use this in this tutorial. 
 	AEosPlayerController();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString SelectedSubsystem;
+
 protected:
 	// Function called when play begins
 	virtual void BeginPlay();
