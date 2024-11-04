@@ -33,7 +33,8 @@ void AEosPlayerController::Login()
 
 	if (NetId != nullptr && Identity->GetLoginStatus(0) == ELoginStatus::LoggedIn)
 	{
-		return;
+		UE_LOG(LogTemp, Log, TEXT("Already logged in. Finding sessions."));
+		FindSessions();
 	}
 
 	/* This binds a delegate so we can run our function when the callback completes. 0 represents the player number.
@@ -91,6 +92,23 @@ void AEosPlayerController::Login()
 	}
 }
 
+void AEosPlayerController::Logout()
+{
+	IOnlineSubsystem* Subsystem = Online::GetSubsystem(GetWorld());
+	auto Session = Subsystem->GetSessionInterface();
+
+	DestroySessionDelegateHandle =
+		Session->AddOnDestroySessionCompleteDelegate_Handle(
+			FOnDestroySessionCompleteDelegate::CreateUObject(
+				this,
+				&ThisClass::HandleLogoutCompleted));
+
+	Session->DestroySession(LobbyName);
+}
+
+void AEosPlayerController::HandleLogoutCompleted(FName SessionNameD, bool bWasSuccessful)
+{
+}
 
 
 void AEosPlayerController::HandleLoginCompleted(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error)
@@ -275,6 +293,7 @@ void AEosPlayerController::HandleFindSessionsCompleted(bool bWasSuccessful, TSha
 				if (Session->GetResolvedConnectString(SessionInSearchResult, NAME_GamePort, ConnectString))
 				{
 					SessionToJoin = &SessionInSearchResult;
+					SessionNameT = FName(SessionInSearchResult.GetSessionIdStr());
 				}
 
 				// For the tutorial we will join the first session found automatically. Usually you would loop through all the sessions and determine which one is best to join. 

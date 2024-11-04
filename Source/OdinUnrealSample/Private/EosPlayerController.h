@@ -32,6 +32,14 @@ protected:
 	//Function to sign into EOS Game Services
 	void Login();
 
+	UFUNCTION(BlueprintCallable)
+	//Function to sign into EOS Game Services
+	void Logout();
+
+	void HandleLogoutCompleted(FName SessionName, bool bWasSuccessful);
+
+	FDelegateHandle LogoutDelegateHandle;
+
 	//Callback function. This function is ran when signing into EOS Game Services completes. 
 	void HandleLoginCompleted(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
 
@@ -78,4 +86,8 @@ protected:
 
 	// Delegate to bind callback event for join session.
 	FDelegateHandle JoinSessionDelegateHandle;
+
+	FDelegateHandle DestroySessionDelegateHandle;
+	
+	FName SessionNameT;
 };
