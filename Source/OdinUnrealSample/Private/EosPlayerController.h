@@ -88,6 +88,4 @@ protected:
 	FDelegateHandle JoinSessionDelegateHandle;
 
 	FDelegateHandle DestroySessionDelegateHandle;
-	
-	FName SessionNameT;
 };

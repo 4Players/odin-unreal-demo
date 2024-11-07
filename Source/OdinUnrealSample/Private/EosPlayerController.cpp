@@ -35,6 +35,7 @@ void AEosPlayerController::Login()
 	{
 		UE_LOG(LogTemp, Log, TEXT("Already logged in. Finding sessions."));
 		FindSessions();
+		return;
 	}
 
 	/* This binds a delegate so we can run our function when the callback completes. 0 represents the player number.
@@ -106,7 +107,7 @@ void AEosPlayerController::Logout()
 	Session->DestroySession(LobbyName);
 }
 
-void AEosPlayerController::HandleLogoutCompleted(FName SessionNameD, bool bWasSuccessful)
+void AEosPlayerController::HandleLogoutCompleted(FName SessionName, bool bWasSuccessful)
 {
 }
 
@@ -293,7 +294,6 @@ void AEosPlayerController::HandleFindSessionsCompleted(bool bWasSuccessful, TSha
 				if (Session->GetResolvedConnectString(SessionInSearchResult, NAME_GamePort, ConnectString))
 				{
 					SessionToJoin = &SessionInSearchResult;
-					SessionNameT = FName(SessionInSearchResult.GetSessionIdStr());
 				}
 
 				// For the tutorial we will join the first session found automatically. Usually you would loop through all the sessions and determine which one is best to join. 
@@ -328,7 +328,7 @@ void AEosPlayerController::JoinSession()
 			&ThisClass::HandleJoinSessionCompleted));
 
 	UE_LOG(LogTemp, Log, TEXT("Joining session."));
-	if (!Session->JoinSession(0, "SessionName", *SessionToJoin))
+	if (!Session->JoinSession(0, LobbyName, *SessionToJoin))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Join session failed"));
 	}
