@@ -35,6 +35,7 @@ void AEosPlayerController::Login()
 	{
 		UE_LOG(LogTemp, Log, TEXT("Already logged in. Finding sessions."));
 		FindSessions();
+		return;
 	}
 
 	/* This binds a delegate so we can run our function when the callback completes. 0 represents the player number.
@@ -103,7 +104,7 @@ void AEosPlayerController::Logout()
 				this,
 				&ThisClass::HandleLogoutCompleted));
 
-	Session->DestroySession(LobbyName);
+	Session->DestroySession(SessionNameT);
 }
 
 void AEosPlayerController::HandleLogoutCompleted(FName SessionNameD, bool bWasSuccessful)
@@ -194,6 +195,7 @@ void AEosPlayerController::HandleCreateLobbyCompleted(FName EOSLobbyName, bool b
 	IOnlineSessionPtr Session = Subsystem->GetSessionInterface();
 	if (bWasSuccessful)
 	{
+		SessionNameT = EOSLobbyName;
 		UE_LOG(LogTemp, Log, TEXT("Lobby: %s Created!"), *EOSLobbyName.ToString());
 		FString Map = "/Game/Maps/TopDownExampleMap?listen"; //Hardcoding map name here, should be passed by parameter
 		FURL TravelURL;
