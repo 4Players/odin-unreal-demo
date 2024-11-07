@@ -104,10 +104,10 @@ void AEosPlayerController::Logout()
 				this,
 				&ThisClass::HandleLogoutCompleted));
 
-	Session->DestroySession(SessionNameT);
+	Session->DestroySession(LobbyName);
 }
 
-void AEosPlayerController::HandleLogoutCompleted(FName SessionNameD, bool bWasSuccessful)
+void AEosPlayerController::HandleLogoutCompleted(FName SessionName, bool bWasSuccessful)
 {
 }
 
@@ -195,7 +195,6 @@ void AEosPlayerController::HandleCreateLobbyCompleted(FName EOSLobbyName, bool b
 	IOnlineSessionPtr Session = Subsystem->GetSessionInterface();
 	if (bWasSuccessful)
 	{
-		SessionNameT = EOSLobbyName;
 		UE_LOG(LogTemp, Log, TEXT("Lobby: %s Created!"), *EOSLobbyName.ToString());
 		FString Map = "/Game/Maps/TopDownExampleMap?listen"; //Hardcoding map name here, should be passed by parameter
 		FURL TravelURL;
@@ -295,7 +294,6 @@ void AEosPlayerController::HandleFindSessionsCompleted(bool bWasSuccessful, TSha
 				if (Session->GetResolvedConnectString(SessionInSearchResult, NAME_GamePort, ConnectString))
 				{
 					SessionToJoin = &SessionInSearchResult;
-					SessionNameT = FName(SessionInSearchResult.GetSessionIdStr());
 				}
 
 				// For the tutorial we will join the first session found automatically. Usually you would loop through all the sessions and determine which one is best to join. 
@@ -330,7 +328,7 @@ void AEosPlayerController::JoinSession()
 			&ThisClass::HandleJoinSessionCompleted));
 
 	UE_LOG(LogTemp, Log, TEXT("Joining session."));
-	if (!Session->JoinSession(0, "SessionName", *SessionToJoin))
+	if (!Session->JoinSession(0, LobbyName, *SessionToJoin))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Join session failed"));
 	}
