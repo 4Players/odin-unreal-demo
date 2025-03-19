@@ -55,6 +55,14 @@
 		{
 			"Name": "SteamAudio",
 			"Enabled": true
+		},
+		{
+			"Name": "FMODStudio",
+			"Enabled": false
+		},
+		{
+			"Name": "OdinFmodAdapter",
+			"Enabled": false
 		}
 	],
 	"TargetPlatforms": [
