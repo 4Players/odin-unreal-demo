@@ -10,9 +10,11 @@
 
 #include "Odin.h"
 #include "OdinFunctionLibrary.h"
+#include "OdinInitializationSubsystem.h"
 #include "OdinRoom.AsyncTasks.h"
 #include "OdinSubsystem.h"
 #include "Engine/Engine.h"
+#include "Engine/GameInstance.h"
 
 UOdinRoom::UOdinRoom(const class FObjectInitializer& PCIP)
     : Super(PCIP)
@@ -64,16 +66,33 @@ void UOdinRoom::CleanUp()
 
     {
         FScopeLock lock(&this->medias_cs_);
+        for (auto media : this->medias_) {
+            if (nullptr != media.Value) {
+                odin_media_stream_destroy(media.Value->GetMediaHandle());
+            }
+        }
         this->medias_.Empty();
     }
 
+    bool bIsInitialized = false;
+    if (UWorld* World = GetWorld()) {
+        if (UGameInstance* GameInstance = World->GetGameInstance()) {
+            if (UOdinInitializationSubsystem* OdinSubsystem =
+                    GameInstance->GetSubsystem<UOdinInitializationSubsystem>()) {
+                bIsInitialized = OdinSubsystem->IsOdinInitialized();
+            }
+        }
+    }
+
     if (room_handle_ > 0) {
-        (new FAutoDeleteAsyncTask<DestroyRoomTask>(RoomHandle()))->StartBackgroundTask();
+        if (bIsInitialized) {
+            (new FAutoDeleteAsyncTask<DestroyRoomTask>(RoomHandle()))->StartBackgroundTask();
+        }
         room_handle_ = 0;
     } else {
         UE_LOG(Odin, Log,
                TEXT("UOdinRoom::Cleanup(): Aborted starting destroy room task, room handle is "
-                    "already invalid."))
+                    "already invalid."));
     }
 }
 
@@ -91,7 +110,7 @@ UOdinRoom* UOdinRoom::ConstructRoom(UObject*                WorldContextObject,
     UOdinSubsystem* OdinSubsystem = UOdinSubsystem::Get();
     if (!OdinSubsystem) {
         UE_LOG(Odin, Error,
-               TEXT("Aborted Odin Room Construction due to invalid Odin Subsystem reference."))
+               TEXT("Aborted Odin Room Construction due to invalid Odin Subsystem reference."));
         return nullptr;
     }
 
@@ -100,7 +119,7 @@ UOdinRoom* UOdinRoom::ConstructRoom(UObject*                WorldContextObject,
     if (0 == room->room_handle_) {
         UE_LOG(Odin, Error,
                TEXT("UOdinRoom::ConstructRoom: odin_room_create() returned a zero room handle, "
-                    "indicating that the ODIN client runtime was not initialized yet."))
+                    "indicating that the ODIN client runtime was not initialized yet."));
         return nullptr;
     }
 
@@ -162,9 +181,9 @@ void UOdinRoom::UpdateAPMConfig(FOdinApmSettings apm_config)
     odin_apm_config.volume_gate_release_loudness = apm_config.fVolumeGateReleaseLoudness;
     odin_apm_config.echo_canceller               = apm_config.bEchoCanceller;
     odin_apm_config.high_pass_filter             = apm_config.bHighPassFilter;
-    odin_apm_config.pre_amplifier                = apm_config.bPreAmplifier;
     odin_apm_config.transient_suppressor         = apm_config.bTransientSuppresor;
-    odin_apm_config.gain_controller              = apm_config.bGainController;
+    odin_apm_config.gain_controller_version =
+        static_cast<OdinGainControllerVersion>(apm_config.GainControllerVersion);
 
     if (nullptr == submix_listener_) {
         submix_listener_ = NewObject<UOdinSubmixListener>(this);
@@ -180,19 +199,19 @@ void UOdinRoom::UpdateAPMConfig(FOdinApmSettings apm_config)
     }
 
     switch (apm_config.noise_suppression_level) {
-        case OdinNS_None: {
+        case EOdinNoiseSuppressionLevel::OdinNS_None: {
             odin_apm_config.noise_suppression_level = OdinNoiseSuppressionLevel_None;
         } break;
-        case OdinNS_Low: {
+        case EOdinNoiseSuppressionLevel::OdinNS_Low: {
             odin_apm_config.noise_suppression_level = OdinNoiseSuppressionLevel_Low;
         } break;
-        case OdinNS_Moderate: {
+        case EOdinNoiseSuppressionLevel::OdinNS_Moderate: {
             odin_apm_config.noise_suppression_level = OdinNoiseSuppressionLevel_Moderate;
         } break;
-        case OdinNS_High: {
+        case EOdinNoiseSuppressionLevel::OdinNS_High: {
             odin_apm_config.noise_suppression_level = OdinNoiseSuppressionLevel_High;
         } break;
-        case OdinNS_VeryHigh: {
+        case EOdinNoiseSuppressionLevel::OdinNS_VeryHigh: {
             odin_apm_config.noise_suppression_level = OdinNoiseSuppressionLevel_VeryHigh;
         } break;
         default:;

@@ -215,27 +215,7 @@ void AEosPlayerController::HandleCreateLobbyCompleted(FName EOSLobbyName, bool b
 
 void AEosPlayerController::SetupNotifications()
 {
-	// Tutorial 7: EOS Lobbies are great as there are notifications sent for our backend when there are changes to lobbies (ex: Participant Joins/Leaves, lobby or lobby member data is updated, etc...) 
-	IOnlineSubsystem* Subsystem = Online::GetSubsystem(GetWorld());
-	IOnlineSessionPtr Session = Subsystem->GetSessionInterface();
-
-	// In this tutorial we're only giving an example of a notification for when a participant joins/leaves the lobby. The approach is similar for other notifications. 
-	Session->AddOnSessionParticipantsChangeDelegate_Handle(FOnSessionParticipantsChangeDelegate::CreateUObject(
-		this,
-		&ThisClass::HandleParticipantChanged));
-}
-
-void AEosPlayerController::HandleParticipantChanged(FName EOSLobbyName, const FUniqueNetId& NetId, bool bJoined)
-{
-	// Tutorial 7: Callback function called when participants join/leave. 
-	if (bJoined)
-	{
-		UE_LOG(LogTemp, Log, TEXT("A player has joined Lobby: %s"), *LobbyName.ToString());
-	}
-	else
-	{
-		UE_LOG(LogTemp, Log, TEXT("A player has left Lobby: %s"), *LobbyName.ToString());
-	}
+	
 }
 
 void AEosPlayerController::FindSessions(FName SearchKey, FString SearchValue) //put default value for example 

@@ -1,8 +1,9 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿/* Copyright (c) 2022-2024 4Players GmbH. All rights reserved. */
 
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Odin.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "OdinInitializationSubsystem.generated.h"
 
@@ -28,7 +29,10 @@ class ODIN_API UOdinInitializationSubsystem : public UGameInstanceSubsystem
      */
     int32 GetChannelCount() const;
 
+    bool IsOdinInitialized() const;
+
   private:
-    int32 SampleRate   = 48000;
-    int32 ChannelCount = 2;
+    int32 SampleRate    = ODIN_DEFAULT_SAMPLE_RATE;
+    int32 ChannelCount  = ODIN_DEFAULT_CHANNEL_COUNT;
+    bool  IsInitialized = false;
 };

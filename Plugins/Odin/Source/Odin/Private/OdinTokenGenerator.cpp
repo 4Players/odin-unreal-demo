@@ -4,6 +4,7 @@
 
 #include "Odin.h"
 #include "odin_sdk.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 UOdinTokenGenerator::UOdinTokenGenerator(const class FObjectInitializer &PCIP)
     : Super(PCIP)
@@ -30,7 +31,8 @@ void UOdinTokenGenerator::SetAccessKey(const FString &AccessKey)
 }
 
 FString UOdinTokenGenerator::GenerateRoomToken(const FString &RoomId, const FString &UserId,
-                                               EOdinTokenAudience TokenAudience)
+                                               EOdinTokenAudience TokenAudience,
+                                               int32              TokenLifeTime)
 {
     char             buf[512] = {0};
     OdinTokenOptions options  = OdinTokenOptions();
@@ -38,7 +40,7 @@ FString UOdinTokenGenerator::GenerateRoomToken(const FString &RoomId, const FStr
     options.audience          = TokenAudience == EOdinTokenAudience::SingleServer
                                     ? OdinTokenAudience_Sfu
                                     : OdinTokenAudience_Gateway;
-    options.lifetime          = 300;
+    options.lifetime          = TokenLifeTime;
     OdinReturnCode ReturnCode = odin_token_generator_create_token_ex(
         this->TokenGenerator, StringCast<ANSICHAR>(*RoomId).Get(),
         StringCast<ANSICHAR>(*UserId).Get(), &options, buf, sizeof buf);
