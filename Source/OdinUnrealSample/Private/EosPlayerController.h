@@ -43,6 +43,8 @@ protected:
 	//Callback function. This function is ran when signing into EOS Game Services completes. 
 	void HandleLoginCompleted(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
 
+	bool bTriedAuthPortal;
+
 	//Delegate to bind callback event for login. 
 	FDelegateHandle LoginDelegateHandle;
 

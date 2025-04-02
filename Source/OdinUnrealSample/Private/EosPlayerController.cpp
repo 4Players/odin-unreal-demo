@@ -78,18 +78,7 @@ void AEosPlayerController::Login()
 
 		UE_LOG(LogTemp, Log, TEXT("Logging into EOS with persistentauth...")); // Log to the UE logs that we are trying to log in. 
 
-		if (!Identity->Login(0, Credentials))
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Failed to login with persistentauth, trying accountportal... ")); // Log to the UE logs that we are trying to log in.
-			FOnlineAccountCredentials Credentials2("accountportal", "", "");
-			
-			if (!Identity->Login(0, Credentials2))
-			{
-				// Clear our handle and reset the delegate.
-				Identity->ClearOnLoginCompleteDelegate_Handle(0, LoginDelegateHandle);
-				LoginDelegateHandle.Reset();
-			}
-		}
+		Identity->Login(0, Credentials);
 	}
 }
 
@@ -126,16 +115,25 @@ void AEosPlayerController::HandleLoginCompleted(int32 LocalUserNum, bool bWasSuc
 		UE_LOG(LogTemp, Log, TEXT("Searching for a session..."));
 		// Maybe via button or player action? Maybe add parameters here
 		FindSessions();
+
+		Identity->ClearOnLoginCompleteDelegate_Handle(LocalUserNum, LoginDelegateHandle);
+		LoginDelegateHandle.Reset();
 	}
 	else //Login failed
 	{
-		// If your game is online only, you may want to return an errror to the user and return to a menu that uses a different GameMode/PlayerController.
+		if (!bTriedAuthPortal)
+		{
+			bTriedAuthPortal = true;
+			UE_LOG(LogTemp, Warning, TEXT("Failed to login with persistentauth, trying accountportal... ")); // Log to the UE logs that we are trying to log in.
+			FOnlineAccountCredentials Credentials2("accountportal", "", "");
 
-		UE_LOG(LogTemp, Warning, TEXT("EOS login failed.")); //Print sign in failure in logs as a warning.
+			Identity->Login(0, Credentials2);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("EOS login failed.")); //Print sign in failure in logs as a warning.
+		}
 	}
-
-	Identity->ClearOnLoginCompleteDelegate_Handle(LocalUserNum, LoginDelegateHandle);
-	LoginDelegateHandle.Reset();
 }
 
 //Default class constructor included here for completeness
