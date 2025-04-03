@@ -78,18 +78,7 @@ void AEosPlayerController::Login()
 
 		UE_LOG(LogTemp, Log, TEXT("Logging into EOS with persistentauth...")); // Log to the UE logs that we are trying to log in. 
 
-		if (!Identity->Login(0, Credentials))
-		{
-			UE_LOG(LogTemp, Warning, TEXT("Failed to login with persistentauth, trying accountportal... ")); // Log to the UE logs that we are trying to log in.
-			FOnlineAccountCredentials Credentials2("accountportal", "", "");
-			
-			if (!Identity->Login(0, Credentials2))
-			{
-				// Clear our handle and reset the delegate.
-				Identity->ClearOnLoginCompleteDelegate_Handle(0, LoginDelegateHandle);
-				LoginDelegateHandle.Reset();
-			}
-		}
+		Identity->Login(0, Credentials);
 	}
 }
 
@@ -126,16 +115,25 @@ void AEosPlayerController::HandleLoginCompleted(int32 LocalUserNum, bool bWasSuc
 		UE_LOG(LogTemp, Log, TEXT("Searching for a session..."));
 		// Maybe via button or player action? Maybe add parameters here
 		FindSessions();
+
+		Identity->ClearOnLoginCompleteDelegate_Handle(LocalUserNum, LoginDelegateHandle);
+		LoginDelegateHandle.Reset();
 	}
 	else //Login failed
 	{
-		// If your game is online only, you may want to return an errror to the user and return to a menu that uses a different GameMode/PlayerController.
+		if (!bTriedAuthPortal)
+		{
+			bTriedAuthPortal = true;
+			UE_LOG(LogTemp, Warning, TEXT("Failed to login with persistentauth, trying accountportal... ")); // Log to the UE logs that we are trying to log in.
+			FOnlineAccountCredentials Credentials2("accountportal", "", "");
 
-		UE_LOG(LogTemp, Warning, TEXT("EOS login failed.")); //Print sign in failure in logs as a warning.
+			Identity->Login(0, Credentials2);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("EOS login failed.")); //Print sign in failure in logs as a warning.
+		}
 	}
-
-	Identity->ClearOnLoginCompleteDelegate_Handle(LocalUserNum, LoginDelegateHandle);
-	LoginDelegateHandle.Reset();
 }
 
 //Default class constructor included here for completeness
@@ -215,27 +213,7 @@ void AEosPlayerController::HandleCreateLobbyCompleted(FName EOSLobbyName, bool b
 
 void AEosPlayerController::SetupNotifications()
 {
-	// Tutorial 7: EOS Lobbies are great as there are notifications sent for our backend when there are changes to lobbies (ex: Participant Joins/Leaves, lobby or lobby member data is updated, etc...) 
-	IOnlineSubsystem* Subsystem = Online::GetSubsystem(GetWorld());
-	IOnlineSessionPtr Session = Subsystem->GetSessionInterface();
-
-	// In this tutorial we're only giving an example of a notification for when a participant joins/leaves the lobby. The approach is similar for other notifications. 
-	Session->AddOnSessionParticipantsChangeDelegate_Handle(FOnSessionParticipantsChangeDelegate::CreateUObject(
-		this,
-		&ThisClass::HandleParticipantChanged));
-}
-
-void AEosPlayerController::HandleParticipantChanged(FName EOSLobbyName, const FUniqueNetId& NetId, bool bJoined)
-{
-	// Tutorial 7: Callback function called when participants join/leave. 
-	if (bJoined)
-	{
-		UE_LOG(LogTemp, Log, TEXT("A player has joined Lobby: %s"), *LobbyName.ToString());
-	}
-	else
-	{
-		UE_LOG(LogTemp, Log, TEXT("A player has left Lobby: %s"), *LobbyName.ToString());
-	}
+	
 }
 
 void AEosPlayerController::FindSessions(FName SearchKey, FString SearchValue) //put default value for example 
