@@ -214,6 +214,12 @@ void AEosPlayerController::HandleCreateLobbyCompleted(FName EOSLobbyName, bool b
 
 void AEosPlayerController::GetCurrentSessionID_AsString(FString& ResultSessionID)
 {
+	if (!SelectedSubsystem.Equals(TEXT("EOS"), ESearchCase::IgnoreCase))
+	{
+		ResultSessionID = TEXT("");
+		return;
+	}
+
 	IOnlineSubsystem* Subsystem = Online::GetSubsystem(GetWorld());
 	IOnlineSessionPtr Session = Subsystem->GetSessionInterface();
 
