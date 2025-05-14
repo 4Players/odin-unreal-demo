@@ -9,6 +9,7 @@
 #include "OnlineSessionSettings.h"
 #include "Online/OnlineSessionNames.h"
 #include "Interfaces/OnlineIdentityInterface.h"
+#include "Online.h"
 #include "Containers/Array.h"
 #include "Kismet/GameplayStatics.h"
 #include "Serialization/BufferArchive.h"
@@ -211,6 +212,35 @@ void AEosPlayerController::HandleCreateLobbyCompleted(FName EOSLobbyName, bool b
 	CreateLobbyDelegateHandle.Reset();
 }
 
+void AEosPlayerController::GetCurrentSessionID_AsString(FString& ResultSessionID)
+{
+	if (!SelectedSubsystem.Equals(TEXT("EOS"), ESearchCase::IgnoreCase))
+	{
+		ResultSessionID = TEXT("");
+		return;
+	}
+
+	IOnlineSubsystem* Subsystem = Online::GetSubsystem(GetWorld());
+	IOnlineSessionPtr Session = Subsystem->GetSessionInterface();
+
+	if (!Session.IsValid())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("GetCurrentSessionID_AsString couldn't get the session interface!"));
+		return;
+	}
+
+	const FNamedOnlineSession* NamedSession = Session->GetNamedSession(LobbyName);
+	if (Session != nullptr)
+	{
+		const TSharedPtr<class FOnlineSessionInfo> SessionInfo = NamedSession->SessionInfo;
+		if (SessionInfo.IsValid() && SessionInfo->IsValid() && SessionInfo->GetSessionId().IsValid())
+		{
+			ResultSessionID = SessionInfo->GetSessionId().ToString();
+			return;
+		}
+	}
+}
+
 void AEosPlayerController::SetupNotifications()
 {
 	
@@ -272,6 +302,7 @@ void AEosPlayerController::HandleFindSessionsCompleted(bool bWasSuccessful, TSha
 				if (Session->GetResolvedConnectString(SessionInSearchResult, NAME_GamePort, ConnectString))
 				{
 					SessionToJoin = &SessionInSearchResult;
+					SessionId = SessionToJoin->GetSessionIdStr();
 				}
 
 				// For the tutorial we will join the first session found automatically. Usually you would loop through all the sessions and determine which one is best to join. 

@@ -24,6 +24,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString SelectedSubsystem;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FString SessionId;
+
+	// Get a string copy of the current session ID
+	UFUNCTION(BlueprintPure, Category = "Online|EosSessions|SessionInfo")
+	void GetCurrentSessionID_AsString(FString& ResultSessionID);
+
 protected:
 	// Function called when play begins
 	virtual void BeginPlay();

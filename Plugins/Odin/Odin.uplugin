@@ -1,9 +1,9 @@
 {
 	"FileVersion": 2,
 	"EngineVersion": "5.5",
-	"Version": 588,
+	"Version": 597,
 	"PlatformAllowList": [ "Win64", "Mac", "IOS", "Linux", "LinuxArm64", "Android"],
-	"VersionName": "1.10.0",
+	"VersionName": "1.10.2",
 	"FriendlyName": "4Players ODIN",
 	"Description": "Unreal integration plugin to integrate real-time chat technology into your game",
 	"Category": "Other",
