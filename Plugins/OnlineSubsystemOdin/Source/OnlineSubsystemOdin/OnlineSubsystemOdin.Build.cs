@@ -47,7 +47,8 @@ public class OnlineSubsystemOdin : ModuleRules
 				"OnlineSubsystemUtils",
 				"Json",
                 "JsonUtilities",
-                "OnlineSubsystem"
+                "OnlineSubsystem",
+				"Sockets"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

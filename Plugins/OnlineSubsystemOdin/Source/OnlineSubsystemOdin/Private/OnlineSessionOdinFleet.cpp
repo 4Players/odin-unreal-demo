@@ -10,24 +10,41 @@ bool FOnlineSessionOdinFleet::FindSessions(int32 LocalUserNum, const TSharedRef<
 {
 	// Beispielhafte URL
 	auto Request = FHttpModule::Get().CreateRequest();
-	Request->SetURL("https://yourbackend.example.com/getserver");
+	Request->SetURL("https://odin-unreal-sample-fleet-api.azurewebsites.net/api/GetServer");
 	Request->SetVerb("GET");
 	Request->OnProcessRequestComplete().BindLambda([SearchSettings](FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
-	{
-		if (bWasSuccessful && Response->GetResponseCode() == 200)
 		{
-			// IP Adresse parsen (hier stark vereinfacht)
-			FString IP = Response->GetContentAsString();
+			if (!bWasSuccessful || !Response.IsValid() || Response->GetResponseCode() != 200)
+			{
+				UE_LOG(LogTemp, Error, TEXT("Failed to find session from Azure Function."));
+				return;
+			}
+
+			FString Body = Response->GetContentAsString();
+			TSharedPtr<FJsonObject> Json;
+			TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(Body);
+
+			if (!FJsonSerializer::Deserialize(Reader, Json) || !Json.IsValid())
+			{
+				UE_LOG(LogTemp, Error, TEXT("Invalid JSON from Azure Function."));
+				return;
+			}
+
+			FString Ip = Json->GetStringField("ip");
+			int32 Port = Json->GetIntegerField("port");
+
+			// Create session result
 			FOnlineSessionSearchResult Result;
-			Result.Session.SessionInfo = MakeShared<FOnlineSessionInfoOdinFleet>();
+			FOnlineSession Session;
+			Session.SessionInfo = MakeShareable(new FOnlineSessionInfoOdinFleet(Ip, Port));
+			Session.SessionSettings.NumPublicConnections = 2;
+			Session.SessionSettings.bIsLANMatch = false;
+			Session.SessionSettings.bIsDedicated = true;
+			Session.OwningUserName = TEXT("OdinServer");
+
+			Result.Session = Session;
 			SearchSettings->SearchResults.Add(Result);
-			SearchSettings->SearchState = EOnlineAsyncTaskState::Done;
-		}
-		else
-		{
-			SearchSettings->SearchState = EOnlineAsyncTaskState::Failed;
-		}
-	});
+		});
 	Request->ProcessRequest();
 
 	return true;
@@ -35,7 +52,37 @@ bool FOnlineSessionOdinFleet::FindSessions(int32 LocalUserNum, const TSharedRef<
 
 bool FOnlineSessionOdinFleet::JoinSession(int32 LocalUserNum, FName SessionName, const FOnlineSessionSearchResult& DesiredSession)
 {
-	return true; // nichts tun, da Verbindung direkt erfolgt
+	IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();
+	if (!Subsystem)
+	{
+		UE_LOG(LogTemp, Error, TEXT("JoinSession failed: no subsystem"));
+		return false;
+	}
+
+	const FOnlineSessionInfoOdinFleet* OdinSessionInfo = static_cast<const FOnlineSessionInfoOdinFleet*>(DesiredSession.Session.SessionInfo.Get());
+	if (!OdinSessionInfo || !OdinSessionInfo->IsValid())
+	{
+		UE_LOG(LogTemp, Error, TEXT("JoinSession failed: Invalid session info"));
+		return false;
+	}
+
+	FNamedOnlineSession* Session = GetNamedSession(SessionName);
+	if (!Session)
+	{
+		Session = AddNamedSession(SessionName, DesiredSession.Session);
+	}
+	else
+	{
+		Session->SessionSettings = DesiredSession.Session.SessionSettings;
+		Session->SessionState = EOnlineSessionState::Pending;
+	}
+
+	Session->HostingPlayerNum = LocalUserNum;
+	Session->SessionInfo = DesiredSession.Session.SessionInfo;
+
+	// Notify game that join succeeded
+	TriggerOnJoinSessionCompleteDelegates(SessionName, EOnJoinSessionCompleteResult::Success);
+	return true;
 }
 
 FNamedOnlineSession* FOnlineSessionOdinFleet::AddNamedSession(FName SessionName, const FOnlineSessionSettings& SessionSettings)
