@@ -1,6 +1,21 @@
 #pragma once
 
 #include "Interfaces/OnlineSessionInterface.h"
+
+class FOdinNetId : public FUniqueNetIdString
+{
+public:
+    FOdinNetId(const FString& InId)
+        : FUniqueNetIdString(InId, FName(TEXT("ODIN")))
+    {
+    }
+
+    FOdinNetId()
+        : FOdinNetId(TEXT("any"))
+    { }
+
+    virtual ~FOdinNetId() override {}
+};
 #include "SocketSubsystem.h"
 
 class FOnlineSessionInfoOdinFleet : public FOnlineSessionInfo
@@ -15,7 +30,7 @@ public:
 
         // Use IP:Port as a consistent session ID string
         FString SessionIdStr = FString::Printf(TEXT("%s:%d"), *InIP, InPort);
-        SessionIdRef = MakeShared<FUniqueNetIdString>(SessionIdStr);
+        SessionIdRef = MakeShared<FOdinNetId>(SessionIdStr);
 
         // Generate byte array for comparisons (e.g., SHA1 hash)
         FString RawData = InIP + FString::FromInt(InPort);
@@ -42,6 +57,6 @@ public:
 
 private:
     TSharedPtr<FInternetAddr> HostAddr;
-    TSharedRef<FUniqueNetIdString> SessionIdRef;
+    TSharedRef<const FOdinNetId> SessionIdRef;
     TArray<uint8> SessionBytes;
 };
