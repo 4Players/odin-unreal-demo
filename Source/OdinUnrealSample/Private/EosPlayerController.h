@@ -41,6 +41,10 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	//Function to sign into EOS Game Services
+	void GetOnlineSubsystem();
+
+	UFUNCTION(BlueprintCallable)
+	//Function to sign into EOS Game Services
 	void Logout();
 
 	void HandleLogoutCompleted(FName SessionName, bool bWasSuccessful);

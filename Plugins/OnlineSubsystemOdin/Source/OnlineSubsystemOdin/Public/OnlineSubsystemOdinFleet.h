@@ -13,15 +13,20 @@ class FOnlineIdentityOdinFleet;
 class FOnlineSubsystemOdinFleet : public FOnlineSubsystemImpl
 {
 public:
-    FOnlineSubsystemOdinFleet() : FOnlineSubsystemImpl(TEXT("OdinFleet"), TEXT("OdinFleetInstance")) {}
+    FOnlineSubsystemOdinFleet(FName InInstanceName) : FOnlineSubsystemImpl(TEXT("OdinFleet"), InInstanceName) {}
 
-    virtual IOnlineSessionPtr GetSessionInterface() const override { return StaticCastSharedPtr<IOnlineSession>(SessionInterface); }
-    virtual IOnlineIdentityPtr GetIdentityInterface() const override { return StaticCastSharedPtr<IOnlineIdentity>(IdentityInterface); }
+    virtual IOnlineSessionPtr GetSessionInterface() const override { return SessionInterface; }
+    virtual IOnlineIdentityPtr GetIdentityInterface() const override { return IdentityInterface; }
 
     bool Init() override;
     bool Shutdown() override;
 
 private:
-    TSharedPtr<FOnlineSessionOdinFleet> SessionInterface;
-    TSharedPtr<FOnlineIdentityOdinFleet> IdentityInterface; 
+    TSharedPtr<IOnlineSession, ESPMode::ThreadSafe> SessionInterface;
+    TSharedPtr<IOnlineIdentity, ESPMode::ThreadSafe> IdentityInterface;
+
+    // Inherited via FOnlineSubsystemImpl
+    IOnlineFriendsPtr GetFriendsInterface() const override;
+    FString GetAppId() const override;
+    FText GetOnlineServiceName() const override;
 };

@@ -17,3 +17,18 @@ bool FOnlineSubsystemOdinFleet::Shutdown()
     IdentityInterface = nullptr;
     return true;
 }
+
+IOnlineFriendsPtr FOnlineSubsystemOdinFleet::GetFriendsInterface() const
+{
+    return IOnlineFriendsPtr();
+}
+
+FString FOnlineSubsystemOdinFleet::GetAppId() const
+{
+    return FString();
+}
+
+FText FOnlineSubsystemOdinFleet::GetOnlineServiceName() const
+{
+    return FText();
+}

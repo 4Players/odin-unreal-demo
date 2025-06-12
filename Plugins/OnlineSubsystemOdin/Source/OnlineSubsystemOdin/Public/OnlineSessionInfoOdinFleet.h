@@ -6,7 +6,7 @@ class FOdinNetId : public FUniqueNetIdString
 {
 public:
     FOdinNetId(const FString& InId)
-        : FUniqueNetIdString(InId, FName(TEXT("ODIN")))
+        : FUniqueNetIdString(InId, FName(TEXT("OdinFleet")))
     {
     }
 

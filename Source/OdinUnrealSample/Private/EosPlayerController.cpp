@@ -83,6 +83,11 @@ void AEosPlayerController::Login()
 	}
 }
 
+void AEosPlayerController::GetOnlineSubsystem()
+{
+	IOnlineSubsystem::Get(TEXT("OdinFleet"));
+}
+
 void AEosPlayerController::Logout()
 {
 	IOnlineSubsystem* Subsystem = Online::GetSubsystem(GetWorld());

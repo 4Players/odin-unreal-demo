@@ -8,7 +8,6 @@
 
 bool FOnlineSessionOdinFleet::FindSessions(int32 LocalUserNum, const TSharedRef<FOnlineSessionSearch>& SearchSettings)
 {
-	// Beispielhafte URL
 	auto Request = FHttpModule::Get().CreateRequest();
 	Request->SetURL("https://odin-unreal-sample-fleet-api.azurewebsites.net/api/GetServer");
 	Request->SetVerb("GET");
