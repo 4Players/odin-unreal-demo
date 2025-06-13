@@ -2,7 +2,7 @@
 
 #include "Interfaces/OnlineSessionInterface.h"
 
-class FOnlineSessionOdinFleet : public IOnlineSession
+class FOnlineSessionOdinFleet : public IOnlineSession, public TSharedFromThis<FOnlineSessionOdinFleet>
 {
 public:
 	virtual bool CreateSession(int32, FName, const FOnlineSessionSettings&) override { return false; }

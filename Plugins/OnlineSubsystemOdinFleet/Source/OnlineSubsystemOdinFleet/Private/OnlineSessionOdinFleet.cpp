@@ -8,10 +8,12 @@
 
 bool FOnlineSessionOdinFleet::FindSessions(int32 LocalUserNum, const TSharedRef<FOnlineSessionSearch>& SearchSettings)
 {
+	TSharedRef<FOnlineSessionOdinFleet> SessionRef = SharedThis(this);
+
 	auto Request = FHttpModule::Get().CreateRequest();
 	Request->SetURL("https://odin-unreal-sample-fleet-api.azurewebsites.net/api/GetServer");
 	Request->SetVerb("GET");
-	Request->OnProcessRequestComplete().BindLambda([SearchSettings](FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
+	Request->OnProcessRequestComplete().BindLambda([SessionRef, SearchSettings](FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
 		{
 			if (!bWasSuccessful || !Response.IsValid() || Response->GetResponseCode() != 200)
 			{
@@ -43,6 +45,8 @@ bool FOnlineSessionOdinFleet::FindSessions(int32 LocalUserNum, const TSharedRef<
 
 			Result.Session = Session;
 			SearchSettings->SearchResults.Add(Result);
+
+			SessionRef->TriggerOnFindSessionsCompleteDelegates(true);
 		});
 	Request->ProcessRequest();
 
@@ -126,7 +130,7 @@ bool FOnlineSessionOdinFleet::CancelMatchmaking(const FUniqueNetId& SearchingPla
 
 bool FOnlineSessionOdinFleet::FindSessions(const FUniqueNetId& SearchingPlayerId, const TSharedRef<FOnlineSessionSearch>& SearchSettings)
 {
-	return false;
+	return FindSessions(0, SearchSettings);
 }
 
 bool FOnlineSessionOdinFleet::FindSessionById(const FUniqueNetId& SearchingUserId, const FUniqueNetId& SessionId, const FUniqueNetId& FriendId, const FOnSingleSessionResultCompleteDelegate& CompletionDelegate)
