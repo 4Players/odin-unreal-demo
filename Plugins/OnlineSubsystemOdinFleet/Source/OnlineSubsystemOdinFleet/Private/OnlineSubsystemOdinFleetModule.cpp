@@ -1,13 +1,13 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "OnlineSubsystemOdin.h"
+#include "OnlineSubsystemOdinFleetModule.h"
 #include "OnlineSubsystemModule.h"
 #include "Modules/ModuleManager.h"
 #include "OnlineSubsystemOdinFleet.h"
 
-#define LOCTEXT_NAMESPACE "FOnlineSubsystemOdinModule"
+#define LOCTEXT_NAMESPACE "FOnlineSubsystemOdinFleetModule"
 
-void FOnlineSubsystemOdinModule::StartupModule()
+void FOnlineSubsystemOdinFleetModule::StartupModule()
 {
 	OdinFleetFactory = MakeUnique<FOnlineFactoryOdinFleet>();
 
@@ -16,7 +16,7 @@ void FOnlineSubsystemOdinModule::StartupModule()
 	OSSModule.RegisterPlatformService(TEXT("OdinFleet"), OdinFleetFactory.Get());
 }
 
-void FOnlineSubsystemOdinModule::ShutdownModule()
+void FOnlineSubsystemOdinFleetModule::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
@@ -29,6 +29,6 @@ void FOnlineSubsystemOdinModule::ShutdownModule()
 	OdinFleetFactory.Reset();
 }
 
+IMPLEMENT_MODULE(FOnlineSubsystemOdinFleetModule, OnlineSubsystemOdinFleet)
+
 #undef LOCTEXT_NAMESPACE
-	
-IMPLEMENT_MODULE(FOnlineSubsystemOdinModule, OnlineSubsystemOdin)

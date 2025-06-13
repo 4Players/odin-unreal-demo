@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class OnlineSubsystemOdin : ModuleRules
+public class OnlineSubsystemOdinFleet : ModuleRules
 {
-	public OnlineSubsystemOdin(ReadOnlyTargetRules Target) : base(Target)
+	public OnlineSubsystemOdinFleet(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		

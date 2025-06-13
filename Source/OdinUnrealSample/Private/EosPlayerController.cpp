@@ -154,6 +154,8 @@ void AEosPlayerController::BeginPlay()
 	Super::BeginPlay(); // Call parent class BeginPlay() function
 	//Login(); //Call login function 
 
+	IOnlineSubsystem::Get();
+
 	GConfig->GetString(TEXT("OnlineSubsystem"), TEXT("DefaultPlatformService"), SelectedSubsystem, GEngineIni);
 }
 
