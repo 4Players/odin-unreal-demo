@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Interfaces/OnlineSessionInterface.h"
+#include "SocketSubsystem.h"
+#include "Templates/SharedPointer.h"
 
 class FOdinNetId : public FUniqueNetIdString
 {
@@ -16,21 +18,23 @@ public:
 
     virtual ~FOdinNetId() override {}
 };
-#include "SocketSubsystem.h"
 
 class FOnlineSessionInfoOdinFleet : public FOnlineSessionInfo
 {
 public:
-    FOnlineSessionInfoOdinFleet(const FString& InIP, int32 InPort)
-        : HostAddr(ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr())
+	FOnlineSessionInfoOdinFleet(const FString& InIP, int32 InPort)
+		: HostAddr(ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr())
+		, SessionIdRef(MakeShared<FOdinNetId>(InIP + FString::FromInt(InPort)))
     {
+        /*auto socketss = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM);
+        HostAddr = socketss->CreateInternetAddr();*/
         bool bIsValid;
         HostAddr->SetIp(*InIP, bIsValid);
         HostAddr->SetPort(InPort);
 
         // Use IP:Port as a consistent session ID string
-        FString SessionIdStr = FString::Printf(TEXT("%s:%d"), *InIP, InPort);
-        SessionIdRef = MakeShared<FOdinNetId>(SessionIdStr);
+        /*FString SessionIdStr = FString::Printf(TEXT("%s:%d"), *InIP, InPort);
+        SessionIdRef = MakeShared<FOdinNetId>(SessionIdStr);*/
 
         // Generate byte array for comparisons (e.g., SHA1 hash)
         FString RawData = InIP + FString::FromInt(InPort);
@@ -42,7 +46,7 @@ public:
         Sha.GetHash(SessionBytes.GetData());
     }
 
-    TSharedPtr<const FInternetAddr> GetHostAddr() const
+    TSharedPtr<FInternetAddr> GetHostAddr() const
     {
         return HostAddr;
     }
@@ -54,9 +58,9 @@ public:
     FString ToString() const override;
     FString ToDebugString() const override;
     const FUniqueNetId& GetSessionId() const override;
+    TSharedRef<FInternetAddr> HostAddr;
 
 private:
-    TSharedPtr<FInternetAddr> HostAddr;
-    TSharedRef<const FOdinNetId> SessionIdRef;
+    TSharedRef<FOdinNetId> SessionIdRef;
     TArray<uint8> SessionBytes;
 };

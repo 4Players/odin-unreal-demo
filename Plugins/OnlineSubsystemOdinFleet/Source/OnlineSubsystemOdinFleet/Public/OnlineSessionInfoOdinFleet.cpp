@@ -12,7 +12,7 @@ int32 FOnlineSessionInfoOdinFleet::GetSize() const
 
 bool FOnlineSessionInfoOdinFleet::IsValid() const
 {
-    return HostAddr.IsValid() && HostAddr->IsValid();
+    return HostAddr->IsValid();
 }
 
 FString FOnlineSessionInfoOdinFleet::ToString() const

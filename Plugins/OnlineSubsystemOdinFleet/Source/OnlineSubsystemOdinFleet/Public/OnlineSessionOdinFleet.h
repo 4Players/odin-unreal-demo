@@ -22,6 +22,7 @@ public:
 	virtual FNamedOnlineSession* GetNamedSession(FName) override { return nullptr; }
 	virtual void RemoveNamedSession(FName) override {}
 	virtual EOnlineSessionState::Type GetSessionState(FName) const override { return EOnlineSessionState::NoSession; }
+	TArray<TSharedPtr<FNamedOnlineSession>> Sessions;
 
 	// Inherited via IOnlineSession
 	FNamedOnlineSession* AddNamedSession(FName SessionName, const FOnlineSessionSettings& SessionSettings) override;

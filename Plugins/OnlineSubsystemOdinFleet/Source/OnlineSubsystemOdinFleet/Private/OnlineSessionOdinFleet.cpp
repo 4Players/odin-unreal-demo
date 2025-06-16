@@ -37,7 +37,7 @@ bool FOnlineSessionOdinFleet::FindSessions(int32 LocalUserNum, const TSharedRef<
 			// Create session result
 			FOnlineSessionSearchResult Result;
 			FOnlineSession Session;
-			Session.SessionInfo = MakeShareable(new FOnlineSessionInfoOdinFleet(Ip, Port));
+			Session.SessionInfo = MakeShared<FOnlineSessionInfoOdinFleet>(Ip, Port);
 			Session.SessionSettings.NumPublicConnections = 2;
 			Session.SessionSettings.bIsLANMatch = false;
 			Session.SessionSettings.bIsDedicated = true;
@@ -83,6 +83,38 @@ bool FOnlineSessionOdinFleet::JoinSession(int32 LocalUserNum, FName SessionName,
 	Session->HostingPlayerNum = LocalUserNum;
 	Session->SessionInfo = DesiredSession.Session.SessionInfo;
 
+	// Get the world or owning player controller
+	ULocalPlayer* LocalPlayer = GEngine->GetFirstGamePlayer(GEngine->GameViewport);
+	if (!LocalPlayer)
+	{
+		return false;
+	}
+
+	APlayerController* PC = LocalPlayer->PlayerController;
+	if (!PC)
+	{
+		return false;
+	}
+
+	// Zugriff auf unsere eigene SessionInfo-Klasse
+	TSharedPtr<FOnlineSessionInfo> Info = Session->SessionInfo;
+	TSharedPtr<FOnlineSessionInfoOdinFleet> OdinInfo = StaticCastSharedPtr<FOnlineSessionInfoOdinFleet>(Info);
+
+	if (!OdinInfo.IsValid() || !OdinInfo->HostAddr->IsValid())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Invalid session info"));
+		return false;
+	}
+
+	// IP + Port zusammensetzen
+	FString Address = OdinInfo->HostAddr->ToString(false); // IP only
+	int32 Port = OdinInfo->HostAddr->GetPort();
+
+	FString TravelURL = FString::Printf(TEXT("%s:%d"), *Address, Port);
+	UE_LOG(LogTemp, Log, TEXT("Client traveling to: %s"), *TravelURL);
+
+	PC->ClientTravel(TravelURL, TRAVEL_Absolute);
+
 	// Notify game that join succeeded
 	TriggerOnJoinSessionCompleteDelegates(SessionName, EOnJoinSessionCompleteResult::Success);
 	return true;
@@ -90,12 +122,27 @@ bool FOnlineSessionOdinFleet::JoinSession(int32 LocalUserNum, FName SessionName,
 
 FNamedOnlineSession* FOnlineSessionOdinFleet::AddNamedSession(FName SessionName, const FOnlineSessionSettings& SessionSettings)
 {
-	return nullptr;
+	// Gibt es schon eine Session mit diesem Namen?
+	if (GetNamedSession(SessionName) != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Session with name '%s' already exists."), *SessionName.ToString());
+		return nullptr;
+	}
+
+	// Neue Session anlegen
+	TSharedPtr<FNamedOnlineSession> NewSession = MakeShared<FNamedOnlineSession>(SessionName, SessionSettings);
+
+	// In Session-Liste eintragen
+	Sessions.Add(NewSession);
+
+	UE_LOG(LogTemp, Log, TEXT("Added new session '%s'."), *SessionName.ToString());
+
+	return NewSession.Get();
 }
 
 FNamedOnlineSession* FOnlineSessionOdinFleet::AddNamedSession(FName SessionName, const FOnlineSession& Session)
 {
-	return nullptr;
+	return AddNamedSession(SessionName, Session.SessionSettings);
 }
 
 FUniqueNetIdPtr FOnlineSessionOdinFleet::CreateSessionIdFromString(const FString& SessionIdStr)
@@ -140,7 +187,7 @@ bool FOnlineSessionOdinFleet::FindSessionById(const FUniqueNetId& SearchingUserI
 
 bool FOnlineSessionOdinFleet::JoinSession(const FUniqueNetId& LocalUserId, FName SessionName, const FOnlineSessionSearchResult& DesiredSession)
 {
-	return false;
+	return JoinSession(0, SessionName, DesiredSession);
 }
 
 bool FOnlineSessionOdinFleet::FindFriendSession(int32 LocalUserNum, const FUniqueNetId& Friend)
