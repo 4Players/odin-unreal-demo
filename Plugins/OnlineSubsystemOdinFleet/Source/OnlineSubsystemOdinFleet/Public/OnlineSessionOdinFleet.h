@@ -19,10 +19,17 @@ public:
 	virtual bool SendSessionInviteToFriends(int32, FName, const TArray<TSharedRef<const FUniqueNetId>>&) override { return false; }
 	virtual int32 GetNumSessions() override { return 0; }
 	virtual void DumpSessionState() override {}
-	virtual FNamedOnlineSession* GetNamedSession(FName) override { return nullptr; }
+	virtual FNamedOnlineSession* GetNamedSession(FName SessionName) override {
+		if (TSharedPtr<FNamedOnlineSession>* FoundSession = Sessions.Find(SessionName))
+		{
+			return FoundSession->Get();
+		}
+		return nullptr;
+	}
 	virtual void RemoveNamedSession(FName) override {}
 	virtual EOnlineSessionState::Type GetSessionState(FName) const override { return EOnlineSessionState::NoSession; }
-	TArray<TSharedPtr<FNamedOnlineSession>> Sessions;
+	TMap<FName, TSharedPtr<FNamedOnlineSession>> Sessions;
+
 
 	// Inherited via IOnlineSession
 	FNamedOnlineSession* AddNamedSession(FName SessionName, const FOnlineSessionSettings& SessionSettings) override;

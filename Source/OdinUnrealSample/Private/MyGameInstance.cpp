@@ -4,17 +4,22 @@
 #include "MyGameInstance.h"
 #include "Interfaces/OnlineIdentityInterface.h"
 #include "OnlineSubsystem.h"
-#include "Kismet/GameplayStatics.h"
-#include "GameFramework/PlayerController.h"
-#include "GameFramework/PlayerState.h"
 
 
 void UMyGameInstance::Init()
 {
+    Super::Init();
+
     IOnlineIdentityPtr Identity = IOnlineSubsystem::Get()->GetIdentityInterface();
     if (Identity.IsValid())
     {
         Identity->AddOnLoginCompleteDelegate_Handle(0, FOnLoginCompleteDelegate::CreateUObject(this, &UMyGameInstance::OnLoginComplete));
+    }
+
+	IOnlineSessionPtr Session = IOnlineSubsystem::Get()->GetSessionInterface();
+    if (Session.IsValid())
+    {
+		Session->AddOnJoinSessionCompleteDelegate_Handle(FOnJoinSessionCompleteDelegate::CreateUObject(this, &UMyGameInstance::OnJoinSessionComplete));
     }
 }
 

@@ -4,6 +4,7 @@
 #include "Interfaces/IHttpRequest.h"
 #include "OnlineSessionSettings.h"
 #include "OnlineSubsystem.h"
+#include "Interfaces/OnlineIdentityInterface.h"
 #include "OnlineSessionInfoOdinFleet.h"
 
 bool FOnlineSessionOdinFleet::FindSessions(int32 LocalUserNum, const TSharedRef<FOnlineSessionSearch>& SearchSettings)
@@ -83,37 +84,11 @@ bool FOnlineSessionOdinFleet::JoinSession(int32 LocalUserNum, FName SessionName,
 	Session->HostingPlayerNum = LocalUserNum;
 	Session->SessionInfo = DesiredSession.Session.SessionInfo;
 
-	// Get the world or owning player controller
-	ULocalPlayer* LocalPlayer = GEngine->GetFirstGamePlayer(GEngine->GameViewport);
-	if (!LocalPlayer)
-	{
-		return false;
-	}
+	
 
-	APlayerController* PC = LocalPlayer->PlayerController;
-	if (!PC)
-	{
-		return false;
-	}
+	
 
-	// Zugriff auf unsere eigene SessionInfo-Klasse
-	TSharedPtr<FOnlineSessionInfo> Info = Session->SessionInfo;
-	TSharedPtr<FOnlineSessionInfoOdinFleet> OdinInfo = StaticCastSharedPtr<FOnlineSessionInfoOdinFleet>(Info);
-
-	if (!OdinInfo.IsValid() || !OdinInfo->HostAddr->IsValid())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Invalid session info"));
-		return false;
-	}
-
-	// IP + Port zusammensetzen
-	FString Address = OdinInfo->HostAddr->ToString(false); // IP only
-	int32 Port = OdinInfo->HostAddr->GetPort();
-
-	FString TravelURL = FString::Printf(TEXT("%s:%d"), *Address, Port);
-	UE_LOG(LogTemp, Log, TEXT("Client traveling to: %s"), *TravelURL);
-
-	PC->ClientTravel(TravelURL, TRAVEL_Absolute);
+	//PC->ClientTravel(TravelURL, TRAVEL_Absolute);
 
 	// Notify game that join succeeded
 	TriggerOnJoinSessionCompleteDelegates(SessionName, EOnJoinSessionCompleteResult::Success);
@@ -133,7 +108,7 @@ FNamedOnlineSession* FOnlineSessionOdinFleet::AddNamedSession(FName SessionName,
 	TSharedPtr<FNamedOnlineSession> NewSession = MakeShared<FNamedOnlineSession>(SessionName, SessionSettings);
 
 	// In Session-Liste eintragen
-	Sessions.Add(NewSession);
+	Sessions.Add(SessionName, NewSession);
 
 	UE_LOG(LogTemp, Log, TEXT("Added new session '%s'."), *SessionName.ToString());
 
@@ -177,6 +152,11 @@ bool FOnlineSessionOdinFleet::CancelMatchmaking(const FUniqueNetId& SearchingPla
 
 bool FOnlineSessionOdinFleet::FindSessions(const FUniqueNetId& SearchingPlayerId, const TSharedRef<FOnlineSessionSearch>& SearchSettings)
 {
+	IOnlineSubsystem* Subsystem = IOnlineSubsystem::Get();
+	IOnlineIdentityPtr IdentityInterface = Subsystem ? Subsystem->GetIdentityInterface() : nullptr;
+
+	if (!IdentityInterface) return false;
+
 	return FindSessions(0, SearchSettings);
 }
 
@@ -217,12 +197,43 @@ bool FOnlineSessionOdinFleet::SendSessionInviteToFriends(const FUniqueNetId& Loc
 
 bool FOnlineSessionOdinFleet::GetResolvedConnectString(FName SessionName, FString& ConnectInfo, FName PortType)
 {
-	return false;
+	FNamedOnlineSession* Session = GetNamedSession(SessionName);
+	if (!Session) return false;
+
+	TSharedPtr<FOnlineSessionInfo> Info = Session->SessionInfo;
+	TSharedPtr<FOnlineSessionInfoOdinFleet> OdinInfo = StaticCastSharedPtr<FOnlineSessionInfoOdinFleet>(Info);
+
+	if (!OdinInfo.IsValid() || !OdinInfo->HostAddr->IsValid())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Invalid session info"));
+		return false;
+	}
+
+	FString Address = OdinInfo->HostAddr->ToString(false); // IP only
+	int32 Port = OdinInfo->HostAddr->GetPort();
+
+	ConnectInfo = FString::Printf(TEXT("%s:%d"), *Address, Port);
+
+	return true;
 }
 
 bool FOnlineSessionOdinFleet::GetResolvedConnectString(const FOnlineSessionSearchResult& SearchResult, FName PortType, FString& ConnectInfo)
 {
-	return false;
+	TSharedPtr<FOnlineSessionInfo> Info = SearchResult.Session.SessionInfo;
+	TSharedPtr<FOnlineSessionInfoOdinFleet> OdinInfo = StaticCastSharedPtr<FOnlineSessionInfoOdinFleet>(Info);
+
+	if (!OdinInfo.IsValid() || !OdinInfo->HostAddr->IsValid())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Invalid session info"));
+		return false;
+	}
+
+	FString Address = OdinInfo->HostAddr->ToString(false); // IP only
+	int32 Port = OdinInfo->HostAddr->GetPort();
+
+	ConnectInfo = FString::Printf(TEXT("%s:%d"), *Address, Port);
+
+	return true;
 }
 
 FOnlineSessionSettings* FOnlineSessionOdinFleet::GetSessionSettings(FName SessionName)

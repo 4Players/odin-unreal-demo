@@ -70,6 +70,7 @@ public:
 	{
 		TSharedPtr<const FUniqueNetIdString> NewId = MakeShared<FUniqueNetIdOdinFleet>(FString::Printf(TEXT("OdinUser%d"), LocalUserNum));
 		UserIds.Add(LocalUserNum, NewId);
+		UserIdToLocalUserNum.Add(NewId->ToString(), LocalUserNum);
 
 		auto Account = MakeShared<FUserOnlineAccountOdinFleet>(AccountCredentials.Id);
 		UserAccounts.Add(*NewId, Account);
@@ -99,6 +100,7 @@ public:
 	// Inherited via IOnlineIdentity
 	TSharedPtr<FUserOnlineAccount> GetUserAccount(const FUniqueNetId& UserId) const override;
 	TArray<TSharedPtr<FUserOnlineAccount>> GetAllUserAccounts() const override;
+	TMap<FString, int32> UserIdToLocalUserNum;
 	FUniqueNetIdPtr CreateUniquePlayerId(uint8* Bytes, int32 Size) override;
 	ELoginStatus::Type GetLoginStatus(const FUniqueNetId& UserId) const override;
 	FString GetPlayerNickname(const FUniqueNetId& UserId) const override;
