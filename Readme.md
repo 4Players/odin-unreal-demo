@@ -2,7 +2,7 @@
 
 This is a simple demonstration of the usage of the [Unreal SDK](https://github.com/4Players/odin-sdk) of 4Player's ODIN, a Voice Chat full service solution. The SDK provides an audio stream that can be processed in the audio engine of Unreal to add spatialization or audio effects.
 
-This version is built upon the [Unreal Engine's Networking Solution](https://docs.unrealengine.com/4.27/en-US/InteractiveExperiences/Networking/Overview/). This sample works for Unreal Engine 5.3+.
+This version is built upon the [Unreal Engine's Networking Solution](https://docs.unrealengine.com/4.27/en-US/InteractiveExperiences/Networking/Overview/). This sample works for Unreal Engine 5.3+. The sample's most recent release holds a client built with UE5.5 that connects with a dedicated server at [Odin Fleet](https://odin.4players.io/fleet/).
 
 An alternative version with Photon instead of Unreal Networking can be found on the [Photon Networking Branch](https://github.com/4Players/odin-unreal-demo/tree/photon-networking). That branch works for UE4.26+.
 
@@ -19,7 +19,8 @@ The Demo showcases the usage of ODIN together with Unreal's Audio Engine. The ex
 
 ## Getting Started
 
-In the releases you can find a pre-built game executable and the current project's code base.  The pre-built game can likely be executed without any installations required - if you do not have the redistributable packages of C++ installed, that Unreal needs, you can find it in the `\Engine\Extras\Redist\en-us` folder of the pre-built game. Per platform there are two builds available in a release with different Online Subsystems active, changing how clients connect to each other:
+In the releases you can find a pre-built game executable and the current project's code base.  The pre-built game can likely be executed without any installations required - if you do not have the redistributable packages of C++ installed, that Unreal needs, you can find it in the `\Engine\Extras\Redist\en-us` folder of the pre-built game. There is one client available per platform, that uses a custom Online Subsystem to connect to the dedicated [Odin Fleet Server](https://odin.4players.io/fleet/). The sample supports more Online Subsystems that can be used:
+1. OdinFleet Online Subsystem: This Subsystem connects to a custom [Azure Functions REST API](https://azure.microsoft.com/en-us/products/functions) that queries Odin Fleet for the first free running server of the demo. The client then connects to that dedicated server. This version does not need any user account and works outside a local network - there is only one global session available that is accessed by all clients for demo purposes.
 1. EOS Online Subsystem: This uses EOS for matchmaking. This version of the demo game needs the user to login to their Epic Games Account and allow the Demo Game to access basic information (user name and online presence).
 1. No Online Subsystem (also called "NULL"): This uses matchmaking over a local network. No account needed for this version but you will only be able to find other clients in the same local network.
 
@@ -30,12 +31,17 @@ To open the project in the Unreal Editor you need to install the Unreal Engine 5
 To change the Online Subsystem in the Unreal project open the `Config\DefaultEngine.ini` and change the lines
 ```
 [OnlineSubsystem]
-DefaultPlatformService=EOS
+DefaultPlatformService=OdinFleet
 ```
 to
 ```
 [OnlineSubsystem]
 DefaultPlatformService=NULL
+```
+or
+```
+[OnlineSubsystem]
+DefaultPlatformService=EOS
 ```
 
 ### Installing Visual Studio and Compiling the Project
@@ -62,7 +68,7 @@ The audio sources in the level have the same attenuation settings as the positio
 
 ## Project Structure
 
-*This guide is written for Unreal Engine version 5.3 as the project is targeted for this version of the engine. You will need to adjust for Unreal Engine 5.4 and above accordingly.*
+*This guide is written for Unreal Engine version 5.5 as the project is targeted for this version of the engine. You will need to adjust for Unreal Engine 5.4 and above accordingly.*
 
 The project is based on the **Top Down Example** by Epic Games, so most of its structure can be found in this project as well.
 
@@ -143,6 +149,12 @@ Additionally we have some functionality to adjust the APM Settings of the rooms 
 Lastly, in the `Tick` Event we start and stop the Capturing of the Proximity Chat and Radio Chat Audio Captures - depending on whether we press the **R Key** or not. The `RPressed` variable is set from the player controller class.
 
 ![OdinClientComponentTick.png.png](/Documentation/img/OdinClientComponentTick.png)
+
+## Odin Fleet Online Subsystem
+
+As mentioned before, the project uses a custom Online Subsystem (OSS) to connect to the running dedicated server in [Odin Fleet](https://odin.4players.io/fleet/). The `OdinFleet` OSS implements all necessary classes and functions in a minimal manner to enable session discovery, join and destruction. Thus, the interesting functions live inside the `IOnlineSession`-Interface, implemented in the `FOnlineSessionOdinFleet` class. `FindSessions` starts an `HTTP GET` request to a custom [Azure Functions REST API](https://azure.microsoft.com/en-us/products/functions) that returns the IP Address and open Unreal Port of the dedicated server in Odin Fleet. While the function runs on an Azure instance, its code can be found in the `AzureBackend` folder of this repository to illustrate the necessary steps to retrieve server information from Odin Fleet: The Azure Function starts an `HTTP GET` request to the Odin Fleet REST API, with proper authentication and an App ID, and receives the IP Address and Port of the first running Server of that App.
+
+Once this information is returned to the Unreal Client, it will start to Join the Session using the `JoinSession` function of the `FOnlineSessionOdinFleet` class. Once that is done, the client's Game Instance (implemented in the `MyGameInstance` class) retrieves an event and triggers its `OnJoinSessionComplete` routine, calling `APlayerController->ClientTravel()` on the local player controller, using the retrieved IP Address and Port. Now the session is handled like any Unreal Networking session using UDP/IP for communication.
 
 ## Conclusion
 
