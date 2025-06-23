@@ -83,6 +83,11 @@ void AEosPlayerController::Login()
 	}
 }
 
+void AEosPlayerController::GetOnlineSubsystem()
+{
+	IOnlineSubsystem::Get(TEXT("OdinFleet"));
+}
+
 void AEosPlayerController::Logout()
 {
 	IOnlineSubsystem* Subsystem = Online::GetSubsystem(GetWorld());
@@ -148,6 +153,8 @@ void AEosPlayerController::BeginPlay()
 	// Tutorial 2: On BeginPlay call our login function. This is only on the GameClient, not on the DedicatedServer. 
 	Super::BeginPlay(); // Call parent class BeginPlay() function
 	//Login(); //Call login function 
+
+	IOnlineSubsystem::Get();
 
 	GConfig->GetString(TEXT("OnlineSubsystem"), TEXT("DefaultPlatformService"), SelectedSubsystem, GEngineIni);
 }
