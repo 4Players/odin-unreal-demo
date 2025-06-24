@@ -156,6 +156,39 @@ As mentioned before, the project uses a custom Online Subsystem (OSS) to connect
 
 Once this information is returned to the Unreal Client, it will start to Join the Session using the `JoinSession` function of the `FOnlineSessionOdinFleet` class. Once that is done, the client's Game Instance (implemented in the `MyGameInstance` class) retrieves an event and triggers its `OnJoinSessionComplete` routine, calling `APlayerController->ClientTravel()` on the local player controller, using the retrieved IP Address and Port. Now the session is handled like any Unreal Networking session using UDP/IP for communication.
 
+### Hosting an own instance of the demo
+
+You can duplicate the setup of the demo in your own infrastructure - e.g. when you wish a closed demonstration of Odin. To run your own instance you need to run a dedicated server in Odin Fleet, create an own instance of the Azure Functions Backend and finally update the URL that the OdinFleet OSS uses for its HTTP Requests. This section will go through each of these steps.
+
+#### 1. Run a Dedicated Game Server on Odin Fleet
+
+To run a dedicated game server on Odin Fleet you first need to create a [Docker Image](https://www.docker.com/) - e.g. on [Docker Hub](https://hub.docker.com/). To get started, you can build the image locally, using [Docker Desktop](https://www.docker.com/), and configure it for Linux Containers (this is also possible on a Windows Machine, [as described here](https://learn.microsoft.com/en-us/virtualization/windowscontainers/deploy-containers/set-up-linux-containers)) and optionally sign up or login to [Docker Hub](https://hub.docker.com/). You can use the packaged build from the [most recent release](https://github.com/4Players/odin-unreal-demo/releases/latest). Once downloaded, unpack it and place a Dockerfile next to it, you can use the [example dockerfile in this repository](https://github.com/4Players/odin-unreal-demo/blob/main/dockerfile) as a reference. Now, open a Shell, or Command Prompt respectively, and navigate to the folder containing the unpacked LinuxServer-Package and the dockerfile. Here you can now build, tag and push your docker container image. If you did not login to Dockerhub, or want to use another container registry, you need to follow steps specific to the registry in order to authenticate before pushing the container image.
+
+```
+docker build -t odin-unreal-demo-linux-server .
+docker tag odin-unreal-demo-linux-server <your-registry>/odin-unreal-demo-linux-server:latest
+docker push <your-registry>/odin-unreal-demo-linux-server
+```
+
+After the image is pushed, you can now use it in Odin Fleet. Follow the [Getting Started Guide](https://docs.4players.io/fleet/guides/getting-started) to create an Account, add an Application and reference the container image from your registry that you just created. Next, create a Server Configuration - make sure to open a Port for the Unreal Communication in the Advanced Server Settings. For the example dockerfile it should be Port 7777 and Protocol should be set to UDP. Lastly create a Server Deployment of your choice from the configuration to start the server. You now have a running instance of your Odin Unreal Sample's dedicated server executable!
+
+#### 2. Run an Azure Function App
+
+Next, we need to create and configure an Azure Function App to run the backend code that communicates with the Odin Fleet API. For this step, you need a Microsoft Azure Account, [you can start here](https://azure.microsoft.com/en-us/Free) to use the Azure Portal.  For this, download or clone the repository's code and build it, e.g. using [Visual Studio](https://visualstudio.microsoft.com/). You can use the Visual Studio IDE to deploy the function app directly to your account (creating a new function app or deploying to an existing one), or you can use another method, if needed, like [Zip Deployment for Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/deployment-zip-push).
+
+Once the App runs on your Azure Account, you need to add two Environment Variables to your Function App's configuration. See [the Microsoft Documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings?tabs=azure-portal%2Cto-premium) for a detailed guide on how to set Environment Variables in your Apps. Fetch the App ID of your Odin Fleet App in the [4Players Console](https://console.4players.io/) and create a Personal Access Token in the Settings Section of the App. Set these as the respective Environment Variables of your Function App:
+
+```
+"ODIN_APP_ID": "<your app id>",
+"ODIN_API_TOKEN": "<your personal access token>"
+```
+
+Now the Azure Function App is running and can authenticate when accessing the Odin Fleet API!
+
+#### 3. Update OSS URL
+
+Lastly, we need to adjust the URL that is called when trying to find sessions. Retrieve the URL from your Function App and copy it in the code of the Unreal Client's OSS in [/Plugins/OnlineSubsystemOdinFleet/Source/OnlineSubsystemOdinFleet/Private/OnlineSessionOdinFleet.cpp](https://github.com/4Players/odin-unreal-demo/blob/main/Plugins/OnlineSubsystemOdinFleet/Source/OnlineSubsystemOdinFleet/Private/OnlineSessionOdinFleet.cpp) in the call to `Request->SetUrl()`. Now you can repackage the client and you are set to use the Odin Unreal Demo in your own infrastructure!
+
 ## Conclusion
 
 This was a rough rundown of the demo project - to get started in your own project with ODIN you can copy and paste any portions of the project. Also have a look at the [ODIN Unreal SDK Manual](https://www.4players.io/odin/sdk/unreal/manual/). Here you have a step by step guide on how to implement the ODIN SDK in your application. On the [4Players Website](https://www.4players.io/products/voice-chat/) you get all information on how to integrate ODIN properly.
