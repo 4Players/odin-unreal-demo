@@ -6,19 +6,25 @@
 #include "OnlineSubsystem.h"
 #include "Interfaces/OnlineIdentityInterface.h"
 #include "OnlineSessionInfoOdinFleet.h"
+#include "Misc/FileHelper.h"
+#include "Misc/Paths.h"
+#include "Json.h"
 
 bool FOnlineSessionOdinFleet::FindSessions(int32 LocalUserNum, const TSharedRef<FOnlineSessionSearch>& SearchSettings)
 {
 	TSharedRef<FOnlineSessionOdinFleet> SessionRef = SharedThis(this);
 
+	LoadConfiguration();
+
 	auto Request = FHttpModule::Get().CreateRequest();
-	Request->SetURL("https://odin-unreal-sample-fleet-api.azurewebsites.net/api/GetServer");
+	Request->SetURL(Url);
 	Request->SetVerb("GET");
 	Request->OnProcessRequestComplete().BindLambda([SessionRef, SearchSettings](FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
 		{
 			if (!bWasSuccessful || !Response.IsValid() || Response->GetResponseCode() != 200)
 			{
 				UE_LOG(LogTemp, Error, TEXT("Failed to find session from Azure Function."));
+				SessionRef->TriggerOnFindSessionsCompleteDelegates(false);
 				return;
 			}
 
@@ -29,6 +35,7 @@ bool FOnlineSessionOdinFleet::FindSessions(int32 LocalUserNum, const TSharedRef<
 			if (!FJsonSerializer::Deserialize(Reader, Json) || !Json.IsValid())
 			{
 				UE_LOG(LogTemp, Error, TEXT("Invalid JSON from Azure Function."));
+				SessionRef->TriggerOnFindSessionsCompleteDelegates(false);
 				return;
 			}
 
@@ -267,4 +274,37 @@ void FOnlineSessionOdinFleet::RegisterLocalPlayer(const FUniqueNetId& PlayerId, 
 
 void FOnlineSessionOdinFleet::UnregisterLocalPlayer(const FUniqueNetId& PlayerId, FName SessionName, const FOnUnregisterLocalPlayerCompleteDelegate& Delegate)
 {
+}
+
+bool FOnlineSessionOdinFleet::LoadConfiguration() 
+{
+	FString JsonPathRel = FPaths::Combine(TEXT("Data"), TEXT("OdinFleetConfig.json"));
+
+#if WITH_EDITOR
+	FString JsonPathAbs = FPaths::Combine(FPaths::ProjectDir(), JsonPathRel);
+#else
+	FString JsonPathAbs = FPaths::Combine(FPaths::LaunchDir(), JsonPathRel);
+#endif
+
+	FString JsonString;
+	if (FFileHelper::LoadFileToString(JsonString, *JsonPathAbs))
+	{
+		TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(JsonString);
+		TSharedPtr<FJsonObject> JsonObject;
+		if (FJsonSerializer::Deserialize(Reader, JsonObject) && JsonObject.IsValid())
+		{
+			Url = JsonObject->GetStringField("Url");
+			return true;
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("Failed to parse JSON from %s"), *JsonPathAbs);
+			return false;
+		}
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to load JSON file from %s"), *JsonPathAbs);
+		return false;
+	}
 }
