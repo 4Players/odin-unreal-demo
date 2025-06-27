@@ -169,6 +169,18 @@ docker build -t odin-unreal-demo-linux-server .
 docker tag odin-unreal-demo-linux-server <your-registry>/odin-unreal-demo-linux-server:latest
 docker push <your-registry>/odin-unreal-demo-linux-server
 ```
+To test the image, you can also run the image locally, 17778 can be any free IP port of your local machine:
+
+```
+docker run -p 17778:7777/udp --name unreal-demo-test -d odin-unreal-demo-linux-server
+```
+
+Now you can start the Unreal Client and connect directly to the VM using Command Line Options when starting, navigate to the folder with the executable in your Command Prompt or Shell and then:
+
+```
+[GameExecutable] 127.0.0.1:17778
+```
+This should now open the game's level instead of lobby menu and you can run around. If you want start a second client and see if they can now see each other. If everything is fine you can proceed to setup the Server in Odin Fleet.
 
 After the image is pushed, you can now use it in Odin Fleet. Follow the [Getting Started Guide](https://docs.4players.io/fleet/guides/getting-started) to create an Account, add an Application and reference the container image from your registry that you just created. Next, create a Server Configuration - make sure to open a Port for the Unreal Communication in the Advanced Server Settings. For the example dockerfile it should be Port 7777 and Protocol should be set to UDP. Lastly create a Server Deployment of your choice from the configuration to start the server. You now have a running instance of your Odin Unreal Sample's dedicated server executable!
 
@@ -187,7 +199,7 @@ Now the Azure Function App is running and can authenticate when accessing the Od
 
 #### 3. Update OSS URL
 
-Lastly, we need to adjust the URL that is called when trying to find sessions. Retrieve the URL from your Function App and copy it in the code of the Unreal Client's OSS in [/Plugins/OnlineSubsystemOdinFleet/Source/OnlineSubsystemOdinFleet/Private/OnlineSessionOdinFleet.cpp](https://github.com/4Players/odin-unreal-demo/blob/main/Plugins/OnlineSubsystemOdinFleet/Source/OnlineSubsystemOdinFleet/Private/OnlineSessionOdinFleet.cpp) in the call to `Request->SetUrl()`. Now you can repackage the client and you are set to use the Odin Unreal Demo in your own infrastructure!
+Lastly, we need to adjust the URL that is called when trying to find sessions. Retrieve the URL from your Function App and copy it in the Main Menu's settings to the `Backend URL` textbox. Now, once you `Join` in the Main Menu, the OdinFleet OSS will ask the alternative Backend. This is saved to a json-file inside the packaged game folder, so when you distribute the packaged game to the other players, make sure to copy the json file with it, so that they do not need to re-configure.
 
 ## Conclusion
 
