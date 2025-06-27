@@ -6,7 +6,12 @@
 
 bool FOnlineSubsystemOdinFleet::Init()
 {
-    SessionInterface = MakeShared<FOnlineSessionOdinFleet>() ;
+    auto OdinFleetSessionInterface = MakeShared<FOnlineSessionOdinFleet>();
+
+    OdinFleetSessionInterface->LoadConfiguration();
+
+    SessionInterface = OdinFleetSessionInterface;
+
     IdentityInterface = MakeShared<FOnlineIdentityOdinFleet>();
     return true;
 }

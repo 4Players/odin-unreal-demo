@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Interfaces/OnlineSessionInterface.h"
+#include "GameFramework/SaveGame.h"
 
 class FOnlineSessionOdinFleet : public IOnlineSession, public TSharedFromThis<FOnlineSessionOdinFleet>
 {
@@ -57,4 +58,9 @@ public:
 	bool UnregisterPlayers(FName SessionName, const TArray<FUniqueNetIdRef>& Players) override;
 	void RegisterLocalPlayer(const FUniqueNetId& PlayerId, FName SessionName, const FOnRegisterLocalPlayerCompleteDelegate& Delegate) override;
 	void UnregisterLocalPlayer(const FUniqueNetId& PlayerId, FName SessionName, const FOnUnregisterLocalPlayerCompleteDelegate& Delegate) override;
+
+	bool LoadConfiguration();
+
+private:
+	FString Url = TEXT("https://odin-unreal-sample-fleet-api.azurewebsites.net/api/GetServer");
 };

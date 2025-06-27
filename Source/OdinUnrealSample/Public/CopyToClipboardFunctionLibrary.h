@@ -17,4 +17,10 @@ class ODINUNREALSAMPLE_API UCopyToClipboardFunctionLibrary : public UBlueprintFu
 public:
 	UFUNCTION(BlueprintCallable, Category = "Platform|Clipboard")
 	static void CopyToClipboard(FString Text);
+
+	UFUNCTION(BlueprintCallable, Category = "Platform|SaveFile")
+	static void SaveBackendConfigToJson(FString Text);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Platform|SaveFile")
+	static FString LoadBackendConfigFromJson();
 };
