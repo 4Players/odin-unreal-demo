@@ -13,13 +13,10 @@ void UCopyToClipboardFunctionLibrary::CopyToClipboard(FString Text)
 
 void UCopyToClipboardFunctionLibrary::SaveBackendConfigToJson(FString Text)
 {
-	FString JsonPathRel = FPaths::Combine(TEXT("Data"), TEXT("OdinFleetConfig.json"));
+	FString JsonPathRel = TEXT("OdinFleetConfig.json");
 
-#if WITH_EDITOR
-	FString JsonPathAbs = FPaths::Combine(FPaths::ProjectDir(), JsonPathRel);
-#else
-	FString JsonPathAbs = FPaths::Combine(FPaths::LaunchDir(), JsonPathRel);
-#endif
+
+	FString JsonPathAbs = FPaths::Combine(FPaths::ProjectSavedDir(), JsonPathRel);
 
 	TSharedPtr<FJsonObject> JsonObject = MakeShared<FJsonObject>();
 
@@ -45,13 +42,10 @@ void UCopyToClipboardFunctionLibrary::SaveBackendConfigToJson(FString Text)
 
 FString UCopyToClipboardFunctionLibrary::LoadBackendConfigFromJson()
 {
-	FString JsonPathRel = FPaths::Combine(TEXT("Data"), TEXT("OdinFleetConfig.json"));
+	FString JsonPathRel = TEXT("OdinFleetConfig.json");
 
-#if WITH_EDITOR
-	FString JsonPathAbs = FPaths::Combine(FPaths::ProjectDir(), JsonPathRel);
-#else
-	FString JsonPathAbs = FPaths::Combine(FPaths::LaunchDir(), JsonPathRel);
-#endif
+
+	FString JsonPathAbs = FPaths::Combine(FPaths::ProjectSavedDir(), JsonPathRel);
 
 	FString JsonString;
 	if (FFileHelper::LoadFileToString(JsonString, *JsonPathAbs))
