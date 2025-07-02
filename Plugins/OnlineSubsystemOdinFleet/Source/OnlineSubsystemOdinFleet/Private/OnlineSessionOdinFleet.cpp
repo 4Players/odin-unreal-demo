@@ -278,13 +278,10 @@ void FOnlineSessionOdinFleet::UnregisterLocalPlayer(const FUniqueNetId& PlayerId
 
 bool FOnlineSessionOdinFleet::LoadConfiguration() 
 {
-	FString JsonPathRel = FPaths::Combine(TEXT("Data"), TEXT("OdinFleetConfig.json"));
+	FString JsonPathRel = TEXT("OdinFleetConfig.json");
 
-#if WITH_EDITOR
-	FString JsonPathAbs = FPaths::Combine(FPaths::ProjectDir(), JsonPathRel);
-#else
-	FString JsonPathAbs = FPaths::Combine(FPaths::LaunchDir(), JsonPathRel);
-#endif
+
+	FString JsonPathAbs = FPaths::Combine(FPaths::ProjectSavedDir(), JsonPathRel);
 
 	FString JsonString;
 	if (FFileHelper::LoadFileToString(JsonString, *JsonPathAbs))
