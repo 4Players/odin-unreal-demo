@@ -82,9 +82,13 @@ void FOdinModule::StartupModule()
 #endif
 #endif
 
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
+    FString OdinConfigPath = FConfigCacheIni::NormalizeConfigIniPath(
+        FPaths::Combine(FPaths::ProjectPluginsDir(), TEXT("Odin/Config/Odin.ini")));
+#else
     FString OdinConfigPath =
         FPaths::Combine(FPaths::ProjectPluginsDir(), TEXT("Odin/Config/Odin.ini"));
-
+#endif
     if (FPaths::FileExists(OdinConfigPath)) {
         GConfig->LoadFile(OdinConfigPath);
     }
@@ -123,6 +127,12 @@ void FOdinModule::LogErrorCode(FString Prefix, uint32_t ErrorCode)
 {
     FString ErrorMessage = UOdinFunctionLibrary::FormatError(ErrorCode, false);
     UE_LOG(Odin, Error, TEXT("%s, Error: %s"), *Prefix, *ErrorMessage);
+}
+
+void FOdinModule::LogReturnCode(FString Prefix, uint32_t ReturnCode)
+{
+    FString Message = UOdinFunctionLibrary::FormatError(ReturnCode, false);
+    UE_LOG(Odin, Display, TEXT("%s Reason: %s"), *Prefix, *Message);
 }
 
 #undef LOCTEXT_NAMESPACE
