@@ -64,6 +64,14 @@ void UOdinCaptureMedia::SetAudioGenerator(UAudioGenerator* audioGenerator)
             static_cast<uint32_t>(GetSampleRate()), static_cast<uint8_t>(GetNumChannels())});
     }
 
+    if (const UWorld* World = audioGenerator->GetWorld()) {
+        if (const UGameInstance* GameInstance = World->GetGameInstance()) {
+            if (UOdinSubsystem* OdinSubsystem = GameInstance->GetSubsystem<UOdinSubsystem>()) {
+                OdinSubsystemPtr = OdinSubsystem;
+            }
+        }
+    }
+
     TWeakObjectPtr<UOdinCaptureMedia> WeakThisPtr = this;
     if (audio_capture_ && IsValid(audio_capture_)) {
         TWeakObjectPtr<UAudioGenerator> WeakAudioGenerator = audio_capture_;
@@ -84,8 +92,9 @@ void UOdinCaptureMedia::SetAudioGenerator(UAudioGenerator* audioGenerator)
 
 void UOdinCaptureMedia::Reset()
 {
-    FScopeLock lock(&this->capture_generator_delegate_);
+    UE_LOG(Odin, Verbose, TEXT("UOdinCaptureMedia::Reset()"));
     if (nullptr != audio_capture_) {
+        FScopeLock lock(&this->capture_generator_delegate_);
         audio_capture_->RemoveGeneratorDelegate(audio_generator_handle_);
         audio_capture_                = nullptr;
         this->audio_generator_handle_ = {};
@@ -99,12 +108,15 @@ void UOdinCaptureMedia::Reset()
 
 OdinReturnCode UOdinCaptureMedia::ResetOdinStream()
 {
-    FScopeLock lock(&this->capture_generator_delegate_);
+    UE_LOG(Odin, Verbose, TEXT("UOdinCaptureMedia::ResetOdinStream()"));
     if (nullptr != audio_capture_) {
+        FScopeLock lock(&this->capture_generator_delegate_);
         this->audio_capture_->RemoveGeneratorDelegate(this->audio_generator_handle_);
     }
-
-    this->audio_generator_handle_ = {};
+    {
+        FScopeLock lock(&this->capture_generator_delegate_);
+        this->audio_generator_handle_ = {};
+    }
 
     if (this->stream_handle_) {
         auto result          = odin_media_stream_destroy(this->stream_handle_);
@@ -157,6 +169,8 @@ bool UOdinCaptureMedia::GetIsMuted() const
 
 void UOdinCaptureMedia::SetIsMuted(bool bNewIsMuted)
 {
+    UE_LOG(Odin, Verbose, TEXT("UOdinCaptureMedia::SetIsMuted New Is Muted State: %s"),
+           bNewIsMuted ? TEXT("True") : TEXT("False"));
     bIsMuted = bNewIsMuted;
 }
 
@@ -167,6 +181,7 @@ void UOdinCaptureMedia::Reconnect()
 
 void UOdinCaptureMedia::BeginDestroy()
 {
+    UE_LOG(Odin, Verbose, TEXT("UOdinCaptureMedia::BeginDestroy()"));
     Reset();
     delete[] volume_adjusted_audio_;
     volume_adjusted_audio_ = nullptr;
@@ -236,21 +251,17 @@ void UOdinCaptureMedia::AudioGeneratorCallback(UOdinCaptureMedia*     Media,
             }
         }
 
-        if (const UWorld* World = Media->GetWorld()) {
-            if (const UGameInstance* GameInstance = World->GetGameInstance()) {
-                if (UOdinSubsystem* OdinSubsystem = GameInstance->GetSubsystem<UOdinSubsystem>()) {
-                    TRACE_CPUPROFILER_EVENT_SCOPE(
-                        UOdinAudioCapture::AudioGeneratorCallback : OdinSubsystem->PushAudio);
-                    OdinSubsystem->PushAudio(Media->stream_handle_, Media->volume_adjusted_audio_,
-                                             TargetSampleCount);
-                }
-            }
+        if (UOdinSubsystem* OdinSubsystem = Media->OdinSubsystemPtr.Get()) {
+            TRACE_CPUPROFILER_EVENT_SCOPE(
+                UOdinAudioCapture::AudioGeneratorCallback : OdinSubsystem->PushAudio);
+            OdinSubsystem->PushAudio(Media->stream_handle_, Media->volume_adjusted_audio_,
+                                     TargetSampleCount);
         }
 
         {
             TRACE_CPUPROFILER_EVENT_SCOPE(
                 UOdinAudioCapture::AudioGeneratorCallback : Audio Buffer Listener Callbacks);
-            for (IAudioBufferListener* AudioBufferListener : Media->AudioBufferListeners) {
+            for (IAudioBufferListener* AudioBufferListener : Media->GetAudioBufferListeners()) {
                 if (AudioBufferListener) {
                     const int32 OdinForcedNumChannels =
                         Media->GetEnableMonoMixing() ? 1 : StreamNumChannels;
@@ -322,7 +333,9 @@ void UOdinCaptureMedia::ReconnectCaptureMedia(TWeakObjectPtr<UOdinCaptureMedia> 
                    *FormattedError);
         } else {
             roomPointer->BindCaptureMedia(OdinCaptureMedia);
-            UE_LOG(Odin, Verbose, TEXT("Binding to New Capture Media."));
+            UE_LOG(Odin, Verbose,
+                   TEXT("UOdinCaptureMedia::ReconnectCaptureMedia was successful, binding to New "
+                        "Capture Media."));
         }
         CaptureMedia->bIsBeingReset = false;
     });

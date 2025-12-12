@@ -25,8 +25,9 @@ UOdinRoom::UOdinRoom(const class FObjectInitializer& PCIP)
 
 void UOdinRoom::BeginDestroy()
 {
+    UE_LOG(Odin, Verbose, TEXT("UOdinRoom::BeginDestroy()"));
+    this->Destroy();
     Super::BeginDestroy();
-    this->CleanUp();
 }
 
 void UOdinRoom::FinishDestroy()
@@ -74,29 +75,15 @@ void UOdinRoom::CleanUp()
         this->medias_.Empty();
     }
 
-    bool bIsInitialized = false;
-    if (UWorld* World = GetWorld()) {
-        if (UGameInstance* GameInstance = World->GetGameInstance()) {
-            if (UOdinSubsystem* OdinSubsystem = GameInstance->GetSubsystem<UOdinSubsystem>()) {
-                bIsInitialized = OdinSubsystem->IsOdinInitialized();
-            }
-        }
-    }
+    UE_LOG(Odin, Verbose, TEXT("UOdinRoom::CleanUp() starting DestroyRoomTask"));
+    (new FAutoDeleteAsyncTask<DestroyRoomTask>(RoomHandle()))->StartBackgroundTask();
 
-    if (room_handle_ > 0) {
-        if (bIsInitialized) {
-            (new FAutoDeleteAsyncTask<DestroyRoomTask>(RoomHandle()))->StartBackgroundTask();
-        }
-        room_handle_ = 0;
-    } else {
-        UE_LOG(Odin, Log,
-               TEXT("UOdinRoom::Cleanup(): Aborted starting destroy room task, room handle is "
-                    "already invalid."));
-    }
+    room_handle_ = 0;
 
     if (submix_listener_) {
         submix_listener_->StopSubmixListener();
     }
+    UE_LOG(Odin, Verbose, TEXT("UOdinRoom::CleanUp() done"));
 }
 
 void UOdinRoom::DeregisterRoomFromSubsystem()
@@ -201,17 +188,19 @@ void UOdinRoom::UpdateAPMConfig(FOdinApmSettings apm_config)
     odin_apm_config.gain_controller_version =
         static_cast<OdinGainControllerVersion>(apm_config.GainControllerVersion);
 
-    if (nullptr == submix_listener_) {
-        submix_listener_ = NewObject<UOdinSubmixListener>(this);
-        submix_listener_->SetRoom(this->room_handle_);
-    }
     if (odin_apm_config.echo_canceller) {
+        if (nullptr == submix_listener_) {
+            submix_listener_ = NewObject<UOdinSubmixListener>(this);
+            submix_listener_->SetRoom(this->room_handle_);
+        }
         if (!bWasStreamDelayInitialized) {
             UpdateAPMStreamDelay(200);
         }
         submix_listener_->StartSubmixListener();
     } else {
-        submix_listener_->StopSubmixListener();
+        if (submix_listener_) {
+            submix_listener_->StopSubmixListener();
+        }
     }
 
     switch (apm_config.noise_suppression_level) {
