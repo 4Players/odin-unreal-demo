@@ -69,12 +69,10 @@ void OdinMediaSoundGenerator::SetStreamReader(
     }
 }
 
-#if ENGINE_MAJOR_VERSION >= 5
 bool OdinMediaSoundGenerator::IsFinished() const
 {
     return bWasMediaStreamInvalid;
 }
-#endif
 
 void OdinMediaSoundGenerator::AddAudioBufferListener(IAudioBufferListener* InAudioBufferListener)
 {

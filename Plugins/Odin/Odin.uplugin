@@ -1,9 +1,8 @@
 {
-	"FileVersion": 2,
-	"EngineVersion": "5.6",
-	"Version": 830,
-	"PlatformAllowList": [ "Win64", "Mac", "IOS", "Linux", "LinuxArm64", "Android"],
+	"FileVersion": 3,
+	"Version": 1,
 	"VersionName": "1.12.2",
+		"PlatformAllowList": [ "Win64", "Mac", "IOS", "Linux", "LinuxArm64", "Android"],
 	"FriendlyName": "4Players ODIN",
 	"Description": "Unreal integration plugin to integrate real-time chat technology into your game",
 	"Category": "Other",
@@ -12,16 +11,22 @@
 	"DocsURL": "https://www.4players.io/odin/sdk/unreal/",
 	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/f45b045efc62416e9f6e6858519ab999",
 	"SupportURL": "",
+	"EngineVersion": "5.7.0",
 	"CanContainContent": false,
-	"IsBetaVersion": false,
-	"IsExperimentalVersion": false,
-	"Installed": false,
+	"Installed": true,
 	"Modules": [
 		{
 			"Name": "Odin",
 			"Type": "Runtime",
 			"LoadingPhase": "PreDefault",
-			"PlatformAllowList": [ "Win64", "Mac", "IOS", "Linux", "LinuxArm64", "Android"],
+			"PlatformAllowList": [
+				"Win64",
+				"Mac",
+				"IOS",
+				"Linux",
+				"LinuxArm64",
+				"Android"
+			],
 			"AdditionalDependencies": [
 				"AudioMixer",
 				"AudioCapture"
@@ -32,7 +37,14 @@
 		{
 			"Name": "AudioCapture",
 			"Enabled": true,
-			"PlatformAllowList": [ "Win64", "Mac", "IOS", "Linux", "LinuxArm64", "Android"]
+			"PlatformAllowList": [
+				"Win64",
+				"Mac",
+				"IOS",
+				"Linux",
+				"LinuxArm64",
+				"Android"
+			]
 		}
 	]
 }
