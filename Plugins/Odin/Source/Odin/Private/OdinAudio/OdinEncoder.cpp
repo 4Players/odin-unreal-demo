@@ -8,11 +8,11 @@
 #include "OdinVoice.h"
 #include "SampleBuffer.h"
 #include "OdinAudio/OdinPipeline.h"
-#include "Engine/Engine.h"
+#include "Runtime/Launch/Resources/Version.h"
 
 UOdinEncoder::UOdinEncoder(const class FObjectInitializer& PCIP)
     : Super(PCIP)
-    , SubmixListener(MakeUnique<FOdinSubmixListener>())
+    , SubmixListener(MakeShared<FOdinSubmixListener>())
 {
 }
 
@@ -23,13 +23,14 @@ void UOdinEncoder::BeginDestroy()
         AudioGenerator->RemoveGeneratorDelegate(Audio_Generator_Handle);
     }
     this->AudioGenerator = nullptr;
-    if (FreeEncoderHandle(GetHandle())) {
-        SetHandle(nullptr);
-    }
+    FreeEncoder(this);
     if (Pipeline) {
         Pipeline->OnApmConfigChanged.RemoveDynamic(this, &UOdinEncoder::OnPipelineApmConfigChanged);
     }
-    SubmixListener.Reset();
+    if (SubmixListener.IsValid()) {
+        SubmixListener->DetachFromSubmix();
+        SubmixListener.Reset();
+    }
 
     Super::BeginDestroy();
 }
@@ -122,6 +123,10 @@ bool UOdinEncoder::FreeEncoder(UOdinEncoder* Encoder)
         return false;
     }
 
+    if (Encoder->SubmixListener.IsValid()) {
+        Encoder->SubmixListener->DetachFromSubmix();
+    }
+
     const bool Result = FreeEncoderHandle(Encoder->GetHandle());
     if (Result) {
         Encoder->SetHandle(nullptr);
@@ -184,12 +189,12 @@ bool UOdinEncoder::GetIsSilent() const
     return odin_encoder_is_silent(this->GetHandle());
 }
 
-bool UOdinEncoder::SetAudioEventHandler(int EFilter, UOdinEncoder* UserData) const
+bool UOdinEncoder::SetAudioEventHandler(int EFilter)
 {
     TRACE_CPUPROFILER_EVENT_SCOPE(UOdinEncoder::SetAudioEventHandler);
-    const TWeakObjectPtr<UOdinEncoder> DataPtr = UserData;
-    auto Result = odin_encoder_set_event_callback(this->GetHandle(), static_cast<enum OdinAudioEvents>(EFilter), this->OdinEncoderEventCallbackFunc,
-                                                  DataPtr.IsValid() ? DataPtr.Get() : nullptr);
+    const TWeakObjectPtr<UOdinEncoder> DataPtr = this;
+    const auto Result = odin_encoder_set_event_callback(this->GetHandle(), static_cast<enum OdinAudioEvents>(EFilter), this->OdinEncoderEventCallbackFunc,
+                                                        DataPtr.IsValid() ? DataPtr.Get() : nullptr);
     if (Result != OdinError::ODIN_ERROR_SUCCESS) {
         FOdinModule::LogErrorCode("Aborting SetAudioEventHandler due to invalid odin_encoder_set_event_callback call: %s", Result);
         return false;
@@ -197,28 +202,31 @@ bool UOdinEncoder::SetAudioEventHandler(int EFilter, UOdinEncoder* UserData) con
     return true;
 }
 
-void UOdinEncoder::HandleOdinAudioEventCallback(OdinEncoder* EncoderHandle, const OdinAudioEvents Events, TWeakObjectPtr<UOdinEncoder> Encoder)
+void UOdinEncoder::HandleOdinAudioEventCallback(OdinEncoder* EncoderHandle, const OdinAudioEvents Events, TWeakObjectPtr<UOdinEncoder> WeakEncoderPtr)
 {
     TRACE_CPUPROFILER_EVENT_SCOPE(UOdinEncoder::HandleOdinAudioEventCallback)
     auto filter = static_cast<EOdinAudioEvents>(Events);
     ODIN_LOG(VeryVerbose, "Received HandleOdinAudioEventCallback for Encoder %p, Event: %s (%d)", EncoderHandle, *UEnum::GetValueAsString(filter), Events);
-    if (!Encoder.IsValid() || Encoder.IsStale(true, true))
+    if (!WeakEncoderPtr.IsValid() || WeakEncoderPtr.IsStale(true, true)) {
+        ODIN_LOG(VeryVerbose, "HandleOdinAudioEventCallback is aborted, referenced Encoder UObject is not valid anymore for Encoder %p, Event: %s, (%d)",
+                 EncoderHandle, *UEnum::GetValueAsString(filter), Events);
         return;
-
-    // it is possible to proxy a callback
-    if (const OdinEncoder* userDataHandle = Encoder->GetHandle(); userDataHandle != EncoderHandle) {
-        ODIN_LOG(Verbose, "Received missmatch Encoder %p != %p in HandleOdinAudioEventCallback. Redirect to %p", EncoderHandle, userDataHandle, userDataHandle);
     }
 
-    if (Encoder->OnAudioEventCallbackBP.IsBound()) {
-        // dispatch
-        FFunctionGraphTask::CreateAndDispatchWhenReady(
-            [Encoder, filter]() {
-                if (Encoder->OnAudioEventCallbackBP.IsBound())
-                    Encoder->OnAudioEventCallbackBP.Broadcast(Encoder.Get(), filter);
-            },
-            TStatId(), nullptr, ENamedThreads::GameThread);
-    }
+    FFunctionGraphTask::CreateAndDispatchWhenReady(
+        [EncoderHandle, WeakEncoderPtr, filter]() {
+            if (UOdinEncoder* EncoderPtr = WeakEncoderPtr.Get()) {
+                // it is possible to proxy a callback
+                if (const OdinEncoder* userDataHandle = EncoderPtr->GetHandle(); userDataHandle != EncoderHandle) {
+                    ODIN_LOG(Verbose, "Received missmatch Encoder %p != %p in HandleOdinAudioEventCallback. Redirect to %p", EncoderHandle, userDataHandle,
+                             userDataHandle);
+                }
+                if (EncoderPtr->OnAudioEventCallbackBP.IsBound()) {
+                    EncoderPtr->OnAudioEventCallbackBP.Broadcast(EncoderPtr, filter);
+                }
+            }
+        },
+        TStatId(), nullptr, ENamedThreads::GameThread);
 }
 
 void UOdinEncoder::SetAudioGenerator(UAudioGenerator* Generator)
@@ -384,7 +392,6 @@ FOdinSubmixListener::FOdinSubmixListener()
 FOdinSubmixListener::~FOdinSubmixListener()
 {
     ODIN_LOG(Log, "Odin Submix Listener destroyed.");
-    DetachFromSubmix();
     FAudioDeviceManagerDelegates::OnAudioDeviceCreated.Remove(AudioDeviceCreatedCallbackHandle);
     FAudioDeviceManagerDelegates::OnAudioDeviceDestroyed.Remove(AudioDeviceDestroyedCallbackHandle);
 }
@@ -393,7 +400,7 @@ void FOdinSubmixListener::OnNewSubmixBuffer(const USoundSubmix* OwningSubmix, fl
                                             double AudioClock)
 {
     TRACE_CPUPROFILER_EVENT_SCOPE(FOdinSubmixListener::OnNewSubmixBuffer);
-    if (PipelineHandle.IsValid()) {
+    if (bIsListening && PipelineHandle.IsValid()) {
         const OdinPipeline* OdinPipeline = PipelineHandle->GetHandle();
 
         TArray<uint32> EffectIds;
@@ -436,17 +443,30 @@ void FOdinSubmixListener::AttachToSubmix()
         bIsListening = true;
         ListenTargetId.Reset();
         ListenTargetId = MakeShared<Audio::DeviceID>(AudioDevice.GetDeviceID());
+
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 4
+        USoundSubmix* ConnectedSubmix = &AudioDevice->GetMainSubmixObject();
+        AudioDevice->RegisterSubmixBufferListener(AsShared(), *ConnectedSubmix);
+#else
         AudioDevice->RegisterSubmixBufferListener(this);
+#endif
+
         ODIN_LOG(Log, "FOdinSubmixListener::AttachToSubmix Successfully started listening to submix");
     }
 }
 
 void FOdinSubmixListener::AddEffectId(const uint32 EffectId)
 {
-    FScopeLock EffectAccessLock(&EffectIdAccessSection);
-    ApmEffectIds.AddUnique(EffectId);
-    ODIN_LOG(Log, "Added effect id %d", EffectId);
-    if (ApmEffectIds.Num() > 0 && !bIsListening) {
+    int32 NumApmEffects;
+    {
+        FScopeLock EffectAccessLock(&EffectIdAccessSection);
+        if (!ApmEffectIds.Contains(EffectId)) {
+            ODIN_LOG(Log, "Added effect id %d", EffectId);
+            ApmEffectIds.AddUnique(EffectId);
+        }
+        NumApmEffects = ApmEffectIds.Num();
+    }
+    if (NumApmEffects > 0 && !bIsListening) {
         AttachToSubmix();
     }
 }
@@ -464,7 +484,18 @@ void FOdinSubmixListener::DetachFromSubmix()
     }
 
     if (FAudioDeviceHandle AudioDevice = FAudioDevice::GetAudioDeviceManager()->GetAudioDevice(*ListenTargetId); AudioDevice.IsValid()) {
+
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 4
+        USoundSubmix* ConnectedSubmix = &AudioDevice->GetMainSubmixObject();
+        if (!ConnectedSubmix) {
+            UE_LOG(Odin, Error, TEXT("UOdinSubmixListener: StopSubmixListener failed, Connected Submix is invalid."));
+            return;
+        }
+        AudioDevice->UnregisterSubmixBufferListener(AsShared(), *ConnectedSubmix);
+#else
         AudioDevice->UnregisterSubmixBufferListener(this);
+#endif
+
         bIsListening = false;
         ListenTargetId.Reset();
         ODIN_LOG(Log, "FOdinSubmixListener::DetachFromSubmix Successfully detached from listening to submix");
@@ -475,10 +506,16 @@ void FOdinSubmixListener::DetachFromSubmix()
 
 void FOdinSubmixListener::RemoveEffectId(const uint32 EffectId)
 {
-    FScopeLock EffectAccessLock(&EffectIdAccessSection);
-    ApmEffectIds.Remove(EffectId);
-    ODIN_LOG(Log, "Removed effect id %d", EffectId);
-    if (ApmEffectIds.Num() < 1 && bIsListening) {
+    int32 NumApmEffects;
+    {
+        FScopeLock EffectAccessLock(&EffectIdAccessSection);
+        int32      NumRemovedEffects = ApmEffectIds.Remove(EffectId);
+        if (NumRemovedEffects > 0) {
+            ODIN_LOG(Log, "Removed effect id %d", EffectId);
+        }
+        NumApmEffects = ApmEffectIds.Num();
+    }
+    if (NumApmEffects < 1 && bIsListening) {
         DetachFromSubmix();
     }
 }
@@ -512,7 +549,6 @@ void FOdinSubmixListener::OnAudioDeviceDestroyed(Audio::FDeviceId Id)
     ODIN_LOG(Log, "Audio Device Destroyed with id %lu", Id);
     if (ListenTargetId.IsValid() && *ListenTargetId == Id) {
         DetachFromSubmix();
-        bIsListening = false;
         ListenTargetId.Reset();
         AttachToSubmix();
     }

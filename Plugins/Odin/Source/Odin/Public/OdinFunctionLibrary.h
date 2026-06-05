@@ -27,9 +27,6 @@ class ODIN_API UOdinFunctionLibrary : public UBlueprintFunctionLibrary
     static FString FormatOdinError(EOdinError Code, bool bUETrace);
 
     UFUNCTION(BlueprintPure, Category = "Odin|Custom Data")
-    static FString BytesToString(const TArray<uint8>& Data);
-
-    UFUNCTION(BlueprintPure, Category = "Odin|Custom Data")
     static void OdinStringToBytes(const FString& Str, TArray<uint8>& Buffer);
 
     UFUNCTION(BlueprintPure, Category = "Odin|Custom Data")
@@ -53,7 +50,8 @@ class ODIN_API UOdinFunctionLibrary : public UBlueprintFunctionLibrary
     static void LinkEncoderToRoom(UOdinEncoder* Encoder, UOdinRoom* Room);
     static void UnlinkEncoderFromRoom(UOdinEncoder* Encoder);
 
-    UFUNCTION(BlueprintCallable, meta = (DisplayName = "Register Decoder to Peer", ToolTip = "Register Decoder to Peer for a specific Odin Room."),
+    UFUNCTION(BlueprintCallable,
+              meta     = (DisplayName = "Register Decoder to Peer", ToolTip = "Register Decoder to Peer for a specific Odin Room.", Keywords = "Link"),
               Category = "Odin|Audio Pipeline")
     static void RegisterDecoder(UOdinDecoder* Decoder, UOdinRoom* Room, int64 PeerId);
 
@@ -70,7 +68,8 @@ class ODIN_API UOdinFunctionLibrary : public UBlueprintFunctionLibrary
      * @param Decoder The decoder to deregister.
      */
     UFUNCTION(BlueprintCallable,
-              meta     = (DisplayName = "Deregister Decoder From All", ToolTip = "Deregisters a Decoder from all connections it receives audio from."),
+              meta     = (DisplayName = "Deregister Decoder From All", ToolTip = "Deregisters a Decoder from all connections it receives audio from.",
+                      Keywords = "Unlink"),
               Category = "Odin|Audio Pipeline")
     static void DeregisterDecoderFromAllConnections(UOdinDecoder* Decoder);
 
@@ -113,4 +112,8 @@ class ODIN_API UOdinFunctionLibrary : public UBlueprintFunctionLibrary
 
     UFUNCTION(BlueprintCallable, Category = "Odin|Channels", meta = (Keywords = "Make Empty Channel Mask"))
     static FOdinChannelMask CreateEmptyMask();
+
+    UFUNCTION(BlueprintPure, Category = "Odin|Audio Pipeline|Events", meta = (CompactNodeTitle = "In Filter"), meta = (Keywords = "Audio Event Filter"))
+    static bool DoesAudioEventMatchFilter(EOdinAudioEvents                                                                                      Event,
+                                          UPARAM(meta = (DisplayName = "Filter", Bitmask, BitmaskEnum = "/Script/Odin.EOdinAudioEvents")) int32 Filter);
 };
