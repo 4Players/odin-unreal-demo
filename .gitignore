@@ -76,3 +76,7 @@ DerivedDataCache/*
 !Plugins/Odin/ThirdParty/OdinLibrary/x64/Win/odin.lib
 !Plugins/Odin/Source/**
 !Plugins/SteamAudio/Source/**
+BuildAllPlatforms.local.bat
+BuildAllPlatforms.bat
+BuildAllPlatforms.local.bat.example
+BuildAllPlatforms.ps1
