@@ -41,6 +41,10 @@
 			"Enabled": true
 		},
 		{
+			"Name": "OnlineSubsystemOdinFleet",
+			"Enabled": true
+		},
+		{
 			"Name": "OnlineServicesEOS",
 			"Enabled": true
 		},
