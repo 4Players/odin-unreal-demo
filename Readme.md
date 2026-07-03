@@ -146,8 +146,6 @@ Additionally we have some functionality to adjust the APM Settings of the rooms 
 
 Lastly, in the `Tick` Event we start and stop the Capturing of the Proximity Chat and Radio Chat Audio Captures - depending on whether we press the **R Key** or the **T Key**, in case Push-To-Talk is enabled, or not. The `RPressed` variable is set from the player controller class.
 
-![OdinClientComponentTick.png.png](/Documentation/img/OdinClientComponentTick.png)
-
 ## Odin Fleet Online Subsystem
 
 As mentioned before, the project uses a custom Online Subsystem (OSS) to connect to the running dedicated server in [Odin Fleet](https://odin.4players.io/fleet/). The `OdinFleet` OSS implements all necessary classes and functions in a minimal manner to enable session discovery, join and destruction. Thus, the interesting functions live inside the `IOnlineSession`-Interface, implemented in the `FOnlineSessionOdinFleet` class. `FindSessions` starts an `HTTP GET` request to a custom [Azure Functions REST API](https://azure.microsoft.com/en-us/products/functions) that returns the IP Address and open Unreal Port of the dedicated server in Odin Fleet. While the function runs on an Azure instance, its code can be found in the `AzureBackend` folder of this repository to illustrate the necessary steps to retrieve server information from Odin Fleet: The Azure Function starts an `HTTP GET` request to the Odin Fleet REST API, with proper authentication and an App ID, and receives the IP Address and Port of the first running Server of that App.
