@@ -2,7 +2,7 @@
 
 This is a simple demonstration of the usage of the [Unreal SDK](https://github.com/4Players/odin-sdk) of 4Player's ODIN, a Voice Chat full service solution. The SDK provides an audio stream that can be processed in the audio engine of Unreal to add spatialization or audio effects.
 
-This version is built upon the [Unreal Engine's Networking Solution](https://docs.unrealengine.com/4.27/en-US/InteractiveExperiences/Networking/Overview/). This sample works for Unreal Engine 5.3+. The sample's most recent release holds a client built with UE5.5 that connects with a dedicated server at [Odin Fleet](https://odin.4players.io/fleet/).
+This version is built upon the [Unreal Engine's Networking Solution](https://docs.unrealengine.com/4.27/en-US/InteractiveExperiences/Networking/Overview/). This sample works for Unreal Engine 5.3+. The sample's most recent release holds a client built with UE5.7 that connects with a dedicated server at [Odin Fleet](https://odin.4players.io/fleet/).
 
 An alternative version with Photon instead of Unreal Networking can be found on the [Photon Networking Branch](https://github.com/4Players/odin-unreal-demo/tree/photon-networking). That branch works for UE4.26+.
 
@@ -15,7 +15,7 @@ The Demo showcases the usage of ODIN together with Unreal's Audio Engine. The ex
 - how to increase immersion by adding audio occlusion effects through collision rays
 - how to send the voice chat audio stream to audio effect processors, e.g. for environmental effects that also apply to voice
 - how to use a second ODIN room for simulating 2D radio communication (press and hold R key while talking)
-- how to activate different filters (APMs) to improve the audio capture quality
+- how to activate different filters (APM & VAD) to improve the audio capture quality
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ In the releases you can find a pre-built game executable and the current project
 1. EOS Online Subsystem: This uses EOS for matchmaking. This version of the demo game needs the user to login to their Epic Games Account and allow the Demo Game to access basic information (user name and online presence).
 1. No Online Subsystem (also called "NULL"): This uses matchmaking over a local network. No account needed for this version but you will only be able to find other clients in the same local network.
 
-To open the project in the Unreal Editor you need to install the Unreal Engine 5.5 or higher. You can open the source code with the corresponding version of the branch easily. If you need to open it with a higher version of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
+To open the project in the Unreal Editor you need to install the Unreal Engine 5.7 or higher. You can open the source code with the corresponding version of the branch easily. If you need to open it with a higher version of the Unreal Engine you can right-click the `OdinUnrealSample.uproject` file and `Switch Unreal Engine version ...` to the Engine version you have installed that you want the project to open with. If the Editor fails to launch, rebuild the project from Visual Studio. You might also need to exchange the Odin Plugin to the corresponding version, downloadable e.g. in its [Github Repository](https://github.com/4Players/odin-sdk-unreal/releases).
 
 :warning: In UE5.4+ currently there is a bug, which causes UnfocusedVolumeMultiplier to not apply to the Odin Synth - so testing is best done on 2 devices instead of starting two clients in the editor process.
 
@@ -64,19 +64,19 @@ Below you can see an overview of the map, its areas and what they show:
 
 ![MapOverview.png](/Documentation/img/MapOverview.png)
 
-The audio sources in the level have the same attenuation settings as the positional voice chat and so you can use them to get an idea of what the level does without having to invite someone else to test with you. To turn an audio source on, go near it and then press space on your keyboard.
+The audio sources in the level have the same attenuation settings as the positional voice chat and so you can use them to get an idea of what the level does without having to invite someone else to test with you. To turn an audio source on, go near it and then press `ALT` on your keyboard.
 
 ## Project Structure
 
-*This guide is written for Unreal Engine version 5.5 as the project is targeted for this version of the engine. You will need to adjust for Unreal Engine 5.4 and above accordingly.*
+*This guide is written for Unreal Engine version 5.7 as the project is targeted for this version of the engine. You will need to adjust for Unreal Engine 5.6 and below accordingly.*
 
 The project is based on the **Top Down Example** by Epic Games, so most of its structure can be found in this project as well.
 
-This document outlines the structure of this sample project and describes how you can achieve similar results in your Unreal project. First we will have a look at the overall folder structure of the project so you can find every asset. Next we will outline the Game Mode, Game Instance and Player Controller classes to create the basic game rules and input methods. After that we describe the Photon Networking of this project and how it replicates the player characters' positions to all clients before we look at how we incorporate Odin here so that each character gets the correct Odin Media assigned. Lastly we look at the map and see what features of the Unreal Audio Engine are show cased here in which way.
+This document outlines the structure of this sample project and describes how you can achieve similar results in your Unreal project. First we will have a look at the overall folder structure of the project so you can find every asset. Next we will outline the Game Mode, Game Instance and Player Controller classes to create the basic game rules and input methods. After that we describe the Networking of this project and how it replicates the player characters' positions to all clients before we look at how we incorporate Odin here so that each character gets the correct Odin Media assigned. Lastly we look at the map and see what features of the Unreal Audio Engine are show cased here in which way.
 
 ### Content Directory
 
-Most of the project's logic is located inside the `Blueprints` folder. Other folders hold the needed fonts for texts, meshes, materials and so on. In the `Sound` folder you can find the used attenuation settings and sound effect assets. Depending on which audio engine you whish to use they may differ from what you need in your project. In order to get an idea of what they do and how the settings affect the audio output of the project you can check out the documentation on [Sound in General in the Unreal Engine](https://docs.unrealengine.com/5.3/en-US/WorkingWithAudio/), and [Sound Attenuation in the Unreal Engine](https://docs.unrealengine.com/5.3/en-US/WorkingWithAudio/DistanceModelAttenuation/) specifically as well as [Submixes](https://docs.unrealengine.com/5.4/en-US/WorkingWithAudio/Submixes/).
+Most of the project's logic is located inside the `Blueprints` folder. Other folders hold the needed fonts for texts, meshes, materials and so on. In the `Sound` folder you can find the used attenuation settings and sound effect assets. Depending on which audio engine you whish to use they may differ from what you need in your project. In order to get an idea of what they do and how the settings affect the audio output of the project you can check out the documentation on [Sound in General in the Unreal Engine](https://docs.unrealengine.com/5.7/en-US/WorkingWithAudio/), and [Sound Attenuation in the Unreal Engine](https://docs.unrealengine.com/5.7/en-US/WorkingWithAudio/DistanceModelAttenuation/) specifically as well as [Submixes](https://docs.unrealengine.com/5.7/en-US/WorkingWithAudio/Submixes/).
 
 The `Maps` folder holds both the map for the Lobby UI and the default map of the project. The `Lobby` map simply overrides the standard Game Mode with a Lobby Game Mode that opens the needed UI. The main map is the `TopDownExampleMap` in here.
 
@@ -116,7 +116,7 @@ In the next part we will now look at what the Networking Component does exactly.
 
 ### Unreal Networking Component and Replication
 
-The `C_UnrealNetworkingComponent` class can be found in the `Blueprints/Networking` folder. It inherits from the Actor Componen. The Component extends the class to handle our use case - yet it is still agnostic to the Odin Framework and thus implements the `Networking Component` Blueprint Interface so that other Components can communicate with the implemented networking framework without knowing which one is used exactly. You can easily extend or exchange this component for anything you would like to use in your application.
+The `C_UnrealNetworkingComponent` class can be found in the `Blueprints/Networking` folder. It inherits from the Actor Component. The Component extends the class to handle our use case - yet it is still agnostic to the Odin Framework and thus implements the `Networking Component` Blueprint Interface so that other Components can communicate with the implemented networking framework without knowing which one is used exactly. You can easily extend or exchange this component for anything you would like to use in your application.
 
 The `Networking Component` heavily uses Unreal Engine's replication feature. It is designed to behave correctly on both the listen server as well as the client.
 
@@ -128,25 +128,23 @@ Lastly `OnEndPlay` we destroy the session to disconnect the client from it - or 
 
 The `Odin Client Component` is the meat and bone of this sample so we will have a detailed look at what it does.
 
-It derives directly from `Actor Component` and does not implement any interfaces. It has two sets of functions - one for each ODIN room it connects to - remember that we have a proximity chat and a radio chat so that we need to join two ODIN rooms in total. You can either connect to them in the same function and then decide how to handle the different events with the passed `Room` parameter, or do it like in this sample and break them into two parts.
+It derives directly from `Actor Component` and does not implement any interfaces. It has three sets of functions - one for each ODIN room it connects to - remember that we have a proximity chat, a radio chat and web chat (for possible web clients) so that we need to join three ODIN rooms in total. You can either connect to them in the same function and then decide how to handle the different events with the passed `Room` parameter, or do it like in this sample and break them into separate code paths.
 
-The `Start Connect` Custom Event is called once the local player is connected to the Photon room. It is mainly taken from the [ODIN Unreal SDK Manual](https://docs.4players.io/voice/unreal/manual/). In summary, we generate a room token with our access key, a room id and a user id. Note, that the Access Key should not be known to the client normally and you should do this on a trusted Web Server instead. For the simplicity of this sample we kept the call on the client though.
+The `Start Connect` Custom Event is called once the local player is connected to the (Listen-)Server. It is mainly taken from the [ODIN Unreal SDK Manual](https://docs.4players.io/voice/unreal/manual/). In summary, we generate a room token with our access key, a room id and a user id. Note, that the Access Key should not be known to the client normally and you should do this on a trusted Web Server instead. For the simplicity of this sample we kept the call on the client though.
 
 Then we construct a room and bind all needed events to appropriate Custom Events (we go through them in a bit). Then we create some User Data - they contain the chosen User Name from the Login Screen and the Network Id from our Photon Component. The Network Id is needed by the other clients so that they can get the correct Player Character from the Photon Component to assign it an Odin Synth Component with the correct Media Stream. Once that is done, we will call the `Join Room` function and are done with the event. We do this two times in total, once for each Odin Room.
 
 We handle the Room Events in different events:
 
-- `Peer Joined`: This event is called before the media of the other peer is added to the room, so we can setup the player character - we use the network id in the user data and the passed ODIN peer id to create a map on this component, so once we get the media stream with the ODIN id we can get the correct network id and thus correct actor to assign it the stream.
+- `Peer Joined`: This event is called before the media of the other peer is added to the room, so we can setup the player character - we use the network id in the user data and the passed ODIN peer id to create a map on this component, so that we can get the media stream with the ODIN id we can get the correct network id and thus correct actor to assign it the stream. It then grabs the actors map from our Networking Component and adds an `Odin Synth Component`to it, activates it and assigns it the given peer id.
 
 - `Joined Room`: This event is called once we join the room ourselves. Here we can create an Audio Capture and from it an ODIN Media Stream that we add to the room afterwards via the `Add Media` node. We also save the Audio Captures of both rooms in a variable to reference them later.
 
 - `Peer Left`: This is called when another peer leaves. Here we just print a message in this sample.
 
-- `Media Added`: This Event is called when the media stream of another peer is added to the room. It grabs the actors map from our Networking Component and adds an `Odin Synth Component`to it, activates it and assigns it the given media stream.
-
 Additionally we have some functionality to adjust the APM Settings of the rooms - this is done in the `SetApmSettings` event. Also we can open the APM Settings menu with the `OpenOptions` event and close them with `CloseOptions`.
 
-Lastly, in the `Tick` Event we start and stop the Capturing of the Proximity Chat and Radio Chat Audio Captures - depending on whether we press the **R Key** or not. The `RPressed` variable is set from the player controller class.
+Lastly, in the `Tick` Event we start and stop the Capturing of the Proximity Chat and Radio Chat Audio Captures - depending on whether we press the **R Key** or the **T Key**, in case Push-To-Talk is enabled, or not. The `RPressed` variable is set from the player controller class.
 
 ![OdinClientComponentTick.png.png](/Documentation/img/OdinClientComponentTick.png)
 
