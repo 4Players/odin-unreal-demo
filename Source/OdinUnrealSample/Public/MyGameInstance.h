@@ -20,8 +20,12 @@ class ODINUNREALSAMPLE_API UMyGameInstance : public UGameInstance
 	
 public:
 	void Init() override;
+	void Shutdown() override;
 
 	void OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
+	void HandlePreLoadMap(const FString& MapName);
+	void HandlePostLoadMap(UWorld* LoadedWorld);
+	void HandleWorldBeginTearDown(UWorld* World);
 	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
 	{
 		if (Result == EOnJoinSessionCompleteResult::Success)
@@ -52,4 +56,12 @@ public:
 			UE_LOG(LogTemp, Warning, TEXT("Failed to join session: %s"), *SessionName.ToString());
 		}
 	}
+
+private:
+	void CleanupOdinBeforeTravel(const TCHAR* Reason, UWorld* WorldToClean = nullptr);
+
+	FDelegateHandle PreLoadMapHandle;
+	FDelegateHandle PostLoadMapHandle;
+	FDelegateHandle WorldBeginTearDownHandle;
+	bool bOdinCleanupTriggered = false;
 };
