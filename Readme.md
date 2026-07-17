@@ -4,7 +4,8 @@ This is a simple demonstration of the usage of the [Unreal SDK](https://github.c
 
 ## Quick Start
 
-✔️ To connect to other clients easily you can download the [Odin Fleet](https://github.com/4Players/odin-unreal-demo/releases/latest) version of this demo, which connects to a dedicated server in Odin Fleet, allowing interaction with any other Odin Fleet client running at the same time.
+> [!TIP]
+> To connect to other clients easily you can download the [Odin Fleet](https://github.com/4Players/odin-unreal-demo/releases/latest) version of this demo, which connects to a dedicated server in Odin Fleet, allowing interaction with any other Odin Fleet client running at the same time.
 
 This version is built upon the [Unreal Engine's Networking Solution](https://docs.unrealengine.com/4.27/en-US/InteractiveExperiences/Networking/Overview/). This sample works for Unreal Engine 5.3+. The sample's most recent release holds a client built with UE5.7 that connects with a dedicated server at [Odin Fleet](https://odin.4players.io/fleet/).
 
