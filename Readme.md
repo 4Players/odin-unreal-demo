@@ -2,6 +2,10 @@
 
 This is a simple demonstration of the usage of the [Unreal SDK](https://github.com/4Players/odin-sdk) of 4Player's ODIN, a Voice Chat full service solution. The SDK provides an audio stream that can be processed in the audio engine of Unreal to add spatialization or audio effects.
 
+## Quick Start
+
+✔️ To connect to other clients easily you can download the [Odin Fleet](https://github.com/4Players/odin-unreal-demo/releases/latest) version of this demo, which connects to a dedicated server in Odin Fleet, allowing interaction with any other Odin Fleet client running at the same time.
+
 This version is built upon the [Unreal Engine's Networking Solution](https://docs.unrealengine.com/4.27/en-US/InteractiveExperiences/Networking/Overview/). This sample works for Unreal Engine 5.3+. The sample's most recent release holds a client built with UE5.7 that connects with a dedicated server at [Odin Fleet](https://odin.4players.io/fleet/).
 
 An alternative version with Photon instead of Unreal Networking can be found on the [Photon Networking Branch](https://github.com/4Players/odin-unreal-demo/tree/photon-networking). That branch works for UE4.26+.
