@@ -5,9 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "OnlineSessionClient.h"
-#include "Kismet/GameplayStatics.h"
-#include "GameFramework/PlayerController.h"
-#include "GameFramework/PlayerState.h"
+#include "TimerManager.h"
 #include "MyGameInstance.generated.h"
 
 /**
@@ -21,47 +19,23 @@ class ODINUNREALSAMPLE_API UMyGameInstance : public UGameInstance
 public:
 	void Init() override;
 	void Shutdown() override;
+	void OnWorldChanged(UWorld* OldWorld, UWorld* NewWorld) override;
 
 	void OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
-	void HandlePreLoadMap(const FString& MapName);
-	void HandlePostLoadMap(UWorld* LoadedWorld);
 	void HandleWorldBeginTearDown(UWorld* World);
-	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result)
-	{
-		if (Result == EOnJoinSessionCompleteResult::Success)
-		{
-			// Handle successful join session logic here
-			UE_LOG(LogTemp, Log, TEXT("Successfully joined session: %s"), *SessionName.ToString());
-
-			UWorld* World = GetWorld();
-			if (!World) return;
-
-			APlayerController* PC = UGameplayStatics::GetPlayerController(World, 0);
-
-			IOnlineSessionPtr Session = IOnlineSubsystem::Get()->GetSessionInterface();
-			if (!Session.IsValid()) return;
-
-			FString ConnectString;
-
-			Session->GetResolvedConnectString(SessionName, ConnectString, NAME_GamePort);
-
-			if (PC && PC->PlayerState)
-			{
-				PC->ClientTravel(ConnectString, TRAVEL_Absolute);
-			}
-		}
-		else
-		{
-			// Handle failure to join session
-			UE_LOG(LogTemp, Warning, TEXT("Failed to join session: %s"), *SessionName.ToString());
-		}
-	}
+	void OnJoinSessionComplete(FName SessionName, EOnJoinSessionCompleteResult::Type Result);
 
 private:
 	void CleanupOdinBeforeTravel(const TCHAR* Reason, UWorld* WorldToClean = nullptr);
+	void ReleaseRetiredOdinObjects();
 
-	FDelegateHandle PreLoadMapHandle;
-	FDelegateHandle PostLoadMapHandle;
+	UPROPERTY(Transient)
+	TArray<TObjectPtr<class UOdinAudioCapture>> RetiredOdinCaptures;
+
+	UPROPERTY(Transient)
+	TArray<TObjectPtr<class UOdinEncoder>> RetiredOdinEncoders;
+
 	FDelegateHandle WorldBeginTearDownHandle;
+	FTimerHandle RetiredOdinReleaseTimer;
 	bool bOdinCleanupTriggered = false;
 };

@@ -7,6 +7,8 @@
 #include "OdinAudio/OdinSynthComponent.h"
 #include "OdinFunctionLibrary.h"
 #include "OdinRoom.h"
+#include "Engine/World.h"
+#include "TimerManager.h"
 
 UOdinRoomCallbackComponent::UOdinRoomCallbackComponent()
 {
@@ -16,6 +18,7 @@ UOdinRoomCallbackComponent::UOdinRoomCallbackComponent()
 void UOdinRoomCallbackComponent::BeginPlay()
 {
 	Super::BeginPlay();
+	bOdinTeardownStarted = false;
 
 	for (UOdinRoom* Room : AutoBindRooms)
 	{
@@ -26,18 +29,23 @@ void UOdinRoomCallbackComponent::BeginPlay()
 void UOdinRoomCallbackComponent::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	UnbindAllRoomCallbacks();
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(AudioCleanupTimer);
+	}
+	FlushPendingAudioCleanup();
 	Super::EndPlay(EndPlayReason);
 }
 
 void UOdinRoomCallbackComponent::BindRoomCallbacks(UOdinRoom* Room)
 {
-	if (!IsValid(Room) || BoundRooms.Contains(Room))
+	if (bOdinTeardownStarted || !IsValid(Room) || BoundRooms.Contains(Room))
 	{
 		return;
 	}
 
-	Room->OnRoomPeerLeftBP.AddDynamic(this, &ThisClass::HandleRoomPeerLeft);
-	Room->OnRoomStatusChangedBP.AddDynamic(this, &ThisClass::HandleRoomStatusChanged);
+	Room->OnRoomPeerLeftBP.AddUniqueDynamic(this, &ThisClass::HandleRoomPeerLeft);
+	Room->OnRoomStatusChangedBP.AddUniqueDynamic(this, &ThisClass::HandleRoomStatusChanged);
 	BoundRooms.Add(Room);
 }
 
@@ -64,7 +72,7 @@ void UOdinRoomCallbackComponent::UnbindAllRoomCallbacks()
 
 int32 UOdinRoomCallbackComponent::CleanupPeerAudio(UOdinRoom* Room, int64 PeerId, bool bDestroySynthComponents, bool bFreeDecoders)
 {
-	if (!IsValid(Room))
+	if (bOdinTeardownStarted || !IsValid(Room))
 	{
 		return 0;
 	}
@@ -81,7 +89,12 @@ int32 UOdinRoomCallbackComponent::CleanupPeerAudio(UOdinRoom* Room, int64 PeerId
 
 int32 UOdinRoomCallbackComponent::CleanupDecoderAudio(UOdinDecoder* Decoder, bool bDestroySynthComponents, bool bFreeDecoder)
 {
-	if (!IsValid(Decoder))
+	if (bOdinTeardownStarted || !IsValid(Decoder))
+	{
+		return 0;
+	}
+
+	if (PendingDecoderCleanup.Contains(Decoder))
 	{
 		return 0;
 	}
@@ -118,21 +131,79 @@ int32 UOdinRoomCallbackComponent::CleanupDecoderAudio(UOdinDecoder* Decoder, boo
 			SynthComponent->SetComponentTickEnabled(false);
 			SynthComponent->Stop();
 			SynthComponent->Deactivate();
-			SynthComponent->DestroyComponent();
+			PendingSynthCleanup.AddUnique(SynthComponent);
 			++CleanedObjects;
 		}
 	}
 
-	if (bFreeDecoder && UOdinDecoder::FreeDecoder(Decoder))
+	if (bFreeDecoder)
 	{
+		PendingDecoderCleanup.Add(Decoder);
 		++CleanedObjects;
+	}
+
+	if (UWorld* World = GetWorld(); World && !World->GetTimerManager().IsTimerActive(AudioCleanupTimer))
+	{
+		World->GetTimerManager().SetTimer(AudioCleanupTimer, this, &ThisClass::FlushPendingAudioCleanup, AudioCleanupGracePeriod, false);
+	}
+	else if (!GetWorld())
+	{
+		FlushPendingAudioCleanup();
 	}
 
 	return CleanedObjects;
 }
 
+void UOdinRoomCallbackComponent::PrepareForWorldTeardown()
+{
+	if (bOdinTeardownStarted)
+	{
+		return;
+	}
+
+	bOdinTeardownStarted = true;
+	UnbindAllRoomCallbacks();
+	if (UWorld* World = GetWorld())
+	{
+		World->GetTimerManager().ClearTimer(AudioCleanupTimer);
+	}
+
+	// MyGameInstance owns the full-world cleanup from this point; do not free the same objects twice.
+	PendingSynthCleanup.Reset();
+	PendingDecoderCleanup.Reset();
+}
+
+void UOdinRoomCallbackComponent::FlushPendingAudioCleanup()
+{
+	for (UOdinSynthComponent* SynthComponent : PendingSynthCleanup)
+	{
+		if (IsValid(SynthComponent))
+		{
+			SynthComponent->DestroyComponent();
+		}
+	}
+	PendingSynthCleanup.Reset();
+
+	for (UOdinDecoder* Decoder : PendingDecoderCleanup)
+	{
+		if (IsValid(Decoder))
+		{
+			UOdinDecoder::FreeDecoder(Decoder);
+		}
+	}
+	PendingDecoderCleanup.Reset();
+}
+
 void UOdinRoomCallbackComponent::HandleRoomPeerLeft(UOdinRoom* Room, FOdinPeerLeft Data)
 {
+	if (bOdinTeardownStarted)
+	{
+		return;
+	}
+
+	const int32 CleanedObjects = CleanupPeerAudio(Room, Data.peer_id);
+	UE_LOG(LogTemp, Log, TEXT("ODIN peer-left cleanup: room=%s, peer=%lld, scheduled objects=%d."),
+		*GetNameSafe(Room), Data.peer_id, CleanedObjects);
 	OnOdinPeerLeft(Room, Data);
 }
 
@@ -148,7 +219,10 @@ void UOdinRoomCallbackComponent::HandleRoomStatusChanged(UOdinRoom* Room, FOdinR
 
 void UOdinRoomCallbackComponent::OnOdinPeerLeft_Implementation(UOdinRoom* Room, const FOdinPeerLeft& Data)
 {
-	CleanupPeerAudio(Room, Data.peer_id);
+}
+
+void UOdinRoomCallbackComponent::OnOdinPeerJoined_Implementation(UOdinRoom* Room, const FOdinPeerJoined& Data)
+{
 }
 
 void UOdinRoomCallbackComponent::OnOdinRoomStatusChanged_Implementation(UOdinRoom* Room, const FOdinRoomStatusChanged& Data)
