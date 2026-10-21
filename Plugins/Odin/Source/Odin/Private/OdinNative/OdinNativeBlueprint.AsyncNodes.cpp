@@ -311,6 +311,8 @@ void UOdinNativeEncoderCreate::Activate()
             auto         result  = odin_encoder_create(this->PeerId, this->Samplerate, this->Stereo, &encoder);
 
             if (result == OdinError::ODIN_ERROR_SUCCESS) {
+                // free the previous native encoder (and with it its pipeline) instead of leaking it
+                UOdinEncoder::FreeEncoder(this->Encoder.Get());
                 this->Encoder->SetHandle(encoder);
             }
 
@@ -362,6 +364,8 @@ void UOdinNativeEncoderCreateEx::Activate()
                                                  this->UpdatePositionInterval, &encoder);
 
             if (result == OdinError::ODIN_ERROR_SUCCESS) {
+                // free the previous native encoder (and with it its pipeline) instead of leaking it
+                UOdinEncoder::FreeEncoder(this->Encoder.Get());
                 this->Encoder->SetHandle(encoder);
             }
 
@@ -1121,22 +1125,24 @@ void UOdinNativeRoomClose::Activate()
 {
     FFunctionGraphTask::CreateAndDispatchWhenReady(
         [this]() {
-            if (!IsValid(this->Room)) {
+            if (!IsValid(this->Room) || this->Room->GetHandle() == nullptr) {
                 OnError.ExecuteIfBound();
                 OnResponse.Broadcast(false);
                 this->SetReadyToDestroy();
                 return;
             }
-            const bool bHadHandle = this->Room->GetHandle() != nullptr;
-            this->Room->ConditionalBeginDestroy();
-            if (!bHadHandle) {
-                OnError.ExecuteIfBound();
-                OnResponse.Broadcast(false);
-            } else {
+            this->Room->OnRoomClosed.AddWeakLambda(this, [this](UOdinRoom* ClosedRoom) {
+                ClosedRoom->OnRoomClosed.RemoveAll(this);
                 OnSuccess.ExecuteIfBound();
                 OnResponse.Broadcast(true);
+                this->SetReadyToDestroy();
+            });
+            if (!this->Room->CloseRoom()) {
+                this->Room->OnRoomClosed.RemoveAll(this);
+                OnError.ExecuteIfBound();
+                OnResponse.Broadcast(false);
+                this->SetReadyToDestroy();
             }
-            this->SetReadyToDestroy();
         },
         TStatId(), nullptr, ENamedThreads::GameThread);
 }
@@ -1163,7 +1169,13 @@ void UOdinNativeRoomFree::Activate()
                 return;
             }
             const bool bFreed = this->Room->FreeRoom();
-            this->Room->ConditionalBeginDestroy();
+            if (this->Room->GetHandle() == nullptr) {
+                this->Room->ConditionalBeginDestroy();
+            } else {
+                // a peer left or close handler connected the room again while it was freed; the
+                // object now owns a live connection and must stay
+                ODIN_LOG(Warning, "RoomFree: a handler reconnected the room while it was freed, keeping the room object.");
+            }
             if (!bFreed) {
                 OnError.ExecuteIfBound();
                 OnResponse.Broadcast(false);
@@ -1456,7 +1468,7 @@ void UOdinNativeSocketCreate::Activate()
 
             auto result =
                 odin_socket_create(handle, static_cast<OdinSocketKind>(this->SocketKind), this->TargetPeerId, this->Label, this->Priority, &socketHandle);
-            this->Socket = NewObject<UOdinSocket>(this->GetWorld());
+            this->Socket = NewObject<UOdinSocket>();
             if (result == OdinError::ODIN_ERROR_SUCCESS) {
                 this->Socket->SetHandle(socketHandle);
             }
@@ -1594,7 +1606,7 @@ void UOdinNativeTokenGeneratorCreate::Activate()
         [this]() {
             OdinTokenGenerator* tokenGenerator = nullptr;
             auto                result         = odin_token_generator_create(TCHAR_TO_UTF8(*this->AccessKey), &tokenGenerator);
-            this->TokenGenerator               = NewObject<UOdinTokenGenerator>(this->GetWorld());
+            this->TokenGenerator               = NewObject<UOdinTokenGenerator>();
             if (result == OdinError::ODIN_ERROR_SUCCESS) {
                 this->TokenGenerator->SetHandle(tokenGenerator);
             }

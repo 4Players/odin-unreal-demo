@@ -47,6 +47,11 @@ enum class EOdinError : uint8 {
      */
     ODIN_ERROR_CLOSED = -4 + OdinUtility::EODIN_ERROR_OFFSET UMETA(DisplayName = "ERROR_CLOSED", ToolTip = "The object is closed"),
     /**
+     * The object is already active in a lower call stack frame
+     */
+    ODIN_ERROR_ALREADY_IN_USE = -5
+        + OdinUtility::EODIN_ERROR_OFFSET UMETA(DisplayName = "ERROR_ALREADY_IN_USE", ToolTip = "The object is already active in a lower call stack frame"),
+    /**
      * A mandatory argument is null
      */
     ODIN_ERROR_ARGUMENT_NULL = -11 + OdinUtility::EODIN_ERROR_OFFSET UMETA(DisplayName = "ERROR_ARGUMENT_NULL", ToolTip = "A mandatory argument is null"),
@@ -80,6 +85,16 @@ enum class EOdinError : uint8 {
      */
     ODIN_ERROR_ARGUMENT_INVALID_JSON = -17
         + OdinUtility::EODIN_ERROR_OFFSET UMETA(DisplayName = "ERROR_ARGUMENT_INVALID_JSON", ToolTip = "A provided JSON argument is invalid"),
+    /**
+     * A provided OdinCipher argument is invalid
+     */
+    ODIN_ERROR_ARGUMENT_INVALID_CIPHER = -18
+        + OdinUtility::EODIN_ERROR_OFFSET UMETA(DisplayName = "ERROR_ARGUMENT_INVALID_CIPHER", ToolTip = "A provided OdinCipher argument is invalid"),
+    /**
+     * A provided argument is too large
+     */
+    ODIN_ERROR_ARGUMENT_TOO_LARGE = -19
+        + OdinUtility::EODIN_ERROR_OFFSET UMETA(DisplayName = "ERROR_ARGUMENT_TOO_LARGE", ToolTip = "A provided argument is too large"),
     /**
      * The provided version is invalid
      */
@@ -634,8 +649,9 @@ class ODIN_API UOdinNativeErrorGetLastError : public UBlueprintAsyncActionBase
 {
     GENERATED_BODY()
   public:
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", Category = "Odin|Native", DisplayName = "Odin Shutdown", ToolTip = "odin_shutdown",
-                                         WorldContext = "WorldContextObject", AutoCreateRefTerm = "initialPeerUserData,url,onSuccess,onError"))
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", Category = "Odin|Native", DisplayName = "Odin ErrorGetLastError",
+                                         ToolTip = "odin_error_get_last_error", WorldContext = "WorldContextObject",
+                                         AutoCreateRefTerm = "initialPeerUserData,url,onSuccess,onError"))
     static UOdinNativeErrorGetLastError *ErrorGetLastError(UObject *WorldContextObject, const FOdinNativeErrorGetLastErrorError &onError,
                                                            const FOdinNativeErrorGetLastErrorSuccess &onSuccess);
 
@@ -657,8 +673,9 @@ class ODIN_API UOdinNativeErrorResetLastError : public UBlueprintAsyncActionBase
 {
     GENERATED_BODY()
   public:
-    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", Category = "Odin|Native", DisplayName = "Odin Shutdown", ToolTip = "odin_shutdown",
-                                         WorldContext = "WorldContextObject", AutoCreateRefTerm = "initialPeerUserData,url,onSuccess,onError"))
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", Category = "Odin|Native", DisplayName = "Odin ErrorResetLastError",
+                                         ToolTip = "odin_error_reset_last_error", WorldContext = "WorldContextObject",
+                                         AutoCreateRefTerm = "initialPeerUserData,url,onSuccess,onError"))
     static UOdinNativeErrorResetLastError *ErrorResetLastError(UObject *WorldContextObject, const FOdinNativeErrorResetLastErrorError &onError,
                                                                const FOdinNativeErrorResetLastErrorSuccess &onSuccess);
 
@@ -1381,9 +1398,9 @@ class ODIN_API UOdinNativeRoomClose : public UBlueprintAsyncActionBase
 {
     GENERATED_BODY()
   public:
-    UFUNCTION(BlueprintCallable,
-              meta = (BlueprintInternalUseOnly = "true", Category = "Odin|Native", DisplayName = "Odin RoomClose", ToolTip = "odin_RoomClose",
-                      WorldContext = "WorldContextObject", AutoCreateRefTerm = "initialPeerUserData,url,onSuccess,onError"))
+    UFUNCTION(BlueprintCallable, meta = (BlueprintInternalUseOnly = "true", Category = "Odin|Native", DisplayName = "Odin RoomClose",
+                                         ToolTip      = "Leaves the room gracefully: waits for the closed status (max 2s), then frees the native room.",
+                                         WorldContext = "WorldContextObject", AutoCreateRefTerm = "initialPeerUserData,url,onSuccess,onError"))
     static UOdinNativeRoomClose *RoomClose(UObject *WorldContextObject, UPARAM(ref) UOdinRoom *&room, const FOdinNativeRoomCloseError &onError,
                                            const FOdinNativeRoomCloseSuccess &onSuccess);
 
