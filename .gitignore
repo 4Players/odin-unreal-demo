@@ -82,3 +82,4 @@ BuildAllPlatforms.local.bat.example
 BuildAllPlatforms.ps1
 ZipBuildArtifacts.bat
 ZipBuildArtifacts.ps1
+/Tools

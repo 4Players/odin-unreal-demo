@@ -11,9 +11,10 @@ public class OdinUnrealSample : ModuleRules
 	public OdinUnrealSample(ReadOnlyTargetRules Target) : base(Target)
 	{
 		MinFilesUsingPrecompiledHeaderOverride = 1;
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "EnhancedInput", "OnlineSubsystem", "OnlineSubsystemUtils", "OnlineSubsystemEOS", "ApplicationCore", "OnlineSubsystemOdinFleet", "Json", "Odin", "AudioCapture", "AudioMixer" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "EnhancedInput", "OnlineSubsystem", "OnlineSubsystemUtils", "OnlineSubsystemEOS", "ApplicationCore", "OnlineSubsystemOdinFleet", "Json", "Odin", "AudioCapture", "AudioMixer", "UMG" });
 
-        PrivateDependencyModuleNames.AddRange(new string[] { });
+        PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
+
 
 		DynamicallyLoadedModuleNames.AddRange(new string[] { "OnlineSubsystemNull" });
 
