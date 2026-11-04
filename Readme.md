@@ -20,7 +20,13 @@ The Demo showcases the usage of ODIN together with Unreal's Audio Engine. The ex
 - how to increase immersion by adding audio occlusion effects through collision rays
 - how to send the voice chat audio stream to audio effect processors, e.g. for environmental effects that also apply to voice
 - how to use a second ODIN room for simulating 2D radio communication (press and hold R key while talking)
-- how to activate different filters (APM & VAD) to improve the audio capture quality
+- how to activate different filters (Audio Processing, Voice Activity Detection and Voice Isolation) to improve the audio capture quality
+- how to send data across Odin clients for different use cases:
+    - Peer State via **Peer User Data**: used for user name, network id and current self-mute state
+    - Fire and Forget Messages via **RPCs**: used for chat messages
+    - Continuous Updates via **Sockets**: used for users' positions on mini map
+- how to enable cryptography and change the used secret
+- how to use channel masks in an Odin room, separated for speaking and listening
 
 ## Getting Started
 
