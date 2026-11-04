@@ -1,5 +1,7 @@
 # Odin Unreal Demo
 
+![MapOverview.png](/Documentation/img/unreal-demo-screenshot.jpg)
+
 This is a simple demonstration of the usage of the [Unreal SDK](https://github.com/4Players/odin-sdk) of 4Player's ODIN, a Voice Chat full service solution. The SDK provides an audio stream that can be processed in the audio engine of Unreal to add spatialization or audio effects.
 
 ## Quick Start
